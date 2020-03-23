@@ -1,0 +1,242 @@
+<head>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <img src="/img/Percaptial.png">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+    </div>
+  </div>
+</nav>
+<nav class="navbar-default navbar-static-side" role="navigation">
+  <div class="sidebar-collapse">
+    <ul class="nav metismenu" id="side-menu">
+      <li>
+        <a href="/legal"><i class="fa fa-diamond"></i> <span class="nav-label">Legal</span></a>
+      </li>
+      <li>
+        <a href="/operaciones"><i class="fa fa-diamond"></i> <span class="nav-label">Operaciones</span></a>
+      </li>
+      <li>
+        <a href="/tesoreria"><i class="fa fa-diamond"></i> <span class="nav-label">Tesoreria</span></a>
+      </li>
+      <li>
+        <!--<a href="/cliente/registrar" ><i class="fa fa-diamond"></i> <span class="nav-label">Registro Inversionista</span></a>-->
+      </li>
+      <li>
+        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Personal</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse">
+          <li><a href="/signin">Login</a></li>
+          <li><a href="/signup">Registro</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+    <div id="page-wrapper" class="gray-bg">
+
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-sm-4">
+                <h2>Cliente</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="wrapper wrapper-content animated fadeInUp">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="m-b-md">
+                                        <h2>{{cliente.nombre}} {{cliente.apellido}}</h2>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right"><dt>Cuenta en la Caja Venezolana de Valores:</dt> </div>
+                                        <div class="col-sm-8 text-sm-left"><dd class="mb-1">
+                                            @if(cliente.estatus_CVV === 0)
+                                                <span class="label label-danger">{{ estatusCVV(cliente.estatus_CVV) }}</span>
+                                                @else
+                                                <span class="label label-primary">{{ estatusCVV(cliente.estatus_CVV) }}</span>
+                                            @endif
+                                        </dd></div>
+                                    </dl>
+                                    {{--  <dl class="row mb-0">  --}}
+                                        {{--  <div class="col-sm-4 text-sm-right"><dt>Pago de Solictud de Unidades de Inversion:</dt> </div>  --}}
+                                        {{--  <div class="col-sm-8 text-sm-left"><dd cla  ss="mb-1"><span class="label label-primary">{{cliente.estatus_pago_solicitud}}</span></dd></div>  --}}
+                                    {{--  </dl>  --}}
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right"><dt>Documento Identificacion:</dt> </div>
+
+                                        <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.tipo_documento_identificacion}}-{{cliente.documento_identificacion}}</dd> </div>
+                                    </dl>
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right"><dt>RIF:</dt> </div>
+                                        <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.rif}}</dd> </div>
+                                    </dl>
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right"><dt>Fecha de nacimiento:</dt> </div>
+                                        <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.fecha_nacimiento}}</dd> </div>
+                                    </dl>
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right"><dt>Sexo:</dt> </div>
+                                        <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{ sexo(cliente.sexo)}}</dd> </div>
+                                    </dl>
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right"><dt>Estado Civil:</dt> </div>
+                                        <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.estado_civil}}</dd> </div>
+                                    </dl>
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right"><dt>Nacionalidad:</dt> </div>
+                                        <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.nacionalidad}}</dd> </div>
+                                    </dl>
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right"><dt>Telefono Habitación:</dt> </div>
+                                        <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.telefono_habitacion}}</dd> </div>
+                                    </dl>
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right"><dt>Telefono Celular:</dt> </div>
+                                        <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.telefono_celular}}</dd> </div>
+                                    </dl>
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right"><dt>Correo Electrónico:</dt> </div>
+                                        <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.correo_electronico}}</dd> </div>
+                                    </dl>
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right"><dt>Dirección Habitación:</dt> </div>
+                                        <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.direccion_habitacion}}</dd> </div>
+                                    </dl>
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right"><dt>Ciudad:</dt> </div>
+                                        <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.ciudad_habitacion}}</dd> </div>
+                                    </dl>
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right"><dt>Estado:</dt> </div>
+                                        <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.estado_habitacion}}</dd> </div>
+                                    </dl>
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right"><dt>Código Postal:</dt> </div>
+                                        <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.codigo_postal_habitacion}}</dd> </div>
+                                    </dl>
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right"><dt>País:</dt> </div>
+                                        <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.pais_habitacion}}</dd> </div>
+                                    </dl>
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right"><dt>Nivel Academico:</dt> </div>
+                                        <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.nivel_academico}}</dd> </div>
+                                    </dl>
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right"><dt>Profesión u Ocupación :</dt> </div>
+                                        <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.profesion_ocupacion}}</dd> </div>
+                                    </dl>
+                                </dl>
+
+                                </div>
+                                <div class="col-lg-4" id="cluster_info">
+
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right">
+                                            <dt>Actualizado:</dt>
+                                        </div>
+                                        <div class="col-sm-8 text-sm-left">
+                                            <dd class="mb-1">{{cliente.updated_at}}</dd>
+                                        </div>
+                                    </dl>
+                                    <dl class="row mb-0">
+                                        <div class="col-sm-4 text-sm-right">
+                                            <dt>Creado:</dt>
+                                        </div>
+                                        <div class="col-sm-8 text-sm-left">
+                                            <dd class="mb-1"> {{cliente.created_at}}</dd>
+                                        </div>
+                                    </dl>
+                                        <dl class="row mb-0">
+                                          @if(cliente.estatus_CVV === 0)
+                                            <div>
+                                                <h4>Confirmar Creacion de cuenta CVV:</h4>
+                                                <form action="/operaciones/{{cliente.id}}?_method=PATCH" method="post">
+                                                    <button name="cvv" value="1" formenctype="application/x-www-form-urlencoded" class="btn btn-block btn-outline btn-primary">Confirmar</button>
+                                                </form>
+                                            </div>
+                                          @endif
+                                        </dl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <dl class="row mb-0">
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="float-right">
+                10GB of <strong>250GB</strong> Free.
+            </div>
+            <div>
+                <strong>Copyright</strong> Example Company &copy; 2014-2018
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="/js/jquery-3.1.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="/js/inspinia.js"></script>
+    <script src="/js/plugins/pace/pace.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+
+            $('#loading-example-btn').click(function () {
+                btn = $(this);
+                simpleLoad(btn, true)
+
+                // Ajax example
+//                $.ajax().always(function () {
+//                    simpleLoad($(this), false)
+//                });
+
+                simpleLoad(btn, false)
+            });
+        });
+
+        function simpleLoad(btn, state) {
+            if (state) {
+                btn.children().addClass('fa-spin');
+                btn.contents().last().replaceWith(" Loading");
+            } else {
+                setTimeout(function () {
+                    btn.children().removeClass('fa-spin');
+                    btn.contents().last().replaceWith(" Refresh");
+                }, 2000);
+            }
+        }
+    </script>
