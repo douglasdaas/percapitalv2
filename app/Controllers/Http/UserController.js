@@ -112,16 +112,16 @@ class UserController {
     console.log('creo el usuario')
 
     cliente = cliente.toJSON()
-    user = user.toJSON()
 
     const datos = {
       cliente,
-      user
+      email: payload.email,
+      password: payload.password
     }
 
     Mail.send('emails.usuario-creado', datos, (message) => {
       message
-        .to(user.email, `${cliente.nombre} ${cliente.apellido}`)
+        .to(email, `${cliente.nombre} ${cliente.apellido}`)
         .from('testapp@per-capital.com', 'PerCapital')
         .subject('Usuario en PerCapital')
     })
