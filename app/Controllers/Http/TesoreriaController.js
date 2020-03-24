@@ -1,6 +1,9 @@
 'use strict'
 
 const ClienteNatural = use('App/Models/ClienteNatural')
+const SolicitudSuscripcionUi = use('App/Models/SolicitudSuscripcionUi')
+const Mail = use('Mail')
+
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -77,7 +80,6 @@ class TesoreriaController {
 
     cliente = cliente.toJSON()
     cliente = cliente[0]
-    console.log(JSON.stringify(cliente,2,2))
 
     return view.render('tesoreria.show', {cliente})
   }
@@ -102,7 +104,36 @@ class TesoreriaController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
+  async update ({ params: {id}, request, response }) {
+    let cliente = await ClienteNatural.find(id)
+
+    let { solicitud } = request.post()
+
+    if (solicitud !== undefined) {
+
+      solicitud = await SolicitudSuscripcionUi.find(solicitud)
+
+      solicitud.unidades_asignadas = true
+
+      await solicitud.save()
+
+      cliente = cliente.toJSON()
+      solicitud = solicitud.toJSON()
+
+      const datos = {
+        cliente,
+        solicitud
+      }
+
+      Mail.send('emails.unidades-asignadas', datos, (message) => {
+        message
+          .to(cliente.correo_electronico, `${cliente.nombre} ${cliente.apellido}`)
+          .from('testapp@per-capital.com', 'PerCapital')
+          .subject('Asignacion de Unidades de Inverción')
+      })
+
+       response.redirect(`/cliente/crearautomatico/${id}` )
+    }
   }
 
   /**

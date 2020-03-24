@@ -25,6 +25,10 @@ class ClienteNatural extends Model {
     return this.hasMany('App/Models/SolicitudSuscripcionUi')
   }
 
+  usuario () {
+    return this.hasOne('App/Models/User')
+  }
+
 }
 
 module.exports = ClienteNatural

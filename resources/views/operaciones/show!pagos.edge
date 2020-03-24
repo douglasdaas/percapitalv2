@@ -169,8 +169,8 @@
                                             <div class="col-sm-8 text-sm-left">
                                               @each(solicitud in cliente.solicitudes)
                                                 @if(solicitud.estatus_conciliacion === 0 && solicitud.pagos !== null)
-                                                    <h4>Conciliar Pago de Solictud:</h4>
-                                                    <dt>Solicitud de pago en fecha: <br> {{solicitud.pagos.created_at}}</dt>
+                                                    <h4>Conciliar Pago de Solictud de Unidades de Inversión:</h4>
+                                                    <dt>Pago en fecha: <br> {{solicitud.pagos.created_at}}</dt>
                                                     <dt>Por monto: {{solicitud.pagos.monto.toLocaleString()}} Bs</dt>
                                                     <dt>Numero de Referencia: {{solicitud.pagos.referencia}}<dt>
                                                     <dt>Comprobante:</dt>
@@ -180,7 +180,7 @@
                                                       </dd>
                                                     </div>
                                                     <form action="/operaciones/{{cliente.id}}?_method=PATCH" method="post">
-                                                      <button name="solicitud" value="{{solicitud.id}}" formenctype="application/x-www-form-urlencoded" class="btn btn-block btn-outline btn-primary">Confirmar</button>
+                                                      <button name="solicitud" value="{{solicitud.id}}" formenctype="application/x-www-form-urlencoded" class="btn btn-block btn-outline btn-primary">Coinciliar Pago</button>
                                                     </form>
                                                 @elseif(solicitud.estatus_conciliacion === 0 && solicitud.pagos === null)
                                                     <h4>No se ha registrado ningun pago</h4>

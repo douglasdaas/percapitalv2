@@ -177,7 +177,7 @@ class ClienteNaturalController {
 
     console.log(solicitudUI)
 
-    response.send(solicitudUI)
+    response.redirect('http://per-capital.com/',200)
 
     Mail.send('emails.pago' ,solicitudUI.toJSON() , (message) => {
       message
@@ -215,7 +215,7 @@ class ClienteNaturalController {
       .pagos()
       .create(informacionPago)
 
-    response.send(pago)
+    response.redirect('http://per-capital.com/',200)
   }
 
 }

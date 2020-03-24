@@ -20,6 +20,7 @@ Route.on('/').render('welcome')
 
 Route.group( () =>{
   Route.resource('inversionista', 'ClienteNaturalController')
+  Route.get('crearAutomatico/:id', 'UserController.crearAutomatico')
   Route.get('signup', 'ClienteNaturalController.signup')
   Route.get('solicitudui/:id', 'ClienteNaturalController.solicitudui')
   Route.post('solicitudui/:id', 'ClienteNaturalController.createSolicitudui')

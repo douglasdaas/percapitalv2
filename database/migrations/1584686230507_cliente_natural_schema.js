@@ -19,7 +19,7 @@ class ClienteNaturalSchema extends Schema {
       table.string('nacionalidad',35).notNullable()
       table.string('telefono_habitacion',35).notNullable()
       table.string('telefono_celular',35).notNullable()
-      table.string('correo_electronico',35).notNullable()
+      table.string('correo_electronico',35).notNullable().index('correos_electronicos')
       table.string('direccion_habitacion',80).notNullable()
       table.string('ciudad_habitacion',35).notNullable()
       table.string('estado_habitacion',35).notNullable()

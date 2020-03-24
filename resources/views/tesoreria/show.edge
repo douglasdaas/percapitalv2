@@ -68,7 +68,7 @@
             <div class="row">
               <div class="col-lg-8">
                 <dl class="row mb-0">
-                  <div class="col-sm-4 text-sm-right"><dt>Estatus de Pagos:</dt> </div>
+                  <div class="col-sm-4 text-sm-right"><dt>Estatus de Unidades:</dt> </div>
                   <div class="col-sm-8 text-sm-left"><dd class="mb-1">
                     @each(solicitud in cliente.solicitudes)
                     @if( solicitud.unidades_asignadas === 1)
@@ -168,24 +168,18 @@
                 <dl class="row mb-0">
                   <div class="col-sm-8 text-sm-left">
                     @each(solicitud in cliente.solicitudes)
-                    @if(solicitud.estatus_conciliacion === 0 && solicitud.pagos !== null)
-                    <h4>Conciliar Pago de Solictud:</h4>
-                    <dt>Solicitud de pago en fecha: <br> {{solicitud.pagos.created_at}}</dt>
-                    <dt>Por monto: {{solicitud.pagos.monto.toLocaleString()}} Bs</dt>
-                    <dt>Numero de Referencia: {{solicitud.pagos.referencia}}<dt>
-                    <dt>Comprobante:</dt>
-                    <div class="col-sm-8 text-sm-left">
-                      <dd class="project-people mb-1">
-                        <a href="/img/documentos/{{solicitud.pagos.combrobate_pago}}"><img alt="comprobante-pago" class="img-lg" src="/img/documentos/{{solicitud.pagos.combrobate_pago}}"></a>
-                      </dd>
-                    </div>
-                    <form action="/operaciones/{{cliente.id}}?_method=PATCH" method="post">
-                      <button name="solicitud" value="{{solicitud.id}}" formenctype="application/x-www-form-urlencoded" class="btn btn-block btn-outline btn-primary">Confirmar</button>
+                    @if(solicitud.estatus_conciliacion === 1 && solicitud.pagos !== null &&  solicitud.unidades_asignadas === 0)
+                    <h4>Solictud Unidades:</h4>
+                    <dt>Cantidad de Unidades: <br> {{solicitud.cantidad_unidades_inversion}}</dt>
+                    <dt>Precio por Unidad: <br> 5,000 Bs</dt>
+                    <dt>Monto total: {{solicitud.total.toLocaleString()}} Bs</dt>
+                    <dt>En Fecha: {{solicitud.created_at}}<dt>
+                    <br>
+                    <form action="/tesoreria/{{cliente.id}}?_method=PATCH" method="post">
+                      <button name="solicitud" value="{{solicitud.id}}" formenctype="application/x-www-form-urlencoded" class="btn btn-block btn-outline btn-primary">Asignar Unidades</button>
                     </form>
-                    @elseif(solicitud.estatus_conciliacion === 0 && solicitud.pagos === null)
-                    <h4>No se ha registrado ningun pago</h4>
                     @else
-
+                    <h4>No posee unidades sin asignar</h4>
                     @endif
                     @endeach
                   </div>
