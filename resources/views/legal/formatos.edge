@@ -1,0 +1,113 @@
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>INSPINIA | File Manager</title>
+
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+  <link href="/css/animate.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+
+</head>
+
+@include('partials.header')
+@include('partials.nav')
+
+<body>
+
+
+<div id="wrapper">
+
+
+  <div id="page-wrapper" class="gray-bg">
+    <div class="row wrapper border-bottom white-bg page-heading">
+      <div class="col-lg-9">
+        <h2>Formatos</h2>
+      </div>
+    </div>
+    <div class="wrapper wrapper-content">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="ibox ">
+            <div class="ibox-content">
+              <div class="file-manager">
+                <h5>Subir Formatos:</h5>
+                <form method="POST" action="/legal/formatos" enctype="multipart/form-data">
+                  <input class="form-control" type="text" name="nombre" placeholder="Nombre Formato" required>
+                  <br>
+                  <input class="form-control" type="file" name="formato" multiple required/>
+                  <button class="btn btn-primary btn-block">Subir Archivo</button>
+                </form>
+
+                <!--                <div class="hr-line-dashed"></div>-->
+                <!--                <h5>Buscador:</h5>-->
+                <!--                <p>Ira aqui</p>-->
+                <div class="clearfix"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 animated fadeInRight">
+          <div class="row">
+            <div class="col-lg-12">
+              @each(formato in formatos)
+
+              <div class="file-box">
+                <div class="file">
+                  <a href="/legal/formatos/download/{{formato.id}}formatos">
+                    <span class="corner"></span>
+
+                    <div class="icon">
+                      <i class="fa fa-file"></i>
+                    </div>
+
+                    <div class="file-name">
+                      {{formato.nombre}}
+                      <br/>
+                      <small>Agregado: {{formato.created_at}}</small>
+                      <br>
+                      <small>Actualizado: {{formato.updated_at}}</small>
+                    </div>
+
+                  </a>
+                </div>
+              </div>
+              @endeach
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="float-right">
+        10GB of <strong>250GB</strong> Free.
+      </div>
+      <div>
+        <strong>Copyright</strong> Example Company &copy; 2014-2018
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Mainly scripts -->
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="js/inspinia.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+
+</body>
+
+
+<!-- Mirrored from webapplayers.com/inspinia_admin-v2.8/file_manager.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Aug 2018 01:32:13 GMT -->
+</html>

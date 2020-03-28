@@ -1,4 +1,7 @@
 'use strict'
+const Helpers = use('Helpers')
+const DocumentosEmpresa = use('App/Models/DocumentosEmpresa')
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +21,8 @@ const Route = use('Route')
 
 Route.on('/').render('welcome')
 
+//CLIENTES
 Route.group( () =>{
-  Route.resource('inversionista', 'ClienteNaturalController')
   Route.get('crearAutomatico/:id', 'UserController.crearAutomatico')
   Route.get('signup', 'ClienteNaturalController.signup')
   Route.get('solicitudui/:id', 'ClienteNaturalController.solicitudui')
@@ -28,18 +31,37 @@ Route.group( () =>{
   Route.post('pago/:id', 'ClienteNaturalController.createPago')
   Route.post('registro', 'ClienteNaturalController.registro')
 }).prefix('cliente')
+Route.resource('inversionista', 'ClienteNaturalController')
 
+//LEGAL
 Route.group( () =>{
-  Route.resource('legal', 'LegalController').only(['index','show','update'])
-})
+  Route.resource('documentos-empresas', 'DocumentosEmpresaController').only(['index','store'])
+  Route.get('documentos-empresas/download/:id', 'DocumentosEmpresaController.download')
+  Route.resource('formatos','FormatoController' ).only(['index','store'])
+  Route.get('formatos/download/:id', 'FormatoController.download')
+  Route.resource('deberes-legales','DeberLegalController' ).only(['index','store'])
+  Route.get('deberes-legales/download/:id', 'DeberLegalController.download')
+  Route.resource('leyes-y-normas','LeyNormaController' ).only(['index','store'])
+  Route.get('leyes-y-normas/download/:id', 'LeyNormaController.download')
+}).prefix('legal')
+Route.resource('legal', 'LegalController').only(['index','show','update'])
 
+//OPERACIONES
 Route.group( () =>{
-  Route.resource('operaciones:option?', 'OperacionesController').only(['index','show','update'])
-})
 
+}).prefix('operaciones')
+Route.resource('operaciones:option?', 'OperacionesController').only(['index','show','update'])
+
+
+//TESORERIA
 Route.group( () =>{
-  Route.resource('tesoreria', 'TesoreriaController').only(['index','show','update'])
-})
+
+}).prefix('tesoreria')
+Route.resource('tesoreria', 'TesoreriaController').only(['index','show','update'])
+
+
+
+
 
 
 //04124442130
