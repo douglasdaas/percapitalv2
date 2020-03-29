@@ -1,6 +1,6 @@
 'use strict'
 const Helpers = use('Helpers')
-const DocumentosEmpresa = use('App/Models/DocumentosEmpresa')
+
 
 
 /*
@@ -31,7 +31,7 @@ Route.group( () =>{
   Route.post('pago/:id', 'ClienteNaturalController.createPago')
   Route.post('registro', 'ClienteNaturalController.registro')
 }).prefix('cliente')
-Route.resource('inversionista', 'ClienteNaturalController')
+Route.resource('cliente', 'ClienteNaturalController')
 
 //LEGAL
 Route.group( () =>{

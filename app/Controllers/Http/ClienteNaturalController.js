@@ -4,6 +4,10 @@ const Mail = use('Mail')
 const Encryption = use('Encryption')
 const ClienteNatural = use('App/Models/ClienteNatural')
 const SolicitudSuscripcionUi = use('App/Models/SolicitudSuscripcionUi')
+const Helpers = use('Helpers')
+const paises = require ('../../../archivos/listas/paises')
+const profesiones = require ('../../../archivos/listas/profesiones')
+const fuentesDeIngresos = require ('../../../archivos/listas/fuentesDeIngresos')
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -39,7 +43,12 @@ class ClienteNaturalController {
    * @param {View} ctx.view
    */
   async create ({ request, response, view }) {
-    return view.render('cliente.create')
+   let data ={}
+    data.paises = paises
+    data.profesiones = profesiones
+    data.fuentesDeIngresos = fuentesDeIngresos
+    console.log(data)
+    return view.render('cliente.create', {data})
   }
 
   /**

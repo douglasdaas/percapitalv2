@@ -5,6 +5,20 @@
   <link href="/css/plugins/steps/jquery.steps.css" rel="stylesheet">
   <link href="/css/animate.css" rel="stylesheet">
   <link href="/css/style.css" rel="stylesheet">
+
+
+
+
+
+
+  <link href="/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
+
+  <link href="/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+
+  <link href="/css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
+
+
+
 </head>
 
 @include('partials.header')
@@ -21,173 +35,155 @@
                 Registro Inversionistas
               </h2>
               <form id="form" action="/cliente/registrar/natural" method="POST" class="wizard-big" enctype="multipart/form-data">
-                <h1>Datos Inversionista</h1>
+                <h1>Datos</h1>
                 <fieldset>
-                  <h2>Datos Básicos</h2>
+                  <h2>Datos Personales del Inversionista</h2>
                   <div class="col">
-                    <!--nombre-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre</label>
-
-                      <div class="col-sm-10"><input type="text" name="nombre" placeholder="Nombre" value="{{datos.nombre}}" class="form-control" maxlength="30" required></div>
-                    </div>
-                    <!--apellido-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Apellido</label>
-
-                      <div class="col-sm-10"><input type="text" name="apellido" placeholder="Apellido" value="{{datos.apellido}}" class="form-control" maxlength="30" required></div>
-                    </div>
                     <!--documento_identificacion-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Número de cédula o pasaporte</label>
-                      <div class="col-sm-1"><select class="form-control m-b" value="{{datos.tipo_documento_identificacion}}" name="tipo_documento_identificacion">
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Documento de Identidad</label>
+                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_documento_identificacion">
                         <option value="V">V</option>
                         <option value="E">E</option>
                         <option value="P">P</option>
                       </select>
                       </div>
 
-                      <div class="col-sm-9"><input type="text" name="documento_identificacion" placeholder="Cédula/Pasaporte"  value="{{datos.documento_identificacion}}" class="form-control" maxlength="18 " required></div>
+                      <div class="col-sm-9"><input type="text" name="documento_identificacion" placeholder="Cédula/Pasaporte"  class="form-control" maxlength="18 " required></div>
                     </div>
-                    <!--rif-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">RIF</label>
+                    <!--nombre-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre</label>
 
-                      <div class="col-sm-10"><input type="text" name="rif" placeholder="RIF" class="form-control" maxlength="18" required></div>
+                      <div class="col-sm-10"><input type="text" name="nombre" placeholder="Nombre" class="form-control" maxlength="30" required></div>
+                    </div>
+                    <!--apellido-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Apellido</label>
+
+                      <div class="col-sm-10"><input type="text" name="apellido" placeholder="Apellido" class="form-control" maxlength="30" required></div>
+                    </div>
+                    <!--fecha_nacimiento-->
+                    <div class="form-group row" id="data_1"><label class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
+                      <div class="input-group date col-sm-10">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="fecha_nacimiento" value="03/04/2014">
+                      </div>
                     </div>
                     <!--lugar_nacimiento-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Lugar de Nacimiento</label>
 
-                      <div class="col-sm-10"><input type="text" name="lugar_nacimiento" placeholder="Lugar de nacimiento" class="form-control" maxlength="35" required></div>
-                    </div>
-                    <!--fecha_nacimiento-->
-                    <div class="form-group  row" id="data_1"><label class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
-                      <div class="input-group date col-sm-10">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value="09/09/1998" required>
+                      <div class="col-sm-10">
+                        <select class="form-control m-b" name="lugar_nacimiento">
+                          @each(pais in data.paises)
+                          <option value="{{pais.name}}">{{pais.name}}</option>
+                          @endeach
+                        </select>
                       </div>
-                    </div>
-                    <!--sexo-->
-                    <div class="form-group row m-2  ">Sexo<label class="col-sm-2 col-form-label">
-
-
-                      <div><label  class="col-sm-2 col-form-label"> <input type="radio" checked="" value="M" id="optionsRadios1" name="sexo"> Masculino </label></div>
-                      <div><label  class="col-sm-2 col-form-label"> <input type="radio" value="F" id="optionsRadios2" name="sexo"> Femenino </label></div>
-                    </div>
-                    <!--estado_civil-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Estado Civil</label>
-
-                      <div class="col-sm-10"><input type="text" name="estado_civil" placeholder="Estado Civil" class="form-control" maxlength="35" required></div>
                     </div>
                     <!--nacionalidad-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Nacionalidad</label>
 
                       <div class="col-sm-10"><input type="text" name="nacionalidad" placeholder="Nacionalidad" class="form-control" maxlength="35" required></div>
                     </div>
-                    <!--telefono_habitacion-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Teléfono de habitación</label>
+                    <!--otra_nacionalidad-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Otra Nacionalidad (Si tiene)</label>
 
-                      <div class="col-sm-10"><input type="number" min="0" name="telefono_habitacion" placeholder="Télefono de habitación" class="form-control" required></div>
+                      <div class="col-sm-10"><input type="text" name="otra_nacionalidad" placeholder="Otra Nacionalidad" class="form-control" maxlength="35" required></div>
+                    </div>
+                    <!--genero-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Genero</label>
+
+                    <div class="col-sm-10">
+                      <select class="form-control m-b" name="genero">
+                        <option value="Femenino">Femenino</option>
+                        <option value="Masculino">Masculino</option>
+                      </select>
+                    </div>
+                  </div>
+                    <!--profecion_oficio-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Profeción U Oficio</label>
+                      <div class="col-sm-10">
+                        <select class="form-control m-b" name="lugar_nacimiento">
+                          @each(profesion in data.profesiones)
+                          <option value="{{profesion}}">{{profesion}}</option>
+                          @endeach
+                        </select>
+                      </div>
+                    </div>
+                    <!--condicion_vivienda-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Condición de la Vivienda</label>
+                      <div class="col-sm-10">
+                        <select class="form-control m-b" name="condicion_vivienda">
+                          <option value="Adjudicada">Adjudicada</option>
+                          <option value="De familiares">De familiares</option>
+                          <option value="Hipotecada">Hipotecada</option>
+                          <option value="Propia">Propia</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!--carga_familiar-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Carga Familiar</label>
+
+                      <div class="col-sm-10"><input type="text" name="carga_familiar" placeholder="Carga Familiar" class="form-control" maxlength="50" required></div>
+                    </div>
+                    <!--estado_civil-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Estado Civil</label>
+                      <div class="col-sm-10">
+                        <select class="form-control m-b" name="estado_civil">
+                          <option value="Casado">Casado</option>
+                          <option value="Divorciado">Divorciado</option>
+                          <option value="Soltero">Soltero</option>
+                          <option value="Unión Estable de Hecho (Concubinato)">Unión Estable de Hecho (Concubinato)</option>
+                          <option value="Viudo">Viudo</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!--direccion_domicilio-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Dirección de Domicilio</label>
+
+                      <div class="col-sm-10"><input type="text" name="direccion_domicilio" placeholder="Dirección de Habitación" class="form-control" maxlength="80" required></div>
+                    </div>
+                    <!--ciudad_domicilio-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Ciudad</label>
+
+                      <div class="col-sm-10"><input type="text" name="ciudad_domicilio" placeholder="Ciudad" class="form-control" maxlength="35" required></div>
+                    </div>
+                    <!--estado_domicilio-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Estado</label>
+
+                      <div class="col-sm-10"><input type="text" name="estado_domicilio" placeholder="Estado" class="form-control" maxlength="35" required></div>
+                    </div>
+                    <!--pais_domicilio-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">País</label>
+
+                      <div class="col-sm-10"><input type="text" name="pais_domicilio" placeholder="País" class="form-control" maxlength="35" required></div>
+                    </div>
+                    <!--codigo_postal_domicilio-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Código Postal</label>
+
+                      <div class="col-sm-10"><input type="text" name="codigo_postal_domicilio" placeholder="Código Postal" class="form-control" maxlength="35" required></div>
+                    </div>
+                    <!--telefono_fijo-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Teléfono Fijo</label>
+
+                      <div class="col-sm-10"><input type="text" name="telefono_fijo" placeholder="Télefono de habitación" class="form-control"maxlength="15" required></div>
                     </div>
                     <!--telefono_celular-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Teléfono Celular</label>
 
-                      <div class="col-sm-10"><input type="number" min="0" name="telefono_celular" placeholder="Télefono Celular" class="form-control" required></div>
+                      <div class="col-sm-10"><input type="text" name="telefono_celular" placeholder="Télefono Celular" class="form-control" maxlength="15" required></div>
                     </div>
                     <!--correo_electronico-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Correo electrónico</label>
 
                       <div class="col-sm-10"><input type="email" name="correo_electronico" placeholder="Correo electrónico" class="form-control" maxlength="35" required></div>
                     </div>
-                    <!--direccion_habitacion-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Dirección de Habitación</label>
-
-                      <div class="col-sm-10"><input type="text" name="direccion_habitacion" placeholder="Dirección de Habitación" class="form-control" maxlength="80" required></div>
-                    </div>
-                    <!--ciudad_habitacion-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Ciudad</label>
-
-                      <div class="col-sm-10"><input type="text" name="ciudad_habitacion" placeholder="Ciudad" class="form-control" maxlength="35" required></div>
-                    </div>
-                    <!--estado_habitacion-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Estado</label>
-
-                      <div class="col-sm-10"><input type="text" name="estado_habitacion" placeholder="Estado" class="form-control" maxlength="35" required></div>
-                    </div>
-                    <!--codigo_postal_habitacion-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Código Postal</label>
-
-                      <div class="col-sm-10"><input type="text" name="codigo_postal_habitacion" placeholder="Código Postal" class="form-control" maxlength="35" required></div>
-                    </div>
-                    <!--pais_habitacion-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">País</label>
-
-                      <div class="col-sm-10"><input type="text" name="pais_habitacion" placeholder="País" class="form-control" maxlength="35" required></div>
-                    </div>
-                    <!--nivel_academico-->
-                    <div class="form-group row m-1">Nivel Académico<label class="col-sm-2 col-form-label">
-
-                      <div><label> <input type="radio" checked="" value="primaria" id="nivel_academico_Primaria" name="nivel_academico"> Primaria </label></div>
-                      <div><label> <input type="radio" value="secundaria" id="nivel_academico_Secundaria" name="nivel_academico"> Secundaria </label></div>
-                      <div><label> <input type="radio" value="universitaria" id="nivel_academico_Universitaria" name="nivel_academico"> Universitaria </label></div>
-                      <div><label> <input type="radio" value="post-grado" id="nivel_academico_Post-grado" name="nivel_academico"> Post-grado </label></div>
-                      <div><label> <input type="radio" value="doctorado" id="nivel_academico_Doctorado" name="nivel_academico"> Doctorado </label></div>
-                    </div>
-                    <!--profesion_ocupacion-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Profesión o Ocupación</label>
-
-                      <div class="col-sm-10"><input type="text" name="profesion_ocupacion" placeholder="Profesión/Ocupación" class="form-control" maxlength="35" required></div>
-                    </div>
-                    <h2>Empresa (si trabaja en una empresa)</h2>
-                    <!--nombre_empresa-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre de la empresa donde trabaja</label>
-
-                      <div class="col-sm-10"><input type="text" name="nombre_empresa" placeholder="Nombre Empresa" class="form-control" maxlength="35"></div>
-                    </div>
-                    <!--cargo-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Cargo</label>
-
-                      <div class="col-sm-10"><input type="text" name="cargo" placeholder="Cargo" class="form-control" maxlength="35"></div>
-                    </div>
-                    <!--anos_en_la_empresa-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Años en la empresa</label>
-
-                      <div class="col-sm-10"><input type="text" name="anos_en_la_empresa" placeholder="Años" class="form-control" maxlength="35"></div>
-                    </div>
-                    <!--direccion_empresa-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Dirección de la empresa</label>
-
-                      <div class="col-sm-10"><input type="text" name="direccion_empresa" placeholder="Dirección" class="form-control" maxlength="80"></div>
-                    </div>
-                    <!--ciudad_empresa-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Ciudad de la empresa</label>
-
-                      <div class="col-sm-10"><input type="text" name="ciudad_empresa" placeholder="Ciudad" class="form-control" maxlength="35"></div>
-                    </div>
-                    <!--estado_empresa-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Estado de la empresa</label>
-
-                      <div class="col-sm-10"><input type="text" name="estado_empresa" placeholder="Estado" class="form-control" maxlength="35"></div>
-                    </div>
-                    <!--codigo_postal_empresa-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Código postal de la empresa</label>
-
-                      <div class="col-sm-10"><input type="text" name="codigo_postal_empresa" placeholder="Código Postal" class="form-control" maxlength="35"></div>
-                    </div>
-                    <!--pais_empresa-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">País de la empresa</label>
-
-                      <div class="col-sm-10"><input type="text" name="pais_empresa" placeholder="País" class="form-control" maxlength="35"></div>
-                    </div>
                     <h2>Cónyuge (si posee cónyuge)</h2>
-                    <!--nombre_conyugue-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre </label>
+                    <!--nombre_completo_conyugue-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre Completo del Cónyugue</label>
 
-                      <div class="col-sm-10"><input type="text" name="nombre_conyugue" placeholder="Nombre" class="form-control" maxlength="30"></div>
-                    </div>
-                    <!--apellido_conyugue-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Apellido </label>
-
-                      <div class="col-sm-10"><input type="text" name="apellido_conyugue" placeholder="Apellido" class="form-control" maxlength="30"></div>
+                      <div class="col-sm-10"><input type="text" name="nombre_completo_conyugue" placeholder="Nombre Completo" class="form-control" maxlength="30"></div>
                     </div>
                     <!--documento_identificacion_conyugue-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Número de cédula o pasaporte</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_documento_identificacion">
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Documento de Identidad</label>
+                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_documento_identificacion_conyugue">
                         <option value="V">V</option>
                         <option value="E">E</option>
                         <option value="P">P</option>
@@ -196,684 +192,786 @@
 
                       <div class="col-sm-9"><input type="text" name="documento_identificacion_conyugue" placeholder="Cédula/Pasaporte" class="form-control" maxlength="18"></div>
                     </div>
-                    <!--nombre_empresa_conyugue-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre de la empresa donde trabaja</label>
-
-                      <div class="col-sm-10"><input type="text" name="nombre_empresa_conyugue" placeholder="Nombre Empresa" class="form-control" maxlength="35"></div>
-                    </div>
-                    <!--cargo_conyugue-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Cargo</label>
-
-                      <div class="col-sm-10"><input type="text" name="cargo_conyugue" placeholder="Cargo" class="form-control" maxlength="35"></div>
-                    </div>
-                    <!--anos_en_la_empresa_conyugue-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Años en la empresa</label>
-
-                      <div class="col-sm-10"><input type="text" name="anos_en_la_empresa_conyugue" placeholder="Años" class="form-control" maxlength="35"></div>
-                    </div>
-                    <!--direccion_empresa_conyugue-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Dirección de la empresa</label>
-
-                      <div class="col-sm-10"><input type="text" name="direccion_empresa_conyugue" placeholder="Dirección" class="form-control" maxlength="80"></div>
-                    </div>
-                    <!--ciudad_empresa_conyugue-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Ciudad de la empresa</label>
-
-                      <div class="col-sm-10"><input type="text" name="ciudad_empresa_conyugue" placeholder="Ciudad" class="form-control" maxlength="35"></div>
-                    </div>
-                    <!--estado_empresa_conyugue-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Estado de la empresa</label>
-
-                      <div class="col-sm-10"><input type="text" name="estado_empresa_conyugue" placeholder="Estado" class="form-control" maxlength="35"></div>
-                    </div>
-                    <!--codigo_postal_empresa_conyugue-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Código postal de la empresa</label>
-
-                      <div class="col-sm-10"><input type="text" name="codigo_postal_empresa_conyugue" placeholder="Código Postal" class="form-control" maxlength="35"></div>
-                    </div>
-                    <!--pais_empresa_conyugue-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">País de la empresa</label>
-
-                      <div class="col-sm-10"><input type="text" name="pais_empresa_conyugue" placeholder="País" class="form-control" maxlength="35"></div>
-                    </div>
-                  </div>
-                </fieldset>
-                <h1>Datos Bancarios</h1>
-                <fieldset>
-                  <div class="col">
-                    <h2>Banco en Bolivares</h2>
-                    <!--nombre_banco-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre del Banco</label>
-
-                      <div class="col-sm-10"><input type="text" name="nombre_banco" placeholder="Nombre" class="form-control" maxlength="80" required></div>
-                    </div>
-                    <!--tipo_cuenta-->
-                    <div class="form-group row m-2  ">Tipo de Cuenta<label class="col-sm-2 col-form-label">
-
-
-                      <div><label  class="col-sm-2 col-form-label"> <input type="radio" checked="" value="corriente" id="optionsRadios1" name="tipo_cuenta"> Corriente </label></div>
-                      <div><label  class="col-sm-2 col-form-label"> <input type="radio" value="ahorro" id="optionsRadios2" name="tipo_cuenta"> Ahorro </label></div>
-                    </div>
-                    <!--numero_cuenta-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Numero de Cuenta</label>
-
-                      <div class="col-sm-10"><input type="text" name="ciudad_habitacion" placeholder="Nº Cuenta" class="form-control" maxlength="35" required></div>
-                    </div>
-                    <h2>Banco en Divisas</h2>
-                    <!--nombre_banco_beneficiario-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Banco Beneficiario</label>
-
-                      <div class="col-sm-10"><input type="text" name="nombre_banco_beneficiario" placeholder="Beneficiario" class="form-control" maxlength="80" required></div>
-                    </div>
-                    <!--SWIFT_ABA_beneficiario-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">SWIFT/ABA</label>
-
-                      <div class="col-sm-10"><input type="text" name="SWIFT_ABA_beneficiario" placeholder="SWIFT/ABA" class="form-control" maxlength="80" required></div>
-                    </div>
-                    <!--numero_cuenta_IBAN_beneficiario-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Numero de Cuenta/IBAN</label>
-
-                      <div class="col-sm-10"><input type="text" name="numero_cuenta_IBAN_beneficiario" placeholder="Nº Cuenta/IBAN" class="form-control" maxlength="35" required></div>
-                    </div>
-                    <!--direccion_banco_beneficiario-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Dirección Banco Beneficiario</label>
-
-                      <div class="col-sm-10"><input type="text" name="direccion_banco_beneficiario" placeholder="Dirección" class="form-control" maxlength="80" required></div>
-                    </div>
-                    <!--nombre_banco_intermediario-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Banco Intermediario</label>
-
-                      <div class="col-sm-10"><input type="text" name="nombre_banco_intermediario" placeholder="Intermediario" class="form-control" maxlength="80" required></div>
-                    </div>
-                    <!--SWIFT_ABA_intermediario-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">SWIFT/ABA</label>
-
-                      <div class="col-sm-10"><input type="text" name="SWIFT_ABA_intermediario" placeholder="SWIFT/ABA" class="form-control" maxlength="80" required></div>
-                    </div>
-                    <!--numero_cuenta_IBAN_intermediario-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Numero de Cuenta/IBAN</label>
-
-                      <div class="col-sm-10"><input type="text" name="numero_cuenta_IBAN_intermediario" placeholder="Nº Cuenta/IBAN" class="form-control" maxlength="35" required></div>
-                    </div>
-                    <!--direccion_banco_intermediario-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Dirección Banco Intermediario</label>
-
-                      <div class="col-sm-10"><input type="text" name="direccion_banco_intermediario" placeholder="Dirección" class="form-control" maxlength="80" required></div>
-                    </div>
-
-                  </div>
-                </fieldset>
-
-                <h1>Firmas</h1>
-                <fieldset>
-                  <div class="col">
-                    <h2>Firmas autorizadas</h2>
-                    <!--documento_identificacion_firma-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Número de cédula o pasaporte</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_documento_identificacion_firma">
-                        <option value="V">V</option>
-                        <option value="E">E</option>
-                        <option value="P">P</option>
-                      </select>
-                      </div>
-
-                      <div class="col-sm-9"><input type="text" name="documento_identificacion_firma" placeholder="Cédula/Pasaporte" class="form-control" maxlength="18 " required></div>
-                    </div>
-                    <!--nombre_firma-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre</label>
-
-                      <div class="col-sm-10"><input type="text" name="nombre_firma" placeholder="Nombre" class="form-control" maxlength="30" required></div>
-                    </div>
-                    <!--apellido_firma-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Apellido</label>
-
-                      <div class="col-sm-10"><input type="text" name="apellido_firma" placeholder="Apellido" class="form-control" maxlength="30" required></div>
-                    </div>
-                    <!--relacion_inversionista_firma-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Relación con el Inversionista</label>
-
-                      <div class="col-sm-10"><input type="text" name="relacion_inversionista_firma" placeholder="Relación" class="form-control" maxlength="30" required></div>
-                    </div>
-                    <!--tipo_firma-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Tipo de Firma</label>
-
-                      <div class="col-sm-10"><input type="text" name="tipo_firma" placeholder="Tipo" class="form-control" maxlength="30" required></div>
-                    </div>
-                    <!--ruta_documento_autoriza_firma-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Documento que autoriza al firmante</label>
+                    <!--fuente_ingresos_conyugue-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Fuente de Ingresos</label>
                       <div class="col-sm-10">
-                        <div class="fileinput fileinput-new" data-provides="fileinput">
-                                            <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar Archivo</span>
-                                            <span class="fileinput-exists">Cambiar</span><input type="file" name="ruta_documento_autoriza_firma" required/></span>
-                          <span class="fileinput-filename"></span>
-                          <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
-                        </div>
+                        <select class="form-control m-b" name="fuente_ingresos_conyugue">
+                          @each(fuenteDeIngreso in data.fuentesDeIngresos)
+                          <option value="{{fuenteDeIngreso}}">{{fuenteDeIngreso}}</option>
+                          @endeach
+                        </select>
                       </div>
                     </div>
-
                   </div>
+                  <h2>Persona Politicamente Expuesta</h2>
+                  <!--estatus_PEP-->
+
+                  <p>Bajo la legislacion vigente se define como persona expuesta politicamente (pep), a toda persona que desepeña o ha desempeñado
+                    funciones publicas prominentes en el gobierno nacional o en el extranjero. Por ejemplo, los jefes de estado o gobierno, politicos
+                    de alto nivel, funcionarios gubernamentales, judiciales u oficiales militares de alto nivel, ejecutivos de alto nivel de
+                    corporaciones que pertenecen al estado, funcionarios importantes de partidos politicos, y sus familiares cercanos,
+                    entendiendose por estos los padres, hermanos, hijos , esposo (a), tios de un pep. Esta definicion no persigue cubrir personas
+                    de rango medio o mas bajo que las categorias anteriormente expuestas.</p>
+                  <h3>El Invercionista es (PEP)</h3>
+                  <!--Invercionista-->
+                  <div class="form-group col">
+                    <div class="form-group row">
+                      <label class="col-sm-1 col-form-label">PEP?</label>
+                      <div class="col-sm-1">
+                        <select class="form-control m-b" name="es_pep_inversionista">
+                          <option value="N">No</option>
+                          <option value="S">Si</option>
+                        </select>
+                      </div>
+                      <label class="col-sm-3 col-form-label">Nombre del Ente Adscripción:</label>
+                      <div class="col-sm-7">
+                        <input type="text" name="nombre_ente_adcripcion_inversionista" placeholder="Nombre del Ente Adscripción" class="form-control" maxlength="18">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-1 col-form-label">País</label>
+                      <div class="col-sm-4">
+                        <select class="form-control m-b" name="pais_inversionista">
+                          @each(pais in data.paises)
+                          <option value="{{pais.name}}">{{pais.name}}</option>
+                          @endeach
+                        </select>
+                      </div>
+                      <label class="col-sm-2 col-form-label">Cargo que Desepeña:</label>
+                      <div class="col-sm-5">
+                        <input type="text" name="cargo_desempena_inversionista" placeholder="Cargo" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Identificación de Relacionado:</label>
+                      <div class="col-sm-9">
+                        <input type="text" name="identificador_relacionado_inversionista" placeholder="Identificación" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3>Tiene Parentesco con (PEP)</h3>
+                  <!--Invercionista-->
+                  <div class="form-group col">
+                    <div class="form-group row">
+                      <label class="col-sm-1 col-form-label">PEP?</label>
+                      <div class="col-sm-1">
+                        <select class="form-control m-b" name="es_pep_parentesco">
+                          <option value="N">No</option>
+                          <option value="S">Si</option>
+                        </select>
+                      </div>
+                      <label class="col-sm-3 col-form-label">Nombre del Ente Adscripción:</label>
+                      <div class="col-sm-7">
+                        <input type="text" name="nombre_ente_adcripcion_parentesco" placeholder="Nombre del Ente Adscripción" class="form-control" maxlength="18">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-1 col-form-label">País</label>
+                      <div class="col-sm-4">
+                        <select class="form-control m-b" name="pais_parentesco">
+                          @each(pais in data.paises)
+                          <option value="{{pais.name}}">{{pais.name}}</option>
+                          @endeach
+                        </select>
+                      </div>
+                      <label class="col-sm-2 col-form-label">Cargo que Desepeña:</label>
+                      <div class="col-sm-5">
+                        <input type="text" name="cargo_desempena_parentesco" placeholder="Cargo" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Identificación de Relacionado:</label>
+                      <div class="col-sm-9">
+                        <input type="text" name="identificador_relacionado_parentesco" placeholder="Identificación" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3>Es Asociado Cercano de (PEP)</h3>
+                  <!--Invercionista-->
+                  <div class="form-group col">
+                    <div class="form-group row">
+                      <label class="col-sm-1 col-form-label">PEP?</label>
+                      <div class="col-sm-1">
+                        <select class="form-control m-b" name="es_pep_asociado">
+                          <option value="N">No</option>
+                          <option value="S">Si</option>
+                        </select>
+                      </div>
+                      <label class="col-sm-3 col-form-label">Nombre del Ente Adscripción:</label>
+                      <div class="col-sm-7">
+                        <input type="text" name="nombre_ente_adcripcion_asociado" placeholder="Nombre del Ente Adscripción" class="form-control" maxlength="18">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-1 col-form-label">País</label>
+                      <div class="col-sm-4">
+                        <select class="form-control m-b" name="pais_asociado">
+                          @each(pais in data.paises)
+                          <option value="{{pais.name}}">{{pais.name}}</option>
+                          @endeach
+                        </select>
+                      </div>
+                      <label class="col-sm-2 col-form-label">Cargo que Desepeña:</label>
+                      <div class="col-sm-5">
+                        <input type="text" name="cargo_desempena_asociado" placeholder="Cargo" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Identificación de Relacionado:</label>
+                      <div class="col-sm-9">
+                        <input type="text" name="identificador_relacionado_asociado" placeholder="Identificación" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+
                 </fieldset>
+
                 <h1>Referencias</h1>
                 <fieldset>
-                  <div class="col">
-                    <h2>Referencias Bancarias, comerciales o personales</h2>
-                    <!--nombre_persona_referencias_personal_natural-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre y Apellido o Razón Social</label>
+                  <div class="form-group col">
+                    <h2>Referencias Bancarias</h2>
+                    <!--institucion_bancaria-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Institución del Sector Bancario</label>
 
-                      <div class="col-sm-10"><input type="text" name="nombre_persona_referencias_personal_natural" placeholder="Nombre o Razón" class="form-control" maxlength="18 " required></div>
+                      <div class="col-sm-10"><input type="text" name="institucion_bancaria" placeholder="Instución Bancaria" class="form-control" required></div>
                     </div>
-                    <!--telefono_referencias_personal_natural-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Teléfono</label>
+                    <!--nombre_producto-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre del Producto</label>
 
-                      <div class="col-sm-10"><input type="text" name="telefono_referencias_personal_natural" placeholder="Teléfono" class="form-control" maxlength="30" required></div>
+                      <div class="col-sm-10"><input type="text" name="nombre_producto" placeholder="Nombre" class="form-control" required></div>
+                    </div>
+                    <!--numero_producto-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Numero del Producto</label>
+
+                      <div class="col-sm-10"><input type="text" name="numero_producto" placeholder="Numero" class="form-control" required></div>
+                    </div>
+                    <!--cifras_promedio-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Cifras Promedio</label>
+
+                      <div class="col-sm-10"><input type="text" name="cifras_promedio" placeholder="Cifras" class="form-control" required></div>
+                    </div>
+                  </div>
+                  <div class="form-group col">
+                    <h2>Referencias Personales</h2>
+                    <!--nombre_apellido-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombres y Apellidos</label>
+
+                      <div class="col-sm-10"><input type="text" name="nombre_apellido" placeholder="Nombre o Razón" class="form-control" maxlength="18 " required></div>
+                    </div>
+                    <!--cedula_identidad-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Cedula de Identidad</label>
+
+                      <div class="col-sm-10"><input type="text" name="cedula_identidad" placeholder="Cedula" class="form-control" maxlength="30" required></div>
                     </div>
                     <!--direccion_referencias_personal_natural-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Dirección</label>
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Telefono Local (Línea Fija)</label>
 
-                      <div class="col-sm-10"><input type="text" name="direccion_referencias_personal_natural" placeholder="Dirección" class="form-control" maxlength="30" required></div>
+                      <div class="col-sm-10"><input type="text" name="telefono_local" placeholder="Telefono" class="form-control" maxlength="30" required></div>
                     </div>
                     <!--nombre_institucion_referencias_institucion_natural-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre Institución Financiera</label>
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Celular (Movil)</label>
 
-                      <div class="col-sm-10"><input type="text" name="nombre_institucion_referencias_institucion_natural" placeholder="Nombre" class="form-control" maxlength="18 " required></div>
-                    </div>
-                    <!--agencia_referencias_institucion_natural-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Agencia</label>
-
-                      <div class="col-sm-10"><input type="text" name="agencia_referencias_institucion_natural" placeholder="Agencia" class="form-control" maxlength="30" required></div>
-                    </div>
-                    <!--numero_cuenta_referencias_institucion_natural-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Numero de Cuenta</label>
-
-                      <div class="col-sm-10"><input type="text" name="numero_cuenta_referencias_institucion_natural" placeholder="Nº de cuenta" class="form-control" maxlength="30" required></div>
+                      <div class="col-sm-10"><input type="text" name="celular" placeholder="Celular" class="form-control" maxlength="18 " required></div>
                     </div>
                   </div>
                 </fieldset>
 
-                <h1>Información financiera</h1>
+                <h1>Cuentas en Divisas</h1>
                 <fieldset>
-                  <div class="col">
-                    <h2>Información financiera y patrimonial</h2>
-                    <!--ingresos_mensuales_promedio-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Ingresos Mensuales Promedio</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_ingresos_mensuales_promedio">
-                        <option value="B">Bs</option>
-                        <option value="D">$</option>
-                      </select>
-                      </div>
+                    <h3>Banco Beneficiario</h3>
+                    <div class="form-group col">
+                      <!--nombre_banco_beneficiario-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Banco Beneficiario</label>
 
-                      <div class="col-sm-9"><input type="number" min="0" name="ingresos_mensuales_promedio" placeholder="Ingresos" class="form-control" maxlength="18 " required></div>
-                    </div>
-                    <!--egresos_mensuales_promedio-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Egresos Mensuales Promedio</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_egresos_mensuales_promedio">
-                        <option value="B">Bs</option>
-                        <option value="D">$</option>
-                      </select>
+                        <div class="col-sm-10"><input type="text" name="nombre_banco_beneficiario" placeholder="Beneficiario" class="form-control" maxlength="80" ></div>
                       </div>
+                      <!--numero_cuenta_IBAN_beneficiario-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Numero de Cuenta/IBAN</label>
 
-                      <div class="col-sm-9"><input type="number" min="0" name="egresos_mensuales_promedio" placeholder="Ingresos" class="form-control" maxlength="18 " required></div>
-                    </div>
-                    <!--otros_ingresos-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Otros Ingresos</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_otros_ingresos">
-                        <option value="B">Bs</option>
-                        <option value="D">$</option>
-                      </select>
+                        <div class="col-sm-10"><input type="text" name="numero_cuenta_IBAN_beneficiario" placeholder="Nº Cuenta/IBAN" class="form-control" maxlength="35" ></div>
                       </div>
+                      <!--SWIFT_ABA_beneficiario-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">SWIFT/ABA</label>
 
-                      <div class="col-sm-9"><input type="number" min="0" name="otros_ingresos" placeholder="Ingresos" class="form-control" maxlength="18 " required></div>
-                    </div>
-                    <!--total_activos_aproximadamente-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Total Activos Aproximadamente</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_total_activos_aproximadamente">
-                        <option value="B">Bs</option>
-                        <option value="D">$</option>
-                      </select>
+                        <div class="col-sm-10"><input type="text" name="SWIFT_ABA_beneficiario" placeholder="SWIFT/ABA" class="form-control" maxlength="80" ></div>
                       </div>
+                        <!--direccion_banco_beneficiario-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Dirección Banco Beneficiario</label>
 
-                      <div class="col-sm-9"><input type="number" min="0" name="total_activos_aproximadamente" placeholder="Ingresos" class="form-control" maxlength="18 " required></div>
-                    </div>
-                    <!--total_pasivos_aproximadamente-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Total Pasivos Aproximadamente</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_total_pasivos_aproximadamente">
-                        <option value="B">Bs</option>
-                        <option value="D">$</option>
-                      </select>
+                        <div class="col-sm-10"><input type="text" name="direccion_banco_beneficiario" placeholder="Dirección" class="form-control" maxlength="80" ></div>
                       </div>
+                    </div>
+                    <h3>Banco Intermediario</h3>
+                    <div class="form-group col">
+                      <!--nombre_banco_intermediario-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Banco Intermediario</label>
 
-                      <div class="col-sm-9"><input type="number" min="0" name="total_pasivos_aproximadamente" placeholder="Ingresos" class="form-control" maxlength="18 " required></div>
-                    </div>
-                    <!--patrimonio_total_aproximadamente-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label"> Patrimonio Total</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_patrimonio_total_aproximadamente">
-                        <option value="B">Bs</option>
-                        <option value="D">$</option>
-                      </select>
+                        <div class="col-sm-10"><input type="text" name="nombre_banco_intermediario" placeholder="Intermediario" class="form-control" maxlength="80" ></div>
                       </div>
+                      <!--numero_cuenta_IBAN_intermediario-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Numero de Cuenta/IBAN</label>
 
-                      <div class="col-sm-9"><input type="number" min="0" name="patrimonio_total_aproximadamente" placeholder="Ingresos" class="form-control" maxlength="18 " required></div>
-                    </div>
-                    <!--otras_inversiones_activos_inmuebles-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Otras Inversiones, Activos, Inmuebles, etc</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_patrimonio_total_aproximadamente">
-                        <option value="B">Bs</option>
-                        <option value="D">$</option>
-                      </select>
+                        <div class="col-sm-10"><input type="text" name="numero_cuenta_IBAN_intermediario" placeholder="Nº Cuenta/IBAN" class="form-control" maxlength="35" ></div>
                       </div>
+                        <!--SWIFT_ABA_intermediario-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">SWIFT/ABA</label>
 
-                      <div class="col-sm-9"><input type="text" name="otras_inversiones_activos_inmuebles" placeholder="Ingresos" class="form-control" maxlength="250 " required></div>
-                    </div>
-                    <!--tipo_contribuyente_SENIAT-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Tipo de contribuyente SENIAT</label>
-                      <div class="col-sm-2"><select class="form-control m-b" name="tipo_contribuyente_SENIAT">
-                        <option value="Normal">Normal</option>
-                        <option value="Especial">Especial</option>
-                        <option value="Formal">Formal</option>
-                      </select>
+                        <div class="col-sm-10"><input type="text" name="SWIFT_ABA_intermediario" placeholder="SWIFT/ABA" class="form-control" maxlength="80" ></div>
+                      </div>
+                      <!--direccion_banco_intermediario-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Dirección Banco Intermediario</label>
+
+                        <div class="col-sm-10"><input type="text" name="direccion_banco_intermediario" placeholder="Dirección" class="form-control" maxlength="80" ></div>
                       </div>
                     </div>
-                  </div>
+                    <h3>Beneficiario</h3>
+                    <div class="form-group col">
+                      <!--nombre_beneficiario-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre Beneficiario</label>
+
+                        <div class="col-sm-10"><input type="text" name="nombre_beneficiario" placeholder="Beneficiario" class="form-control" maxlength="80" ></div>
+                      </div>
+                      <!--direccion_beneficiario-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Dirección Beneficiario</label>
+
+                        <div class="col-sm-10"><input type="text" name="direccion_beneficiario" placeholder="Dirección" class="form-control" maxlength="80" ></div>
+                      </div>
+                    </div>
                 </fieldset>
 
-                <h1>Perfil</h1>
-                <fieldset>
-                  <div class="col">
-                    <h2>Perfil del Inversionista</h2>
-                    <!--experiencia_finianciera-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">¿Tiene o ha tenido experiencia en inversiones financieras?</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="experiencia_finianciera">
-                        <option value="N">No</option>
-                        <option value="S">Si</option>
-                      </select>
-                      </div>
+<!--                <h1>Firmas</h1>-->
+<!--                <fieldset>-->
+<!--                  <div class="col">-->
+<!--                    <h2>Firmas autorizadas</h2>-->
+<!--                    &lt;!&ndash;documento_identificacion_firma&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Número de cédula o pasaporte</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_documento_identificacion_firma">-->
+<!--                        <option value="V">V</option>-->
+<!--                        <option value="E">E</option>-->
+<!--                        <option value="P">P</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
 
-                      <div class="form-group  row"><label class="col-sm-3 col-form-label">Institución</label>
+<!--                      <div class="col-sm-9"><input type="text" name="documento_identificacion_firma" placeholder="Cédula/Pasaporte" class="form-control" maxlength="18 " required></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;nombre_firma&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre</label>-->
 
-                        <div class="col-sm-7"><input type="text" name="institucion_experiencia_finianciera" placeholder="Institución" class="form-control" maxlength="18 " required></div>
-                      </div>
-                      <div class="form-group  row"><label class="col-sm-3 col-form-label">Tiempo</label>
+<!--                      <div class="col-sm-10"><input type="text" name="nombre_firma" placeholder="Nombre" class="form-control" maxlength="30" required></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;apellido_firma&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Apellido</label>-->
 
-                        <div class="col-sm-7"><input type="text" name="tiempo_experiencia_finianciera" placeholder="Tiempo" class="form-control" maxlength="18 " required></div>
-                      </div>
-                    </div>
-                    <!--tipo_inversion_experiencia_finianciera-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Tipo</label>
+<!--                      <div class="col-sm-10"><input type="text" name="apellido_firma" placeholder="Apellido" class="form-control" maxlength="30" required></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;relacion_inversionista_firma&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Relación con el Inversionista</label>-->
 
-                      <div class="col-sm-10    "><input type="text" name="tipo_inversion_experiencia_finianciera" placeholder="Tipo" class="form-control" maxlength="18 " required></div>
-                    </div>
-                    <!--inversiones_otra_institucion-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">¿Mantiene o mantuvo inversiones en otra institución financiera venezolana?</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="inversiones_otra_institucion">
-                        <option value="N">No</option>
-                        <option value="S">Si</option>
-                      </select>
-                      </div>
-                      <div class="col-sm-9"><input type="text" name="nombre_otra_institucion" placeholder="Nombre" class="form-control" maxlength="18 " required></div>
-                    </div>
-                    <!--experiencia_inversionista-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Experiencia y conocimiento como Inversionista</label>
-                      <div class="col-sm-2"><select class="form-control m-b" name="experiencia_inversionista">
-                        <option value="Bajo">Bajo</option>
-                        <option value="Medio">Medio</option>
-                        <option value="Alto">Alto</option>
-                      </select>
-                      </div>
+<!--                      <div class="col-sm-10"><input type="text" name="relacion_inversionista_firma" placeholder="Relación" class="form-control" maxlength="30" required></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;tipo_firma&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Tipo de Firma</label>-->
 
-                    </div>
-                    <!--anos_experiencia-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Años de Experiencia</label>
+<!--                      <div class="col-sm-10"><input type="text" name="tipo_firma" placeholder="Tipo" class="form-control" maxlength="30" required></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;ruta_documento_autoriza_firma&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Documento que autoriza al firmante</label>-->
+<!--                      <div class="col-sm-10">-->
+<!--                        <div class="fileinput fileinput-new" data-provides="fileinput">-->
+<!--                                            <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar Archivo</span>-->
+<!--                                            <span class="fileinput-exists">Cambiar</span><input type="file" name="ruta_documento_autoriza_firma" required/></span>-->
+<!--                          <span class="fileinput-filename"></span>-->
+<!--                          <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
 
-                      <div class="col-sm-10    "><input type="number" min="0" name="anos_experiencia" placeholder="Años" class="form-control" maxlength="18 " required></div>
-                    </div>
-                    <!--nivel_riesgo_asumir-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nivel de Riesgo a Asumir</label>
-                      <div class="col-sm-2"><select class="form-control m-b" name="nivel_riesgo_asumir">
-                        <option value="Bajo">Bajo</option>
-                        <option value="Medio">Medio</option>
-                        <option value="Alto">Alto</option>
-                      </select>
-                      </div>
+<!--                  </div>-->
+<!--                </fieldset>-->
 
-                    </div>
-                    <!--instrumentos_financieros-->
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">Origen de los Fondos a Invertir (puede marcar varias opciones):</label>
+<!--                <h1>Información financiera</h1>-->
+<!--                <fieldset>-->
+<!--                  <div class="col">-->
+<!--                    <h2>Información financiera y patrimonial</h2>-->
+<!--                    &lt;!&ndash;ingresos_mensuales_promedio&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Ingresos Mensuales Promedio</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_ingresos_mensuales_promedio">-->
+<!--                        <option value="B">Bs</option>-->
+<!--                        <option value="D">$</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
 
-                      <div class="col-sm-10">
-                        <label class="checkbox-inline i-checks"> <input type="checkbox" name="fondos_mutuales">Fondos Mutuales </label>
-                        <label class="i-checks"> <input type="checkbox" name="fondos_inversion_inmobiliarios"> Fondos de Inversión Inmobiliarios </label>
-                        <label class="i-checks"> <input type="checkbox" name="fondos_capital_riesgo">  Fondos de Capital de Riesgo </label>
-                        <label class="i-checks"> <input type="checkbox" name="renta_variable"> Renta Variable </label>
-                        <label class="i-checks"> <input type="checkbox" name="renta_fija">  Renta Fija </label>
-                        <label class="i-checks"> <input type="checkbox" name="productos_derivados"> Productos derivados </label>
-                        <label class="i-checks"> <input type="checkbox" name="fondos_retiro"> Fondos de Retiro </label>
-                        <label class="i-checks"> <input type="checkbox" name="mercado_divisa"> Mercado de Divisa </label>
-                        <label class="i-checks"> <input type="checkbox" name="instrumentos_bancarios"> Instrumentos Bancarios </label>
-                      </div>
-                    </div>
-                  </div>
-                </fieldset>
+<!--                      <div class="col-sm-9"><input type="number" min="0" name="ingresos_mensuales_promedio" placeholder="Ingresos" class="form-control" maxlength="18 " required></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;egresos_mensuales_promedio&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Egresos Mensuales Promedio</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_egresos_mensuales_promedio">-->
+<!--                        <option value="B">Bs</option>-->
+<!--                        <option value="D">$</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
 
-                <h1>Solicitud</h1>
-                <fieldset>
-                  <div class="col">
-                    <h2>Solicitud de Suscripción de Unidades de Inversión</h2>
-                    <!--tipo_solicitud-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Solicitud</label>
-                      <div class="col-sm-10"><select class="form-control m-b" name="tipo_solicitud">
-                        <option value="PER CAPITAL Fondo Mutual de Inversión de Capital Abierto">PER CAPITAL Fondo Mutual de Inversión de Capital Abierto</option>
-                        <option value="PER CAPITAL Fondo de Inversión Inmobiliaria">PER CAPITAL Fondo de Inversión Inmobiliaria</option>
-                        <option value="PER CAPITAL Fondo de Inversión de Capital de Riesgo">PER CAPITAL Fondo de Inversión de Capital de Riesgo</option>
-                        <option value="Estructuración de E.I.C.">Estructuración de E.I.C.</option>
-                        <option value="Administración de E.I.C.">Administración de E.I.C.</option>
-                        <option value="Asesoría Financiera">Asesoría Financiera</option>
-                      </select>
-                      </div>
-                    </div>
-                    <!--cantidad_unidades_inversion-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Cantidad Unidades de Inversión</label>
+<!--                      <div class="col-sm-9"><input type="number" min="0" name="egresos_mensuales_promedio" placeholder="Ingresos" class="form-control" maxlength="18 " required></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;otros_ingresos&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Otros Ingresos</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_otros_ingresos">-->
+<!--                        <option value="B">Bs</option>-->
+<!--                        <option value="D">$</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
 
-                      <div class="col-sm-10    "><input type="number" min="0" name="cantidad_unidades_inversion" placeholder="Cantidad" class="form-control" maxlength="18 " required></div>
-                    </div>
-                    <!--precio_VUI-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Precio V.U.I.</label>
+<!--                      <div class="col-sm-9"><input type="number" min="0" name="otros_ingresos" placeholder="Ingresos" class="form-control" maxlength="18 " required></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;total_activos_aproximadamente&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Total Activos Aproximadamente</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_total_activos_aproximadamente">-->
+<!--                        <option value="B">Bs</option>-->
+<!--                        <option value="D">$</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
 
-                      <div class="col-sm-10    "><input type="number" min="0" name="cantidad_unidades_inversion" placeholder="Precio" value="50000" class="form-control" maxlength="18 " disabled></div>
-                    </div>
-                    <!--total-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Total</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_moneda">
-                        <option value="Bs">Bs</option>
-                        <option value="$">$</option>
-                      </select>
-                      </div>
+<!--                      <div class="col-sm-9"><input type="number" min="0" name="total_activos_aproximadamente" placeholder="Ingresos" class="form-control" maxlength="18 " required></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;total_pasivos_aproximadamente&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Total Pasivos Aproximadamente</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_total_pasivos_aproximadamente">-->
+<!--                        <option value="B">Bs</option>-->
+<!--                        <option value="D">$</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
 
-                      <div class="col-sm-10    "><input type="number" min="0" name="cantidad_unidades_inversion" placeholder="Precio" value="50000" class="form-control" maxlength="18 " disabled></div>
-                    </div>
-                    <!--pago_dividendos-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Pago de Dividendos</label>
-                      <div class="col-sm-10"><select class="form-control m-b" name="pago_dividendos">
-                        <option value="R">Reinvertir en nuevas Unidades de Inversión.</option>
-                        <option value="T">Transferir a Cuenta Bancaria</option>
-                      </select>
-                      </div>
-                    </div>
-                    <!--reprecentacion_asamblea_general-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Poder para Representación en Asamblea General</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="pago_dividendos">
-                        <option value="S">Si</option>
-                        <option value="N">No</option>
-                      </select>
-                      </div>
-                    </div>
-                    <!--servicio_custodia-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Servicio de Custodia en Caja Venezolana de Valores</label>
-                      <h4>Custodia en macro cuenta de PER CAPITAL Sociedad Administradora de Entidades de Inversión Colectiva</h4>
-                      <div class="col-sm-1"><select class="form-control m-b" name="pago_dividendos">
-                        <option value="S">Si</option>
-                        <option value="N">No</option>
-                      </select>
-                      </div>
-                    </div>
-                  </div>
-                </fieldset>
+<!--                      <div class="col-sm-9"><input type="number" min="0" name="total_pasivos_aproximadamente" placeholder="Ingresos" class="form-control" maxlength="18 " required></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;patrimonio_total_aproximadamente&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label"> Patrimonio Total</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_patrimonio_total_aproximadamente">-->
+<!--                        <option value="B">Bs</option>-->
+<!--                        <option value="D">$</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
 
-                <h1>Prevención y Control</h1>
-                <fieldset>
-                  <div class="col">
-                    <h2>Prevención y Control de legitimaci[on de capitales y financiamineto al terrorismo</h2>
-                    <!--origen_fondos-->
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">Origen de los Fondos a Invertir (puede marcar varias opciones):</label>
+<!--                      <div class="col-sm-9"><input type="number" min="0" name="patrimonio_total_aproximadamente" placeholder="Ingresos" class="form-control" maxlength="18 " required></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;otras_inversiones_activos_inmuebles&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Otras Inversiones, Activos, Inmuebles, etc</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_patrimonio_total_aproximadamente">-->
+<!--                        <option value="B">Bs</option>-->
+<!--                        <option value="D">$</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
 
-                      <div class="col-sm-10">
-                        <label class="checkbox-inline i-checks"> <input type="checkbox" value="option1">Salarios, Honorarios </label>
-                        <label class="i-checks"> <input type="checkbox" value="option2"> Rentas y Alquileres </label>
-                        <label class="i-checks"> <input type="checkbox" value="option3"> Financiamiento Bancario </label>
-                        <label class="i-checks"> <input type="checkbox" value="option3"> Herencia </label>
-                        <label class="i-checks"> <input type="checkbox" value="option3"> Donaciones </label>
-                        <label class="i-checks"> <input type="checkbox" value="option3"> Venta Activos muebles o inmuebles </label>
-                        <label class="i-checks"> <input type="checkbox" value="option3"> Rendimiento Inversiones </label>
-                        <label class="i-checks"> <input type="checkbox" value="option3"> Comercio de productos y servicios </label>
-                        <label class="i-checks"> <input type="checkbox" value="option3"> Pensiones </label>
-                        <label class="i-checks"> <input type="checkbox" value="option3"> Otros </label>
-                      </div>
-                    </div>
-                    <!--destino_fondos-->
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">Destino de los Fondos:</label>
+<!--                      <div class="col-sm-9"><input type="text" name="otras_inversiones_activos_inmuebles" placeholder="Ingresos" class="form-control" maxlength="250 " required></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;tipo_contribuyente_SENIAT&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Tipo de contribuyente SENIAT</label>-->
+<!--                      <div class="col-sm-2"><select class="form-control m-b" name="tipo_contribuyente_SENIAT">-->
+<!--                        <option value="Normal">Normal</option>-->
+<!--                        <option value="Especial">Especial</option>-->
+<!--                        <option value="Formal">Formal</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </fieldset>-->
+
+<!--                <h1>Perfil</h1>-->
+<!--                <fieldset>-->
+<!--                  <div class="col">-->
+<!--                    <h2>Perfil del Inversionista</h2>-->
+<!--                    &lt;!&ndash;experiencia_finianciera&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">¿Tiene o ha tenido experiencia en inversiones financieras?</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="experiencia_finianciera">-->
+<!--                        <option value="N">No</option>-->
+<!--                        <option value="S">Si</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
+
+<!--                      <div class="form-group  row"><label class="col-sm-3 col-form-label">Institución</label>-->
+
+<!--                        <div class="col-sm-7"><input type="text" name="institucion_experiencia_finianciera" placeholder="Institución" class="form-control" maxlength="18 " required></div>-->
+<!--                      </div>-->
+<!--                      <div class="form-group  row"><label class="col-sm-3 col-form-label">Tiempo</label>-->
+
+<!--                        <div class="col-sm-7"><input type="text" name="tiempo_experiencia_finianciera" placeholder="Tiempo" class="form-control" maxlength="18 " required></div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;tipo_inversion_experiencia_finianciera&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Tipo</label>-->
+
+<!--                      <div class="col-sm-10    "><input type="text" name="tipo_inversion_experiencia_finianciera" placeholder="Tipo" class="form-control" maxlength="18 " required></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;inversiones_otra_institucion&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">¿Mantiene o mantuvo inversiones en otra institución financiera venezolana?</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="inversiones_otra_institucion">-->
+<!--                        <option value="N">No</option>-->
+<!--                        <option value="S">Si</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
+<!--                      <div class="col-sm-9"><input type="text" name="nombre_otra_institucion" placeholder="Nombre" class="form-control" maxlength="18 " required></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;experiencia_inversionista&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Experiencia y conocimiento como Inversionista</label>-->
+<!--                      <div class="col-sm-2"><select class="form-control m-b" name="experiencia_inversionista">-->
+<!--                        <option value="Bajo">Bajo</option>-->
+<!--                        <option value="Medio">Medio</option>-->
+<!--                        <option value="Alto">Alto</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
+
+<!--                    </div>-->
+<!--                    &lt;!&ndash;anos_experiencia&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Años de Experiencia</label>-->
+
+<!--                      <div class="col-sm-10    "><input type="number" min="0" name="anos_experiencia" placeholder="Años" class="form-control" maxlength="18 " required></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;nivel_riesgo_asumir&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nivel de Riesgo a Asumir</label>-->
+<!--                      <div class="col-sm-2"><select class="form-control m-b" name="nivel_riesgo_asumir">-->
+<!--                        <option value="Bajo">Bajo</option>-->
+<!--                        <option value="Medio">Medio</option>-->
+<!--                        <option value="Alto">Alto</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
+
+<!--                    </div>-->
+<!--                    &lt;!&ndash;instrumentos_financieros&ndash;&gt;-->
+<!--                    <div class="form-group row"><label class="col-sm-2 col-form-label">Origen de los Fondos a Invertir (puede marcar varias opciones):</label>-->
+
+<!--                      <div class="col-sm-10">-->
+<!--                        <label class="checkbox-inline i-checks"> <input type="checkbox" name="fondos_mutuales">Fondos Mutuales </label>-->
+<!--                        <label class="i-checks"> <input type="checkbox" name="fondos_inversion_inmobiliarios"> Fondos de Inversión Inmobiliarios </label>-->
+<!--                        <label class="i-checks"> <input type="checkbox" name="fondos_capital_riesgo">  Fondos de Capital de Riesgo </label>-->
+<!--                        <label class="i-checks"> <input type="checkbox" name="renta_variable"> Renta Variable </label>-->
+<!--                        <label class="i-checks"> <input type="checkbox" name="renta_fija">  Renta Fija </label>-->
+<!--                        <label class="i-checks"> <input type="checkbox" name="productos_derivados"> Productos derivados </label>-->
+<!--                        <label class="i-checks"> <input type="checkbox" name="fondos_retiro"> Fondos de Retiro </label>-->
+<!--                        <label class="i-checks"> <input type="checkbox" name="mercado_divisa"> Mercado de Divisa </label>-->
+<!--                        <label class="i-checks"> <input type="checkbox" name="instrumentos_bancarios"> Instrumentos Bancarios </label>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </fieldset>-->
+
+<!--                <h1>Solicitud</h1>-->
+<!--                <fieldset>-->
+<!--                  <div class="col">-->
+<!--                    <h2>Solicitud de Suscripción de Unidades de Inversión</h2>-->
+<!--                    &lt;!&ndash;tipo_solicitud&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Solicitud</label>-->
+<!--                      <div class="col-sm-10"><select class="form-control m-b" name="tipo_solicitud">-->
+<!--                        <option value="PER CAPITAL Fondo Mutual de Inversión de Capital Abierto">PER CAPITAL Fondo Mutual de Inversión de Capital Abierto</option>-->
+<!--                        <option value="PER CAPITAL Fondo de Inversión Inmobiliaria">PER CAPITAL Fondo de Inversión Inmobiliaria</option>-->
+<!--                        <option value="PER CAPITAL Fondo de Inversión de Capital de Riesgo">PER CAPITAL Fondo de Inversión de Capital de Riesgo</option>-->
+<!--                        <option value="Estructuración de E.I.C.">Estructuración de E.I.C.</option>-->
+<!--                        <option value="Administración de E.I.C.">Administración de E.I.C.</option>-->
+<!--                        <option value="Asesoría Financiera">Asesoría Financiera</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;cantidad_unidades_inversion&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Cantidad Unidades de Inversión</label>-->
+
+<!--                      <div class="col-sm-10    "><input type="number" min="0" name="cantidad_unidades_inversion" placeholder="Cantidad" class="form-control" maxlength="18 " required></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;precio_VUI&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Precio V.U.I.</label>-->
+
+<!--                      <div class="col-sm-10    "><input type="number" min="0" name="cantidad_unidades_inversion" placeholder="Precio" value="50000" class="form-control" maxlength="18 " disabled></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;total&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Total</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_moneda">-->
+<!--                        <option value="Bs">Bs</option>-->
+<!--                        <option value="$">$</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
+
+<!--                      <div class="col-sm-10    "><input type="number" min="0" name="cantidad_unidades_inversion" placeholder="Precio" value="50000" class="form-control" maxlength="18 " disabled></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;pago_dividendos&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Pago de Dividendos</label>-->
+<!--                      <div class="col-sm-10"><select class="form-control m-b" name="pago_dividendos">-->
+<!--                        <option value="R">Reinvertir en nuevas Unidades de Inversión.</option>-->
+<!--                        <option value="T">Transferir a Cuenta Bancaria</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;reprecentacion_asamblea_general&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Poder para Representación en Asamblea General</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="pago_dividendos">-->
+<!--                        <option value="S">Si</option>-->
+<!--                        <option value="N">No</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;servicio_custodia&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Servicio de Custodia en Caja Venezolana de Valores</label>-->
+<!--                      <h4>Custodia en macro cuenta de PER CAPITAL Sociedad Administradora de Entidades de Inversión Colectiva</h4>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="pago_dividendos">-->
+<!--                        <option value="S">Si</option>-->
+<!--                        <option value="N">No</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </fieldset>-->
+
+<!--                <h1>Prevención y Control</h1>-->
+<!--                <fieldset>-->
+<!--                  <div class="col">-->
+<!--                    <h2>Prevención y Control de legitimaci[on de capitales y financiamineto al terrorismo</h2>-->
+<!--                    &lt;!&ndash;origen_fondos&ndash;&gt;-->
+<!--                    <div class="form-group row"><label class="col-sm-2 col-form-label">Origen de los Fondos a Invertir (puede marcar varias opciones):</label>-->
+
+<!--                      <div class="col-sm-10">-->
+<!--                        <label class="checkbox-inline i-checks"> <input type="checkbox" value="option1">Salarios, Honorarios </label>-->
+<!--                        <label class="i-checks"> <input type="checkbox" value="option2"> Rentas y Alquileres </label>-->
+<!--                        <label class="i-checks"> <input type="checkbox" value="option3"> Financiamiento Bancario </label>-->
+<!--                        <label class="i-checks"> <input type="checkbox" value="option3"> Herencia </label>-->
+<!--                        <label class="i-checks"> <input type="checkbox" value="option3"> Donaciones </label>-->
+<!--                        <label class="i-checks"> <input type="checkbox" value="option3"> Venta Activos muebles o inmuebles </label>-->
+<!--                        <label class="i-checks"> <input type="checkbox" value="option3"> Rendimiento Inversiones </label>-->
+<!--                        <label class="i-checks"> <input type="checkbox" value="option3"> Comercio de productos y servicios </label>-->
+<!--                        <label class="i-checks"> <input type="checkbox" value="option3"> Pensiones </label>-->
+<!--                        <label class="i-checks"> <input type="checkbox" value="option3"> Otros </label>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;destino_fondos&ndash;&gt;-->
+<!--                    <div class="form-group row"><label class="col-sm-2 col-form-label">Destino de los Fondos:</label>-->
 
 
-                      <div class="col-sm-10"><select class="form-control m-b" name="destino_fondos">
-                        <option value="Ahorro/Retiro">Ahorro/Retiro</option>
-                        <option value="Inversión corto plazo">Inversión corto plazo</option>
-                        <option value="Inversión Largo plazo">Inversión Largo plazo</option>
-                        <option value="Planificación patrimonial">Planificación patrimonial</option>
-                        <option value="Otro">Otro</option>
-                      </select>
-                      </div>
-                    </div>
-                    <!--naturaleza_trabajo-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Favor detallar naturaleza de su trabajo o actividad económica (proceso de venta de productos, servicios, facturación, etc.)</label>
+<!--                      <div class="col-sm-10"><select class="form-control m-b" name="destino_fondos">-->
+<!--                        <option value="Ahorro/Retiro">Ahorro/Retiro</option>-->
+<!--                        <option value="Inversión corto plazo">Inversión corto plazo</option>-->
+<!--                        <option value="Inversión Largo plazo">Inversión Largo plazo</option>-->
+<!--                        <option value="Planificación patrimonial">Planificación patrimonial</option>-->
+<!--                        <option value="Otro">Otro</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;naturaleza_trabajo&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Favor detallar naturaleza de su trabajo o actividad económica (proceso de venta de productos, servicios, facturación, etc.)</label>-->
 
-                      <div class="col-sm-10    "><input type="text" name="naturaleza_trabajo" placeholder="Naturaleza" class="form-control" maxlength="250" required></div>
-                    </div>
-                    <!--transferencias_exterior-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">¿En su actividad comercial recibe o envía transferencias al exterior? En caso afirmativo, favor detallar origen, destino y motivo</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="transferencias_exterior">
-                        <option value="N">No</option>
-                        <option value="S">Si</option>
-                      </select>
-                      </div>
+<!--                      <div class="col-sm-10    "><input type="text" name="naturaleza_trabajo" placeholder="Naturaleza" class="form-control" maxlength="250" required></div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;transferencias_exterior&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">¿En su actividad comercial recibe o envía transferencias al exterior? En caso afirmativo, favor detallar origen, destino y motivo</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="transferencias_exterior">-->
+<!--                        <option value="N">No</option>-->
+<!--                        <option value="S">Si</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
 
-                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Origen</label>
+<!--                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Origen</label>-->
 
-                        <div class="col-sm-9"><input type="text" name="origen_transferencias_exterior" placeholder="Origen" class="form-control" maxlength="50 " ></div>
-                      </div>
-                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Destino</label>
+<!--                        <div class="col-sm-9"><input type="text" name="origen_transferencias_exterior" placeholder="Origen" class="form-control" maxlength="50 " ></div>-->
+<!--                      </div>-->
+<!--                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Destino</label>-->
 
-                        <div class="col-sm-9"><input type="text" name="destino_transferencias_exterior" placeholder="Destino" class="form-control" maxlength="50 " ></div>
-                      </div>
-                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Motivo</label>
+<!--                        <div class="col-sm-9"><input type="text" name="destino_transferencias_exterior" placeholder="Destino" class="form-control" maxlength="50 " ></div>-->
+<!--                      </div>-->
+<!--                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Motivo</label>-->
 
-                        <div class="col-sm-9"><input type="text" name="motivo_transferencias_exterior" placeholder="Motivo" class="form-control" maxlength="50 " ></div>
-                      </div>
-                    </div>
-                    <!--alto_volumen_dinero-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Por el tipo de negocio ¿Maneja alto volumen de dinero en efectivo (monedas, billetes)? En caso afirmativo, favor detallar</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="alto_volumen_dinero">
-                        <option value="N">No</option>
-                        <option value="S">Si</option>
-                      </select>
-                      </div>
+<!--                        <div class="col-sm-9"><input type="text" name="motivo_transferencias_exterior" placeholder="Motivo" class="form-control" maxlength="50 " ></div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;alto_volumen_dinero&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Por el tipo de negocio ¿Maneja alto volumen de dinero en efectivo (monedas, billetes)? En caso afirmativo, favor detallar</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="alto_volumen_dinero">-->
+<!--                        <option value="N">No</option>-->
+<!--                        <option value="S">Si</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
 
-                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Origen</label>
+<!--                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Origen</label>-->
 
-                        <div class="col-sm-9"><input type="text" name="origen_alto_volumen_dinero" placeholder="Origen" class="form-control" maxlength="50 " ></div>
-                      </div>
-                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Destino</label>
+<!--                        <div class="col-sm-9"><input type="text" name="origen_alto_volumen_dinero" placeholder="Origen" class="form-control" maxlength="50 " ></div>-->
+<!--                      </div>-->
+<!--                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Destino</label>-->
 
-                        <div class="col-sm-9"><input type="text" name="destino_alto_volumen_dinero" placeholder="Destino" class="form-control" maxlength="50 " ></div>
-                      </div>
-                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Motivo</label>
+<!--                        <div class="col-sm-9"><input type="text" name="destino_alto_volumen_dinero" placeholder="Destino" class="form-control" maxlength="50 " ></div>-->
+<!--                      </div>-->
+<!--                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Motivo</label>-->
 
-                        <div class="col-sm-9"><input type="text" name="motivo_alto_volumen_dinero" placeholder="Motivo" class="form-control" maxlength="50 " ></div>
-                      </div>
-                    </div>
-                  </div>
-                </fieldset>
+<!--                        <div class="col-sm-9"><input type="text" name="motivo_alto_volumen_dinero" placeholder="Motivo" class="form-control" maxlength="50 " ></div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </fieldset>-->
 
-                <h1>PEP</h1>
-                <fieldset>
-                  <div class="col">
-                    <h2>Persona Politicamente Expuesta</h2>
-                    <!--estatus_PEP-->
-                    <p>Bajo la legislación vigente se define como Persona Expuesta Políticamente (PEP) a toda persona que desempeña o ha desempeñado funciones públicas prominentes en el Gobierno Nacional o en el extranjero. Por ejemplo, los jefes de Estado o Gobierno, políticos de alto nivel, funcionarios gubernamentales, judiciales u oficiales militares de alto nivel, ejecutivos de alto nivel de corporaciones que pertenecen al Estado, funcionarios importantes de partidos políticos; y a sus familiares cercanos, entendiéndose por estos los padres, hermanos, hijos, sobrinos, esposa(o), tíos de un PEP. Esta definición no persigue cubrir personas de rango medio o más bajo que las categorías anteriormente expuestas. Señale si EL INVERSOR, en caso de persona natural, o si algún propietario efectivo, beneficiario final, director, dignatario, persona autorizada y/o apoderado de EL INVERSOR, en caso de persona jurídica, es un PEP.</p>
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">PEP?</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="estatus_PEP">
-                        <option value="N">No</option>
-                        <option value="S">Si</option>
-                      </select>
-                      </div>
+<!--                <h1>PEP</h1>-->
+<!--                <fieldset>-->
+<!--                  <div class="col">-->
+<!--                    <h2>Persona Politicamente Expuesta</h2>-->
+<!--                    &lt;!&ndash;estatus_PEP&ndash;&gt;-->
+<!--                    <p>Bajo la legislación vigente se define como Persona Expuesta Políticamente (PEP) a toda persona que desempeña o ha desempeñado funciones públicas prominentes en el Gobierno Nacional o en el extranjero. Por ejemplo, los jefes de Estado o Gobierno, políticos de alto nivel, funcionarios gubernamentales, judiciales u oficiales militares de alto nivel, ejecutivos de alto nivel de corporaciones que pertenecen al Estado, funcionarios importantes de partidos políticos; y a sus familiares cercanos, entendiéndose por estos los padres, hermanos, hijos, sobrinos, esposa(o), tíos de un PEP. Esta definición no persigue cubrir personas de rango medio o más bajo que las categorías anteriormente expuestas. Señale si EL INVERSOR, en caso de persona natural, o si algún propietario efectivo, beneficiario final, director, dignatario, persona autorizada y/o apoderado de EL INVERSOR, en caso de persona jurídica, es un PEP.</p>-->
+<!--                    <div class="form-group row"><label class="col-sm-2 col-form-label">PEP?</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="estatus_PEP">-->
+<!--                        <option value="N">No</option>-->
+<!--                        <option value="S">Si</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
 
-                    </div>
-                    <p>Favor contestar las siguientes preguntas:</p>
-                    <!--usted_familia_alto_funcionario-->
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">¿Es usted o cualquier miembro de su familia inmediata, un alto funcionario de algún gobierno en la rama ejecutiva, legislativa, judicial o militar?</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="usted_familia_alto_funcionario">
-                        <option value="N">No</option>
-                        <option value="S">Si</option>
-                      </select>
-                      </div>
+<!--                    </div>-->
+<!--                    <p>Favor contestar las siguientes preguntas:</p>-->
+<!--                    &lt;!&ndash;usted_familia_alto_funcionario&ndash;&gt;-->
+<!--                    <div class="form-group row"><label class="col-sm-2 col-form-label">¿Es usted o cualquier miembro de su familia inmediata, un alto funcionario de algún gobierno en la rama ejecutiva, legislativa, judicial o militar?</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="usted_familia_alto_funcionario">-->
+<!--                        <option value="N">No</option>-->
+<!--                        <option value="S">Si</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
 
-                    </div>
-                    <!--alto_funcionario_partido_politico_empresa_estado-->
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">¿Es algo fue un alto funcionario de algún partido político o un alto ejecutivo de alguna empresa del estado?</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="alto_funcionario_partido_politico_empresa_estado">
-                        <option value="N">No</option>
-                        <option value="S">Si</option>
-                      </select>
-                      </div>
+<!--                    </div>-->
+<!--                    &lt;!&ndash;alto_funcionario_partido_politico_empresa_estado&ndash;&gt;-->
+<!--                    <div class="form-group row"><label class="col-sm-2 col-form-label">¿Es algo fue un alto funcionario de algún partido político o un alto ejecutivo de alguna empresa del estado?</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="alto_funcionario_partido_politico_empresa_estado">-->
+<!--                        <option value="N">No</option>-->
+<!--                        <option value="S">Si</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
 
-                    </div>
-                    <!--mantiene_relacion_personal_funcionario-->
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">¿Mantiene usted una estrecha relación profesional o personal con algún alto funcionario publico, militar activo o retirado del estado?</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="mantiene_relacion_personal_funcionario">
-                        <option value="N">No</option>
-                        <option value="S">Si</option>
-                      </select>
-                      </div>
+<!--                    </div>-->
+<!--                    &lt;!&ndash;mantiene_relacion_personal_funcionario&ndash;&gt;-->
+<!--                    <div class="form-group row"><label class="col-sm-2 col-form-label">¿Mantiene usted una estrecha relación profesional o personal con algún alto funcionario publico, militar activo o retirado del estado?</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="mantiene_relacion_personal_funcionario">-->
+<!--                        <option value="N">No</option>-->
+<!--                        <option value="S">Si</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
 
-                    </div>
-                    <!--expliacacion-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">En caso afirmativo a cualquiera de estas preguntas por favor explique detalladamente:</label>
+<!--                    </div>-->
+<!--                    &lt;!&ndash;expliacacion&ndash;&gt;-->
+<!--                    <div class="form-group  row"><label class="col-sm-2 col-form-label">En caso afirmativo a cualquiera de estas preguntas por favor explique detalladamente:</label>-->
 
-                      <div class="col-sm-10"><input type="text" name="expliacacion" placeholder="expliacacion" class="form-control" maxlength="300"></div>
-                    </div>
-                  </div>
-                </fieldset>
+<!--                      <div class="col-sm-10"><input type="text" name="expliacacion" placeholder="expliacacion" class="form-control" maxlength="300"></div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </fieldset>-->
 
-                <h1>FATCA</h1>
-                <fieldset>
-                  <div class="col">
-                    <h2>Ley de Cumplimento Fiscal de Cuentas en el Extrenjero FATCA</h2>
-                    <p>Favor contestar las siguientes preguntas:</p>
-                    <!--ciudadano_nacimiento-->
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">¿Es usted ciudadano estadounidense por nacimiento?</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="ciudadano_nacimiento">
-                        <option value="N">No</option>
-                        <option value="S">Si</option>
-                      </select>
-                      </div>
+<!--                <h1>FATCA</h1>-->
+<!--                <fieldset>-->
+<!--                  <div class="col">-->
+<!--                    <h2>Ley de Cumplimento Fiscal de Cuentas en el Extrenjero FATCA</h2>-->
+<!--                    <p>Favor contestar las siguientes preguntas:</p>-->
+<!--                    &lt;!&ndash;ciudadano_nacimiento&ndash;&gt;-->
+<!--                    <div class="form-group row"><label class="col-sm-2 col-form-label">¿Es usted ciudadano estadounidense por nacimiento?</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="ciudadano_nacimiento">-->
+<!--                        <option value="N">No</option>-->
+<!--                        <option value="S">Si</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
 
-                    </div>
-                    <!--ciudadano_naturalizado-->
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">¿Es usted ciudadano estadounidense por naturalización?</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="ciudadano_naturalizado">
-                        <option value="N">No</option>
-                        <option value="S">Si</option>
-                      </select>
-                      </div>
+<!--                    </div>-->
+<!--                    &lt;!&ndash;ciudadano_naturalizado&ndash;&gt;-->
+<!--                    <div class="form-group row"><label class="col-sm-2 col-form-label">¿Es usted ciudadano estadounidense por naturalización?</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="ciudadano_naturalizado">-->
+<!--                        <option value="N">No</option>-->
+<!--                        <option value="S">Si</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
 
-                    </div>
-                    <!--residente-->
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">¿Es usted residente de los Estados Unidos?</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="residente">
-                        <option value="N">No</option>
-                        <option value="S">Si</option>
-                      </select>
-                      </div>
+<!--                    </div>-->
+<!--                    &lt;!&ndash;residente&ndash;&gt;-->
+<!--                    <div class="form-group row"><label class="col-sm-2 col-form-label">¿Es usted residente de los Estados Unidos?</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="residente">-->
+<!--                        <option value="N">No</option>-->
+<!--                        <option value="S">Si</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
 
-                    </div>
-                    <!--mas_nacionalidad-->
-                    <div class="form-group row"><label class="col-sm-2 col-form-label">¿Tiene usted más de una nacionalidad?</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="mas_nacionalidad">
-                        <option value="N">No</option>
-                        <option value="S">Si</option>
-                      </select>
-                      </div>
+<!--                    </div>-->
+<!--                    &lt;!&ndash;mas_nacionalidad&ndash;&gt;-->
+<!--                    <div class="form-group row"><label class="col-sm-2 col-form-label">¿Tiene usted más de una nacionalidad?</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="mas_nacionalidad">-->
+<!--                        <option value="N">No</option>-->
+<!--                        <option value="S">Si</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
 
-                      <div class="form-group  row"><label class="col-sm-5 col-form-label">En caso afirmativo, indique las nacionalidades que posee:</label>
+<!--                      <div class="form-group  row"><label class="col-sm-5 col-form-label">En caso afirmativo, indique las nacionalidades que posee:</label>-->
 
-                        <div class="col-sm-7"><input type="text" name="cuales_mas_nacionalidad" placeholder="Nacionalidades" class="form-control" maxlength="100"></div>
-                      </div>
+<!--                        <div class="col-sm-7"><input type="text" name="cuales_mas_nacionalidad" placeholder="Nacionalidades" class="form-control" maxlength="100"></div>-->
+<!--                      </div>-->
 
-                    </div>
-                    <!--visitado-->
-                    <div class="form-group row"><label class="col-sm-4 col-form-label">¿Ha visitado usted los Estados Unidos?</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="visitado">
-                        <option value="N">No</option>
-                        <option value="S">Si</option>
-                      </select>
-                      </div>
-                      <p>En caso afirmativo, indique el numero de días en Estados Unidos:</p>
+<!--                    </div>-->
+<!--                    &lt;!&ndash;visitado&ndash;&gt;-->
+<!--                    <div class="form-group row"><label class="col-sm-4 col-form-label">¿Ha visitado usted los Estados Unidos?</label>-->
+<!--                      <div class="col-sm-1"><select class="form-control m-b" name="visitado">-->
+<!--                        <option value="N">No</option>-->
+<!--                        <option value="S">Si</option>-->
+<!--                      </select>-->
+<!--                      </div>-->
+<!--                      <p>En caso afirmativo, indique el numero de días en Estados Unidos:</p>-->
 
-                      <div class="form-group  row"><label class="col-sm-4 col-form-label">Año Actual:</label>
+<!--                      <div class="form-group  row"><label class="col-sm-4 col-form-label">Año Actual:</label>-->
 
-                        <div class="col-sm-9"><input type="text" name="numero_dias_visitado_ano_actual" placeholder="Actual" class="form-control" maxlength="20 " ></div>
-                      </div>
-                      <div class="form-group  row"><label class="col-sm-4 col-form-label">Año Pasado: </label>
+<!--                        <div class="col-sm-9"><input type="text" name="numero_dias_visitado_ano_actual" placeholder="Actual" class="form-control" maxlength="20 " ></div>-->
+<!--                      </div>-->
+<!--                      <div class="form-group  row"><label class="col-sm-4 col-form-label">Año Pasado: </label>-->
 
-                        <div class="col-sm-9"><input type="text" name="numero_dias_visitado_ano_pasado" placeholder="Pasado" class="form-control" maxlength="20 " ></div>
-                      </div>
-                      <div class="form-group  row"><label class="col-sm-4 col-form-label">Año Antepasado:</label>
+<!--                        <div class="col-sm-9"><input type="text" name="numero_dias_visitado_ano_pasado" placeholder="Pasado" class="form-control" maxlength="20 " ></div>-->
+<!--                      </div>-->
+<!--                      <div class="form-group  row"><label class="col-sm-4 col-form-label">Año Antepasado:</label>-->
 
-                        <div class="col-sm-9"><input type="text" name="numero_dias_visitado_ano_antepasado" placeholder="Antepasado" class="form-control" maxlength="20 " ></div>
-                      </div>
+<!--                        <div class="col-sm-9"><input type="text" name="numero_dias_visitado_ano_antepasado" placeholder="Antepasado" class="form-control" maxlength="20 " ></div>-->
+<!--                      </div>-->
 
-                    </div>
-                    <p>*Persona de Estados Unidos-U.S. Person: (1) Ciudadanos de E.U.A., inclusive si viven en el extranjero; (2) Residentes legales de E.U.A. (green card;) (3) Personas que reúnan la prueba de presencia sustancial de 183 días en los E.U.A; (4) Personas con indicios de estatus de E.U.A. (5) Entidades cuyo accionista/beneficiarios sean de los E.U.A. (uno o más, substanciales).
-                      El (los) firmante(s) (el inversor) declaran haber leído, comprendido y expresamente acepta que PER CAPITAL SOCIEDAD ADMINISTRADORA DE E.I.C.., pueda suministrar al Internal Revenue Service (IRS) de los Estados Unidos de Norteamérica cualquier información sobre las operaciones que esta realice, en tal sentido (el “inversor”) libra a PER CAPITAL SOCIEDAD ADMINISTRADORA DE E.I.C. de toda responsabilidad penal y administrativa que se encuentren estipuladas en el marco jurídico venezolano.
-                    </p>
-                  </div>
-                </fieldset>
+<!--                    </div>-->
+<!--                    <p>*Persona de Estados Unidos-U.S. Person: (1) Ciudadanos de E.U.A., inclusive si viven en el extranjero; (2) Residentes legales de E.U.A. (green card;) (3) Personas que reúnan la prueba de presencia sustancial de 183 días en los E.U.A; (4) Personas con indicios de estatus de E.U.A. (5) Entidades cuyo accionista/beneficiarios sean de los E.U.A. (uno o más, substanciales).-->
+<!--                      El (los) firmante(s) (el inversor) declaran haber leído, comprendido y expresamente acepta que PER CAPITAL SOCIEDAD ADMINISTRADORA DE E.I.C.., pueda suministrar al Internal Revenue Service (IRS) de los Estados Unidos de Norteamérica cualquier información sobre las operaciones que esta realice, en tal sentido (el “inversor”) libra a PER CAPITAL SOCIEDAD ADMINISTRADORA DE E.I.C. de toda responsabilidad penal y administrativa que se encuentren estipuladas en el marco jurídico venezolano.-->
+<!--                    </p>-->
+<!--                  </div>-->
+<!--                </fieldset>-->
 
-                <h1>Declaración</h1>
-                <fieldset>
-                  <div class="col">
-                    <h2>Declaración de Origen y Destino de Fondos</h2>
-                    <p>Conformación del Representante Legal: Autorizo a PER CAPITAL SOCIEDAD ADMINISTRADORA DE E.I.C. a confirmar la información suministrada en la presente Solicitud de Suscripción. También doy fe que el origen y destinos de los fondos y bienes provienen de fuentes lícitas y, por lo tanto, no tiene relación alguna con dinero, capitales, bienes, haberes, valores o títulos producto de las actividades o acciones a que se refiere la Ley Orgánica Contra la Delincuencia Organizada y Financiamiento al Terrorismo y demás leyes nacionales e internacionales relativas a la regulación del delito de legitimación de capitales y financiamiento al terrorismo. Para el caso de que se compruebe, por cualquier medio, que la fuente de donde proviene el dinero no es lícita, expresamente libero a PER CAPITAL SOCIEDAD ADMINISTRADORA DE E.I.C. de responsabilidades legales y asumo, en consecuencia, las responsabilidades penales y civiles que se deriven de dicho hecho.</p>
-                  </div>
-                </fieldset>
+<!--                <h1>Declaración</h1>-->
+<!--                <fieldset>-->
+<!--                  <div class="col">-->
+<!--                    <h2>Declaración de Origen y Destino de Fondos</h2>-->
+<!--                    <p>Conformación del Representante Legal: Autorizo a PER CAPITAL SOCIEDAD ADMINISTRADORA DE E.I.C. a confirmar la información suministrada en la presente Solicitud de Suscripción. También doy fe que el origen y destinos de los fondos y bienes provienen de fuentes lícitas y, por lo tanto, no tiene relación alguna con dinero, capitales, bienes, haberes, valores o títulos producto de las actividades o acciones a que se refiere la Ley Orgánica Contra la Delincuencia Organizada y Financiamiento al Terrorismo y demás leyes nacionales e internacionales relativas a la regulación del delito de legitimación de capitales y financiamiento al terrorismo. Para el caso de que se compruebe, por cualquier medio, que la fuente de donde proviene el dinero no es lícita, expresamente libero a PER CAPITAL SOCIEDAD ADMINISTRADORA DE E.I.C. de responsabilidades legales y asumo, en consecuencia, las responsabilidades penales y civiles que se deriven de dicho hecho.</p>-->
+<!--                  </div>-->
+<!--                </fieldset>-->
 
-                <h1>Documentos</h1>
-                <fieldset>
-                  <h2>Se necesitan imagenes de los siguientes documentos</h2>
-                  <!--img_cedula_pasaporte-->
-                  <div class="form-group  row"><label class="col-sm-2 col-form-label">Cédula o Pasaporte</label>
-                    <div class="col-sm-10">
-                      <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                        <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar Archivo</span>
-                                                        <span class="fileinput-exists">Cambiar</span><input type="file" name="img_cedula_pasaporte" required/></span>
-                        <span class="fileinput-filename"></span>
-                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
-                      </div>
-                    </div>
-                  </div>
-                  <!--img_rif-->
-                  <div class="form-group  row"><label class="col-sm-2 col-form-label">RIF</label>
-                    <div class="col-sm-10">
-                      <div class="fileinput fileinput-new" data-provides="fileinput">
-                                            <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar Archivo</span>
-                                            <span class="fileinput-exists">Cambiar</span><input type="file" name="img_rif" required/></span>
-                        <span class="fileinput-filename"></span>
-                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
-                      </div>
-                    </div>
-                  </div>
-                  <!--img_recibo-->
-                  <div class="form-group  row"><label class="col-sm-2 col-form-label">Recibo</label>
-                    <div class="col-sm-10">
-                      <div class="fileinput fileinput-new" data-provides="fileinput">
-                                            <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar Archivo</span>
-                                            <span class="fileinput-exists">Cambiar</span><input type="file" name="img_recibo" required/></span>
-                        <span class="fileinput-filename"></span>
-                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
-                      </div>
-                    </div>
-                  </div>
-                </fieldset>
-                ¿
-            </div>
-            </fieldset>
+<!--                <h1>Documentos</h1>-->
+<!--                <fieldset>-->
+<!--                  <h2>Se necesitan imagenes de los siguientes documentos</h2>-->
+<!--                  &lt;!&ndash;img_cedula_pasaporte&ndash;&gt;-->
+<!--                  <div class="form-group  row"><label class="col-sm-2 col-form-label">Cédula o Pasaporte</label>-->
+<!--                    <div class="col-sm-10">-->
+<!--                      <div class="fileinput fileinput-new" data-provides="fileinput">-->
+<!--                                                        <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar Archivo</span>-->
+<!--                                                        <span class="fileinput-exists">Cambiar</span><input type="file" name="img_cedula_pasaporte" required/></span>-->
+<!--                        <span class="fileinput-filename"></span>-->
+<!--                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  &lt;!&ndash;img_rif&ndash;&gt;-->
+<!--                  <div class="form-group  row"><label class="col-sm-2 col-form-label">RIF</label>-->
+<!--                    <div class="col-sm-10">-->
+<!--                      <div class="fileinput fileinput-new" data-provides="fileinput">-->
+<!--                                            <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar Archivo</span>-->
+<!--                                            <span class="fileinput-exists">Cambiar</span><input type="file" name="img_rif" required/></span>-->
+<!--                        <span class="fileinput-filename"></span>-->
+<!--                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  &lt;!&ndash;img_recibo&ndash;&gt;-->
+<!--                  <div class="form-group  row"><label class="col-sm-2 col-form-label">Recibo</label>-->
+<!--                    <div class="col-sm-10">-->
+<!--                      <div class="fileinput fileinput-new" data-provides="fileinput">-->
+<!--                                            <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar Archivo</span>-->
+<!--                                            <span class="fileinput-exists">Cambiar</span><input type="file" name="img_recibo" required/></span>-->
+<!--                        <span class="fileinput-filename"></span>-->
+<!--                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </fieldset>-->
             </form>
           </div>
         </div>
@@ -900,9 +998,13 @@
 <!-- Jquery Validate -->
 <script src="/js/plugins/validate/jquery.validate.min.js"></script>
 
+<!-- Data picker -->
+<script src="/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
 
 <script>
   $(document).ready(function(){
+
     $("#wizard").steps();
     $("#form").steps({
       bodyTag: "fieldset",
@@ -978,6 +1080,15 @@
           equalTo: "#password"
         }
       }
+    });
+
+    var mem = $('#data_1 .input-group.date').datepicker({
+      startView: 2,
+      todayBtn: "linked",
+      keyboardNavigation: false,
+      forceParse: false,
+      calendarWeeks: false,
+      autoclose: true
     });
   });
 </script>
