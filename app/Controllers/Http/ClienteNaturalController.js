@@ -7,7 +7,11 @@ const SolicitudSuscripcionUi = use('App/Models/SolicitudSuscripcionUi')
 const Helpers = use('Helpers')
 const paises = require ('../../../archivos/listas/paises')
 const profesiones = require ('../../../archivos/listas/profesiones')
-const fuentesDeIngresos = require ('../../../archivos/listas/fuentesDeIngresos')
+const actividadesEconomicas = require ('../../../archivos/listas/actividadesEconomicas')
+const categoriasEspeciales = require ('../../../archivos/listas/categoriasEspeciales')
+const otrosIngresos = require ('../../../archivos/listas/otrosIngresos')
+const tiposInstrumentosFinancieros = require ('../../../archivos/listas/tiposInstrumentosFinancieros')
+
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -46,8 +50,11 @@ class ClienteNaturalController {
    let data ={}
     data.paises = paises
     data.profesiones = profesiones
-    data.fuentesDeIngresos = fuentesDeIngresos
-    console.log(data)
+    data.actividadesEconomicas = actividadesEconomicas
+    data.categoriasEspeciales = categoriasEspeciales
+    data.otrosIngresos = otrosIngresos
+    data.tiposInstrumentosFinancieros = tiposInstrumentosFinancieros
+    // console.log(data)
     return view.render('cliente.create', {data})
   }
 
@@ -73,6 +80,53 @@ class ClienteNaturalController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const informacionCliente = request.post()
+
+    const archivoIdentidad = request.file('img_cedula_pasaporte', {
+      types: ['image'],
+      size: '5mb'
+    })
+    const archivoRif = request.file('img_rif', {
+      types: ['image'],
+      size: '5mb'
+    })
+    const archivoRecibo = request.file('img_recibo', {
+      types: ['image'],
+      size: '5mb'
+    })
+
+    informacionCliente.img_cedula_pasaporte = `identidad-${new Date().getTime()}.${archivo.subtype}`
+    informacionCliente.img_rif = `rif-${new Date().getTime()}.${archivo.subtype}`
+    informacionCliente.img_recibo = `recibo-${new Date().getTime()}.${archivo.subtype}`
+
+    await archivo.move(Helpers.appRoot('archivos/documentos-empresas'), {
+      name: archivoIdentidad.img_cedula_pasaporte,
+      overwrite: true
+    })
+
+    if (!archivoIdentidad.moved()) {
+      return archivoIdentidad.error()
+    }
+    await archivoRif.move(Helpers.appRoot('archivos/documentos-empresas'), {
+      name: informacionCliente.img_rif,
+      overwrite: true
+    })
+
+    if (!archivoRif.moved()) {
+      return archivoRif.error()
+    }
+
+    await archivoRecibo.move(Helpers.appRoot('archivos/documentos-empresas'), {
+      name: archivoRecibo.img_recibo,
+      overwrite: true
+    })
+
+    if (!archivoRecibo.moved()) {
+      return archivoRecibo.error()
+    }
+
+
+    response.json(informacionCliente)
   }
 
   /**

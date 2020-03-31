@@ -31,10 +31,8 @@
         <div class="col-lg-12">
           <div class="ibox">
             <div class="ibox-content">
-              <h2>
-                Registro Inversionistas
-              </h2>
-              <form id="form" action="/cliente/registrar/natural" method="POST" class="wizard-big" enctype="multipart/form-data">
+              <h2>Registro Inversionistas</h2>
+              <form id="form" action="/cliente" method="POST" class="wizard-big" enctype="multipart/form-data">
                 <h1>Datos</h1>
                 <fieldset>
                   <h2>Datos Personales del Inversionista</h2>
@@ -63,7 +61,7 @@
                     <!--fecha_nacimiento-->
                     <div class="form-group row" id="data_1"><label class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
                       <div class="input-group date col-sm-10">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="fecha_nacimiento" value="03/04/2014">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="fecha_nacimiento" value="03/04/2014" required>
                       </div>
                     </div>
                     <!--lugar_nacimiento-->
@@ -71,6 +69,7 @@
 
                       <div class="col-sm-10">
                         <select class="form-control m-b" name="lugar_nacimiento">
+                          <option value="">Seleccione</option>
                           @each(pais in data.paises)
                           <option value="{{pais.name}}">{{pais.name}}</option>
                           @endeach
@@ -85,7 +84,7 @@
                     <!--otra_nacionalidad-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Otra Nacionalidad (Si tiene)</label>
 
-                      <div class="col-sm-10"><input type="text" name="otra_nacionalidad" placeholder="Otra Nacionalidad" class="form-control" maxlength="35" required></div>
+                      <div class="col-sm-10"><input type="text" name="otra_nacionalidad" placeholder="Otra Nacionalidad" class="form-control" maxlength="35"></div>
                     </div>
                     <!--genero-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Genero</label>
@@ -101,6 +100,7 @@
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Profeción U Oficio</label>
                       <div class="col-sm-10">
                         <select class="form-control m-b" name="lugar_nacimiento">
+                          <option value="">Seleccione</option>
                           @each(profesion in data.profesiones)
                           <option value="{{profesion}}">{{profesion}}</option>
                           @endeach
@@ -111,6 +111,7 @@
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Condición de la Vivienda</label>
                       <div class="col-sm-10">
                         <select class="form-control m-b" name="condicion_vivienda">
+                          <option value="">Seleccione</option>
                           <option value="Adjudicada">Adjudicada</option>
                           <option value="De familiares">De familiares</option>
                           <option value="Hipotecada">Hipotecada</option>
@@ -127,6 +128,7 @@
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Estado Civil</label>
                       <div class="col-sm-10">
                         <select class="form-control m-b" name="estado_civil">
+                          <option value="">Seleccione</option>
                           <option value="Casado">Casado</option>
                           <option value="Divorciado">Divorciado</option>
                           <option value="Soltero">Soltero</option>
@@ -196,8 +198,9 @@
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Fuente de Ingresos</label>
                       <div class="col-sm-10">
                         <select class="form-control m-b" name="fuente_ingresos_conyugue">
-                          @each(fuenteDeIngreso in data.fuentesDeIngresos)
-                          <option value="{{fuenteDeIngreso}}">{{fuenteDeIngreso}}</option>
+                          <option value="">Seleccione</option>
+                          @each(actividadEconomica in data.actividadesEconomicas)
+                          <option value="{{actividadEconomica}}">{{actividadesEconomicas}}</option>
                           @endeach
                         </select>
                       </div>
@@ -206,7 +209,7 @@
                   <h2>Persona Politicamente Expuesta</h2>
                   <!--estatus_PEP-->
 
-                  <p>Bajo la legislacion vigente se define como persona expuesta politicamente (pep), a toda persona que desepeña o ha desempeñado
+                  <p class="text-justify">Bajo la legislacion vigente se define como persona expuesta politicamente (pep), a toda persona que desepeña o ha desempeñado
                     funciones publicas prominentes en el gobierno nacional o en el extranjero. Por ejemplo, los jefes de estado o gobierno, politicos
                     de alto nivel, funcionarios gubernamentales, judiciales u oficiales militares de alto nivel, ejecutivos de alto nivel de
                     corporaciones que pertenecen al estado, funcionarios importantes de partidos politicos, y sus familiares cercanos,
@@ -232,6 +235,7 @@
                       <label class="col-sm-1 col-form-label">País</label>
                       <div class="col-sm-4">
                         <select class="form-control m-b" name="pais_inversionista">
+                          <option value="">Seleccione</option>
                           @each(pais in data.paises)
                           <option value="{{pais.name}}">{{pais.name}}</option>
                           @endeach
@@ -270,6 +274,7 @@
                       <label class="col-sm-1 col-form-label">País</label>
                       <div class="col-sm-4">
                         <select class="form-control m-b" name="pais_parentesco">
+                          <option value="">Seleccione</option>
                           @each(pais in data.paises)
                           <option value="{{pais.name}}">{{pais.name}}</option>
                           @endeach
@@ -308,6 +313,7 @@
                       <label class="col-sm-1 col-form-label">País</label>
                       <div class="col-sm-4">
                         <select class="form-control m-b" name="pais_asociado">
+                          <option value="">Seleccione</option>
                           @each(pais in data.paises)
                           <option value="{{pais.name}}">{{pais.name}}</option>
                           @endeach
@@ -439,6 +445,382 @@
                         <div class="col-sm-10"><input type="text" name="direccion_beneficiario" placeholder="Dirección" class="form-control" maxlength="80" ></div>
                       </div>
                     </div>
+                </fieldset>
+
+                <h1>Información Economica Financiera</h1>
+                <fieldset>
+                    <div class="form-group col">
+                      <!--actividad_economica-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Actividad Economica</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="actividad_economica">
+                            <option value="">Seleccione</option>
+                            @each(actividadEconomica in data.actividadesEconomicas)
+                            <option value="{{actividadEconomica}}">{{actividadEconomica}}</option>
+                            @endeach
+                          </select>
+                        </div>
+                      </div>
+                      <!--actividad_especifica-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Actividad Especifica</label>
+
+                        <div class="col-sm-10"><input type="text" name="actividad_especifica" placeholder="Actividad" class="form-control"></div>
+                      </div>
+                      <!--categoria_especial-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Categoria Especial</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="actividad_economica">
+                            <option value="">Seleccione</option>
+                            @each(categoriaEspecial in data.categoriasEspeciales)
+                            <option value="{{categoriaEspecial}}">{{categoriaEspecial}}</option>
+                            @endeach
+                          </select>
+                        </div>
+                      </div>
+                      <h2>Fuente de Ingresos del Inversionista</h2>
+                      <!--relacion_dependencia-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Relación de Dependencia</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="relacion_dependencia">
+                            <option value="">Seleccione</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </div>
+                      <h3>Responda solo si la respuesta anterior fue si</h3>
+                      <hr>
+                      <h4>Relación de Dependencia</h4>
+                      <div class="form-group col">
+                        <!--nombre_empresa_dependencia-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre de la Empresa:</label>
+
+                          <div class="col-sm-10"><input type="text" name="nombre_empresa_dependencia" placeholder="Nombre" class="form-control"></div>
+                        </div>
+                        <!--rif_empresa_dependencia-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">RIF:</label>
+
+                          <div class="col-sm-10"><input type="text" name="rif_empresa_dependencia" placeholder="RIF" class="form-control"></div>
+                        </div>
+                        <!--remuneracion_empresa_dependencia-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Remuneración</label>
+
+                          <div class="col-sm-10"><input type="text" name="remuneracion_empresa_dependencia" placeholder="Remuneración" class="form-control"></div>
+                        </div>
+                        <!--fecha_ingreso_empresa_dependencia-->
+                        <div class="form-group row" id="data_1"><label class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
+                          <div class="input-group date col-sm-10">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="fecha_ingreso_empresa_dependencia" value="03/04/2014">
+                          </div>
+                        </div>
+                          <!--cargo_ocupa_empresa_dependencia-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Cargo que Ocupa</label>
+
+                          <div class="col-sm-10"><input type="text" name="cargo_ocupa_empresa_dependencia" placeholder="Cargo" class="form-control"></div>
+                        </div>
+                        <!--direccion_empresa_dependencia-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Dirección de la Empresa</label>
+
+                          <div class="col-sm-10"><input type="text" name="direccion_empresa_dependencia" placeholder="Dirección" class="form-control"></div>
+                        </div>
+                        <!--telefono_empresa_dependencia-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Teléfono:</label>
+
+                          <div class="col-sm-10"><input type="text" name="telefono_empresa_dependencia" placeholder="Teléfono" class="form-control"></div>
+                        </div>
+                        <!--ramo_negocio_empresa_dependencia-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Ramo del Negocio</label>
+
+                          <div class="col-sm-10"><input type="text" name="ramo_negocio_empresa_dependencia" placeholder="Ramo" class="form-control"></div>
+                        </div>
+                      </div>
+                      <hr>
+                      <!--negocio_propio-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Negocio Propio</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="negocio_propio">
+                            <option value="">Seleccione</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </div>
+                      <h3>Responda solo si la respuesta anterior fue Si</h3>
+                      <hr>
+                      <h4>Negocio Propio</h4>
+                      <div class="form-group col">
+                        <!--nombre_empresa_propio-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre de la Empresa</label>
+
+                          <div class="col-sm-10"><input type="text" name="nombre_empresa_propio" placeholder="Nombre" class="form-control"></div>
+                        </div>
+                        <!--rif_empresa_propio-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">RIF</label>
+
+                          <div class="col-sm-10"><input type="text" name="rif_empresa_propio" placeholder="RIF" class="form-control"></div>
+                        </div>
+                        <!--ingresos_mensuales_propio-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Ingresos Mensuales</label>
+
+                          <div class="col-sm-10"><input type="text" name="ingresos_mensuales_propio" placeholder="Ingresos" class="form-control"></div>
+                        </div>
+                        <!--fecha_conatitucion_empresa_propio-->
+                        <div class="form-group row" id="data_1"><label class="col-sm-2 col-form-label">Fecha de Constitución</label>
+                          <div class="input-group date col-sm-10">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="fecha_conatitucion_empresa_propio" value="03/04/2014">
+                          </div>
+                        </div>
+                        <!--datos_registro_propio-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Datos de Registro</label>
+
+                          <div class="col-sm-10"><input type="text" name="datos_registro_propio" placeholder="Cargo" class="form-control"></div>
+                        </div>
+                        <!--direccion_fiscal_empresa_propio-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Dirección Fiscal</label>
+
+                          <div class="col-sm-10"><input type="text" name="direccion_fiscal_empresa_propio" placeholder="Dirección" class="form-control"></div>
+                        </div>
+                        <!--telefono_empresa_propio-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Teléfono</label>
+
+                          <div class="col-sm-10"><input type="text" name="telefono_empresa_propio" placeholder="Teléfono" class="form-control"></div>
+                        </div>
+                        <!--ramo_negocio_empresa_propio-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Ramo del Negocio</label>
+
+                          <div class="col-sm-10"><input type="text" name="ramo_negocio_empresa_propio" placeholder="Ramo" class="form-control"></div>
+                        </div>
+                      </div>
+                      <h4>Provedores Principales del Negocio Propio</h4>
+                      <div class="form-group col">
+                        <div class="form-group  row">
+                          <!--provedor_nombre_razon_1_propio-->
+                          <label class="col-sm-2 col-form-label">Nombre o Razon Social</label>
+                          <div class="col-sm-4"><input type="text" name="provedor_nombre_razon_1_propio" placeholder="Nombre" class="form-control"></div>
+
+                          <!--provedor_ubicacion_1_propio-->
+                          <label class="col-sm-1 col-form-label">Ubicación</label>
+                          <div class="col-sm-5"><input type="text" name="provedor_ubicacion_1_propio" placeholder="Ubicación" class="form-control"></div>
+                        </div>
+                        <div class="form-group  row">
+                          <!--provedor_nombre_razon_2_propio-->
+                          <label class="col-sm-2 col-form-label">Nombre o Razon Social</label>
+                          <div class="col-sm-4"><input type="text" name="provedor_nombre_razon_2_propio" placeholder="Nombre" class="form-control"></div>
+
+                          <!--provedor_ubicacion_2_propio-->
+                          <label class="col-sm-1 col-form-label">Ubicación</label>
+                          <div class="col-sm-5"><input type="text" name="provedor_ubicacion_2_propio" placeholder="Ubicación" class="form-control"></div>
+                        </div>
+                        <div class="form-group  row">
+                          <!--provedor_nombre_razon_3_propio-->
+                          <label class="col-sm-2 col-form-label">Nombre o Razon Social</label>
+                          <div class="col-sm-4"><input type="text" name="provedor_nombre_razon_3_propio" placeholder="Nombre" class="form-control"></div>
+
+                          <!--provedor_ubicacion_3_propio-->
+                          <label class="col-sm-1 col-form-label">Ubicación</label>
+                          <div class="col-sm-5"><input type="text" name="provedor_ubicacion_3_propio" placeholder="Ubicación" class="form-control"></div>
+                        </div>
+                      </div>
+                      <h4>Clientes Principales del Negocio Propio</h4>
+                      <div class="form-group col">
+                        <div class="form-group  row">
+                          <!--cliente_nombre_razon_1_propio-->
+                          <label class="col-sm-2 col-form-label">Nombre o Razon Social</label>
+                          <div class="col-sm-4"><input type="text" name="cliente_nombre_razon_1_propio" placeholder="Nombre" class="form-control"></div>
+
+                            <!--cliente_ubicacion_1_propio-->
+                          <label class="col-sm-1 col-form-label">Ubicación</label>
+                          <div class="col-sm-5"><input type="text" name="cliente_ubicacion_1_propio" placeholder="Ubicación" class="form-control"></div>
+                        </div>
+                        <div class="form-group  row">
+                            <!--cliente_nombre_razon_2_propio-->
+                          <label class="col-sm-2 col-form-label">Nombre o Razon Social</label>
+                          <div class="col-sm-4"><input type="text" name="cliente_nombre_razon_2_propio" placeholder="Nombre" class="form-control"></div>
+
+                          <!--cliente_ubicacion_2_propio-->
+                          <label class="col-sm-1 col-form-label">Ubicación</label>
+                          <div class="col-sm-5"><input type="text" name="cliente_ubicacion_2_propio" placeholder="Ubicación" class="form-control"></div>
+                        </div>
+                        <div class="form-group  row">
+                          <!--cliente_nombre_razon_3_propio-->
+                          <label class="col-sm-2 col-form-label">Nombre o Razon Social</label>
+                          <div class="col-sm-4"><input type="text" name="cliente_nombre_razon_3_propio" placeholder="Nombre" class="form-control"></div>
+
+                          <!--cliente_ubicacion_3_propio-->
+                          <label class="col-sm-1 col-form-label">Ubicación</label>
+                          <div class="col-sm-5"><input type="text" name="cliente_ubicacion_3_propio" placeholder="Ubicación" class="form-control"></div>
+                        </div>
+                      </div>
+                      <hr>
+                        <!--otras_fuentes_ingreso-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Otras Fuentes de Ingreso</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="otras_fuentes_ingreso">
+                            <option value="">Seleccione</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </div>
+                      <h3>Responda solo si la respuesta anterior fue si</h3>
+                      <hr>
+                      <h4>Otras Fuentes de Ingreso</h4>
+                      <div class="form-group col">
+                        <!--actividad_generadora_ingresos_otros-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Actividad Generadora de Ingresos</label>
+                          <div class="col-sm-10">
+                            <select class="form-control m-b" name="actividad_generadora_ingresos_otros">
+                              <option value="">Seleccione</option>
+                              @each(otroIngreso in data.otrosIngresos)
+                              <option value="{{otroIngreso}}">{{otroIngreso}}</option>
+                              @endeach
+                            </select>
+                          </div>
+                        </div>
+                        <!--ingrsos_mensuales_totales_otros-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Ingresos Totales Mensuales</label>
+
+                          <div class="col-sm-10"><input type="text" name="ingrsos_mensuales_totales_otros" placeholder="Ingresos" class="form-control"></div>
+                        </div>
+                        <!--egresos_totales_mensuales_otros-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Egresos Totales Mensuales</label>
+
+                          <div class="col-sm-10"><input type="text" name="egresos_totales_mensuales_otros" placeholder="Egresos" class="form-control"></div>
+                        </div>
+                        <!--total_activos_otros-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Total Activos</label>
+
+                          <div class="col-sm-10"><input type="text" name="total_activos_otros" placeholder="Activos" class="form-control"></div>
+                        </div>
+                        <!--total_pasivos_otros-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Total Pasivos</label>
+
+                          <div class="col-sm-10"><input type="text" name="direccion_empresa_dependencia" placeholder="Pasivos" class="form-control"></div>
+                        </div>
+                        <!--otras_inversiones_otros-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Otras Inversiones</label>
+
+                          <div class="col-sm-10"><input type="text" name="telefono_empresa_dependencia" placeholder="Otras Inversiones" class="form-control"></div>
+                        </div>
+                        <!--total_patrimonio_otros-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Total Patrimonio</label>
+
+                          <div class="col-sm-10"><input type="text" name="ramo_negocio_empresa_dependencia" placeholder="Total Patrimonio" class="form-control"></div>
+                        </div>
+                      </div>
+                      <hr>
+                    </div>
+                </fieldset>
+
+                <h1>Perfil del Inversionista</h1>
+                <fieldset>
+                  <div class="form-group col">
+                    <!--experiencia_inversiones-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Tiene Experiencia en Inversiones</label>
+                      <div class="col-sm-10">
+                        <select class="form-control m-b" name="experiencia_inversiones">
+                          <option value="">Seleccionar</option>
+                          <option value="1">Si</option>
+                          <option value="0">No</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!--tipo_inversion-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Tiene Experiencia en Inversiones</label>
+                      <div class="col-sm-10">
+                        <select class="form-control m-b" name="tipo_inversion">
+                          <option value="">Seleccionar</option>
+                          <option value="Inmobiliaria">Inmobiliaria</option>
+                          <option value="Bursatil">Bursatil</option>
+                          <option value="Riesgo">Riesgo</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!--tiempo_inversion-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Tiene Experiencia en Inversiones</label>
+                      <div class="col-sm-10">
+                        <select class="form-control m-b" name="tiempo_inversion">
+                          <option value="">Seleccionar</option>
+                          <option value="1">1 Año</option>
+                          <option value="2">2 Años</option>
+                          <option value="3">3 Años</option>
+                          <option value="Mas De 3">Mas De 3 Años</option>
+                        </select>
+                      </div>
+                    </div>
+                    <h4>Nivel de Conocimiento y Experiencia como Inversionista</h4>
+                    <!--anos_experiencia-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Años de Experiencia</label>
+                      <div class="col-sm-10">
+                        <select class="form-control m-b" name="anos_experiencia">
+                          <option value="">Seleccionar</option>
+                          <option value="1">1 Año</option>
+                          <option value="2">2 Años</option>
+                          <option value="3">3 Años</option>
+                          <option value="Mas De 3">Mas De 3 Años</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!--nivel_riesgo_asumir-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nivel de Riesgo a Asumir</label>
+                      <div class="col-sm-10">
+                        <select class="form-control m-b" name="nivel_riesgo_asumir">
+                          <option value="">Seleccionar</option>
+                          <option value="Bajo">Bajo</option>
+                          <option value="Medio">Medio</option>
+                          <option value="Alto">Alto</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!--tipos_instrumentos_financieros_experiencia-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Tipos de Instrumentos Financieros con los que Ha Tenido Experiencia</label>
+                      <div class="col-sm-10">
+                        <select class="form-control m-b" name="nivel_riesgo_asumir">
+                          <option value="">Seleccionar</option>
+                          @each(instrumentoFinanciero in data.tiposInstrumentosFinancieros)
+                          <option value="{{instrumentoFinanciero}}">{{instrumentoFinanciero}}</option>
+                          @endeach
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <h1>Documentos</h1>
+                <fieldset>
+                  <h2>Se necesitan imagenes de los siguientes documentos</h2>
+                  <!--img_cedula_pasaporte-->
+                  <div class="form-group  row"><label class="col-sm-2 col-form-label">Cédula o Pasaporte</label>
+                    <div class="col-sm-10">
+                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                        <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar Archivo</span>
+                          <span class="fileinput-exists">Cambiar</span><input type="file" name="img_cedula_pasaporte" required/></span>
+                        <span class="fileinput-filename"></span>
+                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!--img_rif-->
+                  <div class="form-group  row"><label class="col-sm-2 col-form-label">RIF</label>
+                    <div class="col-sm-10">
+                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                        <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar Archivo</span>
+                          <span class="fileinput-exists">Cambiar</span><input type="file" name="img_rif" required/></span>
+                        <span class="fileinput-filename"></span>
+                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!--img_recibo-->
+                  <div class="form-group  row"><label class="col-sm-2 col-form-label">Recibo</label>
+                    <div class="col-sm-10">
+                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                        <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar Archivo</span>
+                          <span class="fileinput-exists">Cambiar</span><input type="file" name="img_recibo" required/></span>
+                        <span class="fileinput-filename"></span>
+                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+                      </div>
+                    </div>
+                  </div>
                 </fieldset>
 
 <!--                <h1>Firmas</h1>-->

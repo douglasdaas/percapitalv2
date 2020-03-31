@@ -1,0 +1,1 @@
+module.exports = ["Arrendamiento De Bienes Muebles E Inmuebles","Beca","Docencia ","Econom\u00eda Informal","Ingresos A Trav\u00e9s De Terceros","Intermediario De Seguros","Operario De Transporte P\u00fablico Y Privado","Prestamista ","Remesas Familiares","Rifas, Loter\u00edas Y Otros Sorteos","Servicios Profesionales Y T\u00e9cnicos"]
