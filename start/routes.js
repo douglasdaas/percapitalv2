@@ -21,8 +21,8 @@ const Route = use('Route')
 
 Route.on('/').render('welcome')
 
-//CLIENTES
-Route.group( () =>{
+//CLIENTES NATURAL
+Route.group(() => {
   Route.get('crearAutomatico/:id', 'UserController.crearAutomatico')
   Route.get('signup', 'ClienteNaturalController.signup')
   Route.get('solicitudui/:id', 'ClienteNaturalController.solicitudui')
@@ -30,8 +30,15 @@ Route.group( () =>{
   Route.get('pago/:id', 'ClienteNaturalController.pago')
   Route.post('pago/:id', 'ClienteNaturalController.createPago')
   Route.post('registro', 'ClienteNaturalController.registro')
-}).prefix('cliente')
-Route.resource('cliente', 'ClienteNaturalController')
+}).prefix('cliente/natural')
+Route.resource('cliente/natural', 'ClienteNaturalController')
+
+
+//CLIENTES JURIDICO
+Route.group( () => {
+
+}).prefix('cliente/juridico')
+Route.resource('cliente/juridico', 'ClienteJuridicoController')
 
 //LEGAL
 Route.group( () =>{

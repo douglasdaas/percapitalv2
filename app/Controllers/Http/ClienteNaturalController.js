@@ -5,12 +5,12 @@ const Encryption = use('Encryption')
 const ClienteNatural = use('App/Models/ClienteNatural')
 const SolicitudSuscripcionUi = use('App/Models/SolicitudSuscripcionUi')
 const Helpers = use('Helpers')
-const paises = require ('../../../archivos/listas/paises')
-const profesiones = require ('../../../archivos/listas/profesiones')
-const actividadesEconomicas = require ('../../../archivos/listas/actividadesEconomicas')
-const categoriasEspeciales = require ('../../../archivos/listas/categoriasEspeciales')
-const otrosIngresos = require ('../../../archivos/listas/otrosIngresos')
-const tiposInstrumentosFinancieros = require ('../../../archivos/listas/tiposInstrumentosFinancieros')
+const paises = require('../../../archivos/listas/paises')
+const profesiones = require('../../../archivos/listas/profesiones')
+const actividadesEconomicas = require('../../../archivos/listas/actividadesEconomicas')
+const categoriasEspeciales = require('../../../archivos/listas/categoriasEspeciales')
+const otrosIngresos = require('../../../archivos/listas/otrosIngresos')
+const tiposInstrumentosFinancieros = require('../../../archivos/listas/tiposInstrumentosFinancieros')
 
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
@@ -34,7 +34,7 @@ class ClienteNaturalController {
 
     let clientes = await ClienteNatural.all()
     clientes = clientes.toJSON()
-    return view.render('cliente.index', {clientes})
+    return view.render('cliente.natural.index', {clientes})
   }
 
   /**
@@ -55,20 +55,7 @@ class ClienteNaturalController {
     data.otrosIngresos = otrosIngresos
     data.tiposInstrumentosFinancieros = tiposInstrumentosFinancieros
     // console.log(data)
-    return view.render('cliente.create', {data})
-  }
-
-  /**
-   * Render a form to be used for creating a new clientenatural.
-   * GET clientenaturals/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async createLink ({ request, response, view }) {
-     return view.render('cliente.create',{datos})
+    return view.render('cliente.natural.create', {data})
   }
 
   /**
@@ -185,7 +172,7 @@ class ClienteNaturalController {
    * @param {View} ctx.view
    */
   async signup ({ params, request, response, view }) {
-    return view.render('cliente.signup')
+    return view.render('cliente.natural.signup')
   }
 
   /**
@@ -222,7 +209,7 @@ class ClienteNaturalController {
   async solicitudui ({ params: {id}, view }) {
 
     const precio = 50000
-    return view.render('cliente.solicitudui',{id,precio})
+    return view.render('cliente.natural.solicitudui',{id,precio})
   }
 
   async createSolicitudui ({ request, params: {id}, view, response }) {
@@ -265,7 +252,7 @@ class ClienteNaturalController {
     let solicitud = await SolicitudSuscripcionUi.find(id)
     // solicitud.total = `${solicitud.total.toLocaleString('de-DE')} Bs`
     solicitud = solicitud.toJSON()
-    return view.render('cliente.pago', {solicitud})
+    return view.render('cliente.natural.pago', {solicitud})
   }
 
   async createPago ({ params:{id}, request, response, view }) {
