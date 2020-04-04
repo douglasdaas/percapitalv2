@@ -1,0 +1,1 @@
+module.exports = ["Ahorro","Compra De Moneda Virtual","Emisi\u00f3n De Cheques De Gerencia","Capital De Trabajo","Fideicomiso","N\u00f3mina","Pago De Servicios","Personal","Tr\u00e1mite De Cr\u00e9dito","Pago De Obligaciones","Recibir O Enviar Transferencias A Otros Bancos"]
