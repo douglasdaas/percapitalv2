@@ -163,15 +163,15 @@ class TesoreriaController {
       }
 
       Event.fire('asignacionUnidades::clienteNatural',datos)
-
-      await cliente.load('usuario')
-
-      const usuario = cliente.getRelated('usuario')
-      console.log('usuario',usuario)
-
-      if (usuario === (null || undefined)) {
-        return response.redirect(`/cliente/crearautomatico/${clienteId}` )
-      }
+      //
+      // await cliente.load('usuario')
+      //
+      // const usuario = cliente.getRelated('usuario')
+      // console.log('usuario',usuario)
+      //
+      // // if (usuario === (null || undefined)) {
+      // //   return response.redirect(`/cliente/crearautomatico/${clienteId}` )
+      // // }
 
       return response.redirect('/tesoreria!natural',200)
 
@@ -193,14 +193,14 @@ class TesoreriaController {
 
       Event.fire('asignacionUnidades::clienteJuridico',datos)
 
-      await cliente.load('usuario')
-
-      const usuario = cliente.getRelated('usuario')
-      console.log('usuario',usuario)
-
-      if (usuario === (null || undefined)) {
-        return response.redirect(`/cliente/crearautomatico/${clienteId}` )
-      }
+      // await cliente.load('usuario')
+      //
+      // const usuario = cliente.getRelated('usuario')
+      // console.log('usuario',usuario)
+      //
+      // if (usuario === (null || undefined)) {
+      //   return response.redirect(`/cliente/crearautomatico/${clienteId}` )
+      // }
 
       return response.redirect('/tesoreria!juridico',200)
     }
