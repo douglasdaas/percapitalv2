@@ -40,15 +40,16 @@
           <div class="ibox">
             <div class="ibox-title">
               <h2>Inversionistas </h2>
+              <a class="badge" href="/legal!natural">Clientes Naturales</a> / <a class="badge" href="/legal!juridico">Clientes Juridicos</a>
               <div class="ibox-tools">
-                <a href="/cliente/create" class="btn btn-primary btn-xs">Agregar nuevo inverionista</a>
+                <a href="/cliente/juridico/create" class="btn btn-primary btn-xs">Agregar nuevo inverionista juridico</a>
               </div>
             </div>
             <div class="ibox-content">
               <div class="row m-b-sm m-t-sm">
 
                 <div class="col-md-12">
-                  <div class="input-group"><input type="text" placeholder="Numero de documento de identidad" class="form-control-sm form-control"> <span class="input-group-btn">
+                  <div class="input-group"><input type="text" placeholder="Numero de RIF" class="form-control-sm form-control"> <span class="input-group-btn">
                                         <button type="button" class="btn btn-sm btn-primary"> Buscar !</button> </span></div>
                 </div>
               </div>
@@ -67,21 +68,20 @@
                         @endif
                       </td>
                       <td class="project-title">
-                        <label>{{cliente.nombre}} {{cliente.apellido}}</label>
+                        <label>{{cliente.razon_social}}</label>
                         <br/>
                         <small>Creado {{cliente.created_at}} </small>
                       </td>
                       <td class="project-completion">
-                        <h5>Nº documento identidad</h5>
-                        <small>{{cliente.tipo_documento_identificacion}}-{{cliente.documento_identificacion}}</small>
+                        <h5>Nº RIF</h5>
+                        <small>{{cliente.registro_informacion_fiscal}}</small>
                       </td>
                       <td class="project-people">
-                        <a href="#"><img alt="image" class="rounded-circle" src="{{cliente.img_cedula_pasaporte}}"></a>
+                        <a href="#"><img alt="image" class="rounded-circle" src="{{cliente.documento_constitutivo_empresas}}"></a>
                         <a href="#"><img alt="image" class="rounded-circle" src="{{cliente.img_rif}}"></a>
-                        <a href="#"><img alt="image" class="rounded-circle" src="{{cliente.img_recibo}}"></a>
                       </td>
                       <td class="project-actions">
-                        <a href="/legal/{{cliente.id}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
+                        <a href="/legal!juridico/{{cliente.registro_informacion_fiscal}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
                       </td>
                   </tr>
                   @endeach

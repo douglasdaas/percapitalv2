@@ -11,6 +11,11 @@ const actividadesEconomicas = require('../../../archivos/listas/actividadesEcono
 const categoriasEspeciales = require('../../../archivos/listas/categoriasEspeciales')
 const otrosIngresos = require('../../../archivos/listas/otrosIngresos')
 const tiposInstrumentosFinancieros = require('../../../archivos/listas/tiposInstrumentosFinancieros')
+const monedas = require('../../../archivos/listas/monedas')
+const monedasVirtuales = require('../../../archivos/listas/monedasVirtuales')
+const origenFondos = require('../../../archivos/listas/origenFondos')
+const destinoFondos = require('../../../archivos/listas/destinoFondos')
+
 
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
@@ -54,6 +59,10 @@ class ClienteNaturalController {
     data.categoriasEspeciales = categoriasEspeciales
     data.otrosIngresos = otrosIngresos
     data.tiposInstrumentosFinancieros = tiposInstrumentosFinancieros
+    data.monedas = monedas
+    data.monedasVirtuales = monedasVirtuales
+    data.origenFondos = origenFondos
+    data.destinoFondos = destinoFondos
     // console.log(data)
     return view.render('cliente.natural.create', {data})
   }
@@ -68,6 +77,7 @@ class ClienteNaturalController {
    */
   async store ({ request, response }) {
     const informacionCliente = request.post()
+    const documento_identificacion = request.only(['documento_identificacion'])
 
     const archivoIdentidad = request.file('img_cedula_pasaporte', {
       types: ['image'],
@@ -82,19 +92,19 @@ class ClienteNaturalController {
       size: '5mb'
     })
 
-    informacionCliente.img_cedula_pasaporte = `identidad-${new Date().getTime()}.${archivo.subtype}`
-    informacionCliente.img_rif = `rif-${new Date().getTime()}.${archivo.subtype}`
-    informacionCliente.img_recibo = `recibo-${new Date().getTime()}.${archivo.subtype}`
+    informacionCliente.img_cedula_pasaporte = `identidad-${new Date().getTime()}.${archivoIdentidad.subtype}`
+    informacionCliente.img_rif = `rif-${new Date().getTime()}.${archivoRif.subtype}`
+    informacionCliente.img_recibo = `recibo-${new Date().getTime()}.${archivoRecibo.subtype}`
 
-    await archivo.move(Helpers.appRoot('archivos/documentos-empresas'), {
-      name: archivoIdentidad.img_cedula_pasaporte,
+    await archivoIdentidad.move(Helpers.appRoot(`archivos/clientes/natural/${documento_identificacion}`), {
+      name: informacionCliente.img_cedula_pasaporte,
       overwrite: true
     })
 
     if (!archivoIdentidad.moved()) {
       return archivoIdentidad.error()
     }
-    await archivoRif.move(Helpers.appRoot('archivos/documentos-empresas'), {
+    await archivoRif.move(Helpers.appRoot(`archivos/clientes/natural/${documento_identificacion}`), {
       name: informacionCliente.img_rif,
       overwrite: true
     })
@@ -103,8 +113,8 @@ class ClienteNaturalController {
       return archivoRif.error()
     }
 
-    await archivoRecibo.move(Helpers.appRoot('archivos/documentos-empresas'), {
-      name: archivoRecibo.img_recibo,
+    await archivoRecibo.move(Helpers.appRoot(`archivos/clientes/natural/${documento_identificacion}`), {
+      name: informacionCliente.img_recibo,
       overwrite: true
     })
 
@@ -112,8 +122,9 @@ class ClienteNaturalController {
       return archivoRecibo.error()
     }
 
+    const clienteNatural = await ClienteNatural.create(informacionCliente)
 
-    response.json(informacionCliente)
+    response.json(clienteNatural)
   }
 
   /**
@@ -206,37 +217,6 @@ class ClienteNaturalController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async solicitudui ({ params: {id}, view }) {
-
-    const precio = 50000
-    return view.render('cliente.natural.solicitudui',{id,precio})
-  }
-
-  async createSolicitudui ({ request, params: {id}, view, response }) {
-
-    const cliente = await ClienteNatural.find(id)
-    const precio = 5000
-    const informacionSolicitudUI = request.post()
-    let { cantidad_unidades_inversion } = request.post()
-
-    informacionSolicitudUI.total = cantidad_unidades_inversion*precio
-
-    const solicitudUI = await cliente
-      .solicitudes()
-      .create(informacionSolicitudUI)
-
-    console.log(solicitudUI)
-
-    response.redirect('http://per-capital.com/',200)
-
-    Mail.send('emails.pago' ,solicitudUI.toJSON() , (message) => {
-      message
-        .to(cliente.correo_electronico, `${cliente.nombre} ${cliente.apellido}`)
-        .from('testapp@per-capital.com', 'PerCapital')
-        .subject('Pago de unidades de Inversión')
-    })
-
-  }
 
   /**
    * Display a single clientenatural.

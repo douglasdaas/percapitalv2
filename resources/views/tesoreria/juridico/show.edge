@@ -24,7 +24,7 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="m-b-md">
-                  <h2>{{cliente.nombre}} {{cliente.apellido}}</h2>
+                  <h2>{{cliente.razon_social}}</h2>
                 </div>
 
               </div>
@@ -34,80 +34,61 @@
                 <dl class="row mb-0">
                   <div class="col-sm-4 text-sm-right"><dt>Estatus de Unidades:</dt> </div>
                   <div class="col-sm-8 text-sm-left"><dd class="mb-1">
-                    @each(solicitud in cliente.solicitudes)
-                    @if( solicitud.unidades_asignadas === 1)
-                    <span class="label label-primary">{{ estatusUnidades(solicitud.unidades_asignadas) }}</span>
+                    @if( cliente.solicitudes[0].unidades_asignadas === 1)
+                    <span class="label label-primary">{{ estatusUnidades(cliente.solicitudes[0].unidades_asignadas) }}</span>
                     @else
-                    <span class="label label-danger">{{ estatusUnidades(solicitud.unidades_asignadas) }}</span>
+                    <span class="label label-danger">{{ estatusUnidades(cliente.solicitudes[0].unidades_asignadas) }}</span>
                     @endif
-                    @endeach
-                  </dd></div>
+                  </dd>
+                  </div>
                 </dl>
                 <dl class="row mb-0">
-                  <div class="col-sm-4 text-sm-right"><dt>Documento Identificacion:</dt> </div>
-
-                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.tipo_documento_identificacion}}-{{cliente.documento_identificacion}}</dd> </div>
+                  <div class="col-sm-4 text-sm-right"><dt>Registro de Información Fiscal:</dt> </div>
+                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.registro_informacion_fiscal}}</dd> </div>
                 </dl>
                 <dl class="row mb-0">
-                  <div class="col-sm-4 text-sm-right"><dt>RIF:</dt> </div>
-                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.rif}}</dd> </div>
+                  <div class="col-sm-4 text-sm-right"><dt>Nombre Comercial:</dt> </div>
+                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.nombre_comercial}}</dd> </div>
                 </dl>
                 <dl class="row mb-0">
-                  <div class="col-sm-4 text-sm-right"><dt>Fecha de nacimiento:</dt> </div>
-                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.fecha_nacimiento}}</dd> </div>
+                  <div class="col-sm-4 text-sm-right"><dt>Actividad Economica:</dt> </div>
+                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.actividad_economica}}</dd> </div>
                 </dl>
                 <dl class="row mb-0">
-                  <div class="col-sm-4 text-sm-right"><dt>Sexo:</dt> </div>
-                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{ sexo(cliente.sexo)}}</dd> </div>
+                  <div class="col-sm-4 text-sm-right"><dt>Fecha Inicial de Registro:</dt> </div>
+                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{ cliente.fecha_registro_inicial}}</dd> </div>
                 </dl>
                 <dl class="row mb-0">
-                  <div class="col-sm-4 text-sm-right"><dt>Estado Civil:</dt> </div>
-                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.estado_civil}}</dd> </div>
+                  <div class="col-sm-4 text-sm-right"><dt>Capital Actual:</dt> </div>
+                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.capital_actual_modificicaion}}</dd> </div>
                 </dl>
                 <dl class="row mb-0">
-                  <div class="col-sm-4 text-sm-right"><dt>Nacionalidad:</dt> </div>
-                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.nacionalidad}}</dd> </div>
+                  <div class="col-sm-4 text-sm-right"><dt>Sitio Web:</dt> </div>
+                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.sitio_web}}</dd> </div>
                 </dl>
                 <dl class="row mb-0">
-                  <div class="col-sm-4 text-sm-right"><dt>Telefono Habitación:</dt> </div>
-                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.telefono_habitacion}}</dd> </div>
-                </dl>
-                <dl class="row mb-0">
-                  <div class="col-sm-4 text-sm-right"><dt>Telefono Celular:</dt> </div>
-                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.telefono_celular}}</dd> </div>
+                  <div class="col-sm-4 text-sm-right"><dt>Telefono:</dt> </div>
+                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.telefono}}</dd> </div>
                 </dl>
                 <dl class="row mb-0">
                   <div class="col-sm-4 text-sm-right"><dt>Correo Electrónico:</dt> </div>
                   <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.correo_electronico}}</dd> </div>
                 </dl>
                 <dl class="row mb-0">
-                  <div class="col-sm-4 text-sm-right"><dt>Dirección Habitación:</dt> </div>
-                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.direccion_habitacion}}</dd> </div>
+                  <div class="col-sm-4 text-sm-right"><dt>Dirección:</dt> </div>
+                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.direccion}}</dd> </div>
                 </dl>
                 <dl class="row mb-0">
                   <div class="col-sm-4 text-sm-right"><dt>Ciudad:</dt> </div>
-                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.ciudad_habitacion}}</dd> </div>
+                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.ciudad}}</dd> </div>
                 </dl>
                 <dl class="row mb-0">
                   <div class="col-sm-4 text-sm-right"><dt>Estado:</dt> </div>
-                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.estado_habitacion}}</dd> </div>
-                </dl>
-                <dl class="row mb-0">
-                  <div class="col-sm-4 text-sm-right"><dt>Código Postal:</dt> </div>
-                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.codigo_postal_habitacion}}</dd> </div>
+                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.estado}}</dd> </div>
                 </dl>
                 <dl class="row mb-0">
                   <div class="col-sm-4 text-sm-right"><dt>País:</dt> </div>
-                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.pais_habitacion}}</dd> </div>
-                </dl>
-                <dl class="row mb-0">
-                  <div class="col-sm-4 text-sm-right"><dt>Nivel Academico:</dt> </div>
-                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.nivel_academico}}</dd> </div>
-                </dl>
-                <dl class="row mb-0">
-                  <div class="col-sm-4 text-sm-right"><dt>Profesión u Ocupación :</dt> </div>
-                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.profesion_ocupacion}}</dd> </div>
-                </dl>
+                  <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.pais}}</dd> </div>
                 </dl>
 
               </div>
@@ -131,21 +112,19 @@
                 </dl>
                 <dl class="row mb-0">
                   <div class="col-sm-8 text-sm-left">
-                    @each(solicitud in cliente.solicitudes)
-                    @if(solicitud.estatus_conciliacion === 1 && solicitud.pagos !== null &&  solicitud.unidades_asignadas === 0)
+                    @if(cliente.solicitudes[0].estatus_conciliacion === 1 && cliente.solicitudes[0].pagos !== null &&  cliente.solicitudes[0].unidades_asignadas === 0)
                     <h4>Solictud Unidades:</h4>
-                    <dt>Cantidad de Unidades: <br> {{solicitud.cantidad_unidades_inversion}}</dt>
+                    <dt>Cantidad de Unidades: <br> {{cliente.solicitudes[0].cantidad_unidades_inversion}}</dt>
                     <dt>Precio por Unidad: <br> 5,000 Bs</dt>
-                    <dt>Monto total: {{solicitud.total.toLocaleString()}} Bs</dt>
-                    <dt>En Fecha: {{solicitud.created_at}}<dt>
+                    <dt>Monto total: {{cliente.solicitudes[0].total.toLocaleString()}} Bs</dt>
+                    <dt>En Fecha: {{cliente.solicitudes[0].created_at}}<dt>
                     <br>
-                    <form action="/tesoreria/{{cliente.id}}?_method=PATCH" method="post">
-                      <button name="solicitud" value="{{solicitud.id}}" formenctype="application/x-www-form-urlencoded" class="btn btn-block btn-outline btn-primary">Asignar Unidades</button>
+                    <form action="/tesoreria!juridico/{{cliente.solicitudes[0].id}}?_method=PATCH" method="post">
+                      <button name="clienteId" value="{{cliente.registro_informacion_fiscal}}" formenctype="application/x-www-form-urlencoded" class="btn btn-block btn-outline btn-primary">Asignar Unidades</button>
                     </form>
                     @else
                     <h4>No posee unidades sin asignar</h4>
                     @endif
-                    @endeach
                   </div>
                 </dl>
               </div>

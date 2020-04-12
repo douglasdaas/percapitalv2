@@ -1,10 +1,12 @@
 'use strict'
 
 const ClienteJuridico = use('App/Models/ClienteJuridico')
+const paises = require('../../../archivos/listas/paises')
+const profesiones = require('../../../archivos/listas/profesiones')
 const actividadesEconomicas = require('../../../archivos/listas/actividadesEconomicas')
 const categoriasEspeciales = require('../../../archivos/listas/categoriasEspeciales')
+const otrosIngresos = require('../../../archivos/listas/otrosIngresos')
 const tiposInstrumentosFinancieros = require('../../../archivos/listas/tiposInstrumentosFinancieros')
-const paises = require('../../../archivos/listas/paises')
 const monedas = require('../../../archivos/listas/monedas')
 const monedasVirtuales = require('../../../archivos/listas/monedasVirtuales')
 const origenFondos = require('../../../archivos/listas/origenFondos')
@@ -51,10 +53,10 @@ class ClienteJuridicoController {
 
     let data ={}
     data.paises = paises
-    // data.profesiones = profesiones
+    data.profesiones = profesiones
     data.actividadesEconomicas = actividadesEconomicas
     data.categoriasEspeciales = categoriasEspeciales
-    // data.otrosIngresos = otrosIngresos
+    data.otrosIngresos = otrosIngresos
     data.tiposInstrumentosFinancieros = tiposInstrumentosFinancieros
     data.monedas = monedas
     data.monedasVirtuales = monedasVirtuales
@@ -74,8 +76,10 @@ class ClienteJuridicoController {
    */
   async store ({ request, response }) {
     const informacionCliente = request.post()
+    const registro_informacion_fiscal = request.only(['registro_informacion_fiscal'])
 
-    const archivoIdentidad = request.file('img_cedula_pasaporte', {
+
+    const archivoConstitutivo = request.file('documento_constitutivo_empresas', {
       types: ['image'],
       size: '5mb'
     })
@@ -83,39 +87,25 @@ class ClienteJuridicoController {
       types: ['image'],
       size: '5mb'
     })
-    const archivoRecibo = request.file('img_recibo', {
-      types: ['image'],
-      size: '5mb'
-    })
 
-    informacionCliente.img_cedula_pasaporte = `identidad-${new Date().getTime()}.${archivo.subtype}`
-    informacionCliente.img_rif = `rif-${new Date().getTime()}.${archivo.subtype}`
-    informacionCliente.img_recibo = `recibo-${new Date().getTime()}.${archivo.subtype}`
+    informacionCliente.documento_constitutivo_empresas = `constitutivo-${new Date().getTime()}.${archivoConstitutivo.subtype}`
+    informacionCliente.img_rif = `rif-${new Date().getTime()}.${archivoRif.subtype}`
 
-    await archivo.move(Helpers.appRoot('archivos/documentos-empresas'), {
-      name: archivoIdentidad.img_cedula_pasaporte,
+    await archivoConstitutivo.move(Helpers.appRoot(`archivos/clientes/juridico/${registro_informacion_fiscal}`), {
+      name: informacionCliente.documento_constitutivo_empresas,
       overwrite: true
     })
 
-    if (!archivoIdentidad.moved()) {
-      return archivoIdentidad.error()
+    if (!archivoConstitutivo.moved()) {
+      return archivoConstitutivo.error()
     }
-    await archivoRif.move(Helpers.appRoot('archivos/documentos-empresas'), {
+    await archivoRif.move(Helpers.appRoot(`archivos/clientes/juridico/${registro_informacion_fiscal}`), {
       name: informacionCliente.img_rif,
       overwrite: true
     })
 
     if (!archivoRif.moved()) {
       return archivoRif.error()
-    }
-
-    await archivoRecibo.move(Helpers.appRoot('archivos/documentos-empresas'), {
-      name: archivoRecibo.img_recibo,
-      overwrite: true
-    })
-
-    if (!archivoRecibo.moved()) {
-      return archivoRecibo.error()
     }
 
 

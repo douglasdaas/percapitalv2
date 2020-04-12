@@ -2,6 +2,8 @@
 
 const Mail = use('Mail')
 const ClienteNatural = use('App/Models/ClienteNatural')
+const ClienteJuridico = use('App/Models/ClienteJuridico')
+const Event = use('Event')
 
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
@@ -21,14 +23,23 @@ class LegalController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
-    let clientes = await ClienteNatural.all()
+  async index ({ params:{tipoCliente}, request, response, view }) {
 
-    clientes = clientes.toJSON()
+    if (tipoCliente === '!natural'){
+      let clientes = await ClienteNatural.all()
 
-    console.log(clientes)
+      clientes = clientes.toJSON()
 
-    return view.render('legal.index', {clientes})
+      return view.render('legal.natural.index', {clientes})
+
+    } else if (tipoCliente === '!juridico'){
+      let clientes = await ClienteJuridico.all()
+
+      clientes = clientes.toJSON()
+
+      return view.render('legal.juridico.index', {clientes})
+    }
+
   }
 
   /**
@@ -51,15 +62,22 @@ class LegalController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params: {id}, request, response, view }) {
+  async show ({ params: { tipoCliente, id}, request, response, view }) {
 
-    let cliente = await ClienteNatural.find(id)
+    if (tipoCliente === '!natural'){
+      let cliente = await ClienteNatural.find(id)
 
-    cliente = cliente.toJSON()
+      cliente = cliente.toJSON()
 
-    console.log(cliente)
+      return view.render('legal.natural.show', {cliente})
 
-    return view.render('legal.show', {cliente})
+    } else if (tipoCliente === '!juridico'){
+      let cliente = await ClienteJuridico.find(id)
+
+      cliente = cliente.toJSON()
+
+      return view.render('legal.juridico.show', {cliente})
+    }
 
   }
 
@@ -83,24 +101,32 @@ class LegalController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params: {id}, request, response }) {
-    let cliente = await ClienteNatural.find(id)
+  async update ({ params: {id, tipoCliente}, request, response }) {
 
-    cliente.estatus_legal = true
-    cliente.aprobadoLegal = Date.now()
+    if (tipoCliente === '!natural'){
+      let cliente = await ClienteNatural.find(id)
+      cliente.estatus_legal = true
+      cliente.aprobadoLegal = Date.now()
 
-    await cliente.save()
+      await cliente.save()
 
-    console.log(cliente)
+      Event.fire('aprobadoLegal::clienteNatural', cliente)
 
-    Mail.send('emails.aprobacion-legal', cliente.toJSON(), (message) => {
-      message
-        .to(cliente.correo_electronico, `${cliente.nombre} ${cliente.apellido}`)
-        .from('testapp@per-capital.com', 'PerCapital')
-        .subject('Aprobacion Legal')
-    })
+      return response.redirect('/legal!natural', 200)
 
-    response.redirect('/legal', 200)
+    } else if (tipoCliente === '!juridico'){
+      var cliente = await ClienteJuridico.find(id)
+      cliente.estatus_legal = true
+      cliente.aprobadoLegal = Date.now()
+
+      await cliente.save()
+
+      Event.fire('aprobadoLegal::clienteJuridico', cliente)
+
+      return response.redirect('/legal!juridico', 200)
+
+    }
+
   }
 
   /**

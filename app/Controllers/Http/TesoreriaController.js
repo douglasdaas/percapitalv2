@@ -1,7 +1,9 @@
 'use strict'
 
 const ClienteNatural = use('App/Models/ClienteNatural')
+const ClienteJuridico = use('App/Models/ClienteJuridico')
 const SolicitudSuscripcionUi = use('App/Models/SolicitudSuscripcionUi')
+const Event = use('Event')
 const Mail = use('Mail')
 
 
@@ -22,20 +24,46 @@ class TesoreriaController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
-    let clientes = await ClienteNatural
-      .query()
-      .where('estatus_legal', true)
-      .where('estatus_CVV', true)
-      .has('solicitudes')
-      .with('solicitudes', (builder)  =>{
-        builder.where('estatus_conciliacion', true)
-    })
-      .fetch()
+  async index ({params: {tipoCliente}, request, response, view }) {
 
-    clientes = clientes.toJSON()
+    if (tipoCliente === '!natural'){
+      let clientes = await ClienteNatural
+        .query()
+        .where('estatus_legal', true)
+        .where('estatus_CVV', true)
+        .has('solicitudes')
+        .with('solicitudes', (builder)  =>{
+          builder
+            .where('estatus_conciliacion', true)
+            .orderBy('created_at', 'asc')
+            .limit(1)
+        })
+        .fetch()
 
-    return view.render('tesoreria.index', {clientes})
+      clientes = clientes.toJSON()
+
+      return view.render('tesoreria.natural.index', {clientes})
+
+    } else if (tipoCliente === '!juridico'){
+
+      let clientes = await ClienteJuridico
+        .query()
+        .where('estatus_legal', true)
+        .where('estatus_CVV', true)
+        .has('solicitudes')
+        .with('solicitudes', (builder)  =>{
+          builder
+            .where('estatus_conciliacion', true)
+            .orderBy('created_at', 'asc')
+            .limit(1)
+        })
+        .fetch()
+
+      clientes = clientes.toJSON()
+
+      return view.render('tesoreria.juridico.index', {clientes})
+    }
+
 
   }
 
@@ -71,17 +99,29 @@ class TesoreriaController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params: {id}, request, response, view }) {
-    let cliente = await ClienteNatural
-      .query()
-      .where('id', id)
-      .with('solicitudes.pagos')
-      .fetch()
+  async show ({ params: {id,tipoCliente}, request, response, view }) {
 
-    cliente = cliente.toJSON()
-    cliente = cliente[0]
+    if (tipoCliente === '!natural'){
+      let cliente = await ClienteNatural.find(id)
+      await cliente.loadMany({
+        solicitudes: (builder) => builder .with('pagos').orderBy('created_at', 'asc').limit(1)
+      })
 
-    return view.render('tesoreria.show', {cliente})
+      cliente = cliente.toJSON()
+
+      return view.render('tesoreria.natural.show', {cliente})
+
+    } else if (tipoCliente === '!juridico'){
+      let cliente = await ClienteJuridico.find(id)
+      await cliente.loadMany({
+        solicitudes: (builder) => builder .with('pagos').orderBy('created_at', 'asc').limit(1)
+      })
+
+      cliente = cliente.toJSON()
+
+      return view.render('tesoreria.juridico.show', {cliente})
+    }
+
   }
 
   /**
@@ -104,36 +144,67 @@ class TesoreriaController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params: {id}, request, response }) {
-    let cliente = await ClienteNatural.find(id)
+  async update ({ params: {id, tipoCliente}, request, response }) {
 
-    let { solicitud } = request.post()
+    if (tipoCliente === '!natural'){
 
-    if (solicitud !== undefined) {
+      const {clienteId} = request.post()
 
-      solicitud = await SolicitudSuscripcionUi.find(solicitud)
+      let solicitud = await SolicitudSuscripcionUi.find(id)
+      let cliente = await ClienteNatural.find(clienteId)
 
       solicitud.unidades_asignadas = true
 
       await solicitud.save()
-
-      cliente = cliente.toJSON()
-      solicitud = solicitud.toJSON()
 
       const datos = {
         cliente,
         solicitud
       }
 
-      Mail.send('emails.unidades-asignadas', datos, (message) => {
-        message
-          .to(cliente.correo_electronico, `${cliente.nombre} ${cliente.apellido}`)
-          .from('testapp@per-capital.com', 'PerCapital')
-          .subject('Asignacion de Unidades de Inverción')
-      })
+      Event.fire('asignacionUnidades::clienteNatural',datos)
 
-       response.redirect(`/cliente/crearautomatico/${id}` )
+      await cliente.load('usuario')
+
+      const usuario = cliente.getRelated('usuario')
+      console.log('usuario',usuario)
+
+      if (usuario === (null || undefined)) {
+        return response.redirect(`/cliente/crearautomatico/${clienteId}` )
+      }
+
+      return response.redirect('/tesoreria!natural',200)
+
+    } else if (tipoCliente === '!juridico'){
+
+      const {clienteId} = request.post()
+
+      let solicitud = await SolicitudSuscripcionUi.find(id)
+      let cliente = await ClienteJuridico.find(clienteId)
+
+      solicitud.unidades_asignadas = true
+
+      await solicitud.save()
+
+      const datos = {
+        cliente,
+        solicitud
+      }
+
+      Event.fire('asignacionUnidades::clienteJuridico',datos)
+
+      await cliente.load('usuario')
+
+      const usuario = cliente.getRelated('usuario')
+      console.log('usuario',usuario)
+
+      if (usuario === (null || undefined)) {
+        return response.redirect(`/cliente/crearautomatico/${clienteId}` )
+      }
+
+      return response.redirect('/tesoreria!juridico',200)
     }
+
   }
 
   /**

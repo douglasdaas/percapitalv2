@@ -31,6 +31,7 @@
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
                 <h2>Operaciones</h2>
+                <h4>Creacion de Cuentas CVV</h4>
             </div>
         </div>
         <div class="row">
@@ -40,10 +41,7 @@
                     <div class="ibox">
                         <div class="ibox-title">
                             <h2>Inversionistas</h2>
-<!--                            <button class="btn btn-outline btn-link" href="/operaciones ">Creación de Cuentas en la CCV</button>-->
-                          <a class="badge" href="operaciones">Creación de Cuentas en la CCV</a> / <a class="badge" href="operaciones!pagos">Conciliación de Pagos Pendietes</a>
-<!--                            <button class="btn btn-outlin btn-link" href="/!pago">Conciliación de Pagos Pendietes</button>-->
-                          </a>
+                          <a class="badge" href="/operaciones!natural">Clientes Naturales</a> / <a class="badge" href="/operaciones!juridico">Clientes Juridicos</a>
                         </div>
                         <div class="ibox-content">
                             <div class="row m-b-sm m-t-sm">
@@ -67,18 +65,22 @@
                                                 <span class="label label-primary">{{ estatusCVV(cliente.estatus_CVV) }}</span>
                                               @endif
                                             </td>
-                                            <td class="project-title">
-                                                <label>{{cliente.nombre}} {{cliente.apellido}}</a>
-                                                <br/>
-                                                <small>Ultima Actualizacion {{cliente.updated_at}} </small>
-                                            </td>
-                                            <td class="project-completion">
-                                                <h5>Nº documento identidad</h5>
-                                                <small>{{cliente.tipo_documento_identificacion}}-{{cliente.documento_identificacion}}</small>
-                                            </td>
-                                            <td class="project-actions">
-                                                <a href="/operaciones/{{cliente.id}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
-                                            </td>
+                                          <td class="project-title">
+                                            <label>{{cliente.razon_social}}</label>
+                                            <br/>
+                                            <small>Creado {{cliente.created_at}} </small>
+                                          </td>
+                                          <td class="project-completion">
+                                            <h5>Nº RIF</h5>
+                                            <small>{{cliente.registro_informacion_fiscal}}</small>
+                                          </td>
+                                          <td class="project-people">
+                                            <a href="#"><img alt="image" class="rounded-circle" src="{{cliente.documento_constitutivo_empresas}}"></a>
+                                            <a href="#"><img alt="image" class="rounded-circle" src="{{cliente.img_rif}}"></a>
+                                          </td>
+                                          <td class="project-actions">
+                                            <a href="/operaciones!juridico/{{cliente.registro_informacion_fiscal}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
+                                          </td>
                                         </tr>
                                     @endeach
                                     </tbody>

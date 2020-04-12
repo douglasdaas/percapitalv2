@@ -21,7 +21,7 @@
     <h3 class="ibox-title">Pago de Unidades de Inversión</h3>
     <!--<p>Create account to see it in action.</p>-->
     <div class="ibox-content">
-      <form action="/cliente/pago/{{solicitud.id}}" method="post" enctype="multipart/form-data">
+      <form action="/pago-suscripcion/{{solicitud.id}}" method="post" enctype="multipart/form-data">
         <h3>Monto:</h3>
         <div class="form-group">
           <input type="text" class="form-control" name="monto" placeholder="monto" value="{{solicitud.total.toLocaleString('de-DE')}} Bs" readonly>
@@ -34,7 +34,7 @@
         <p>Por favor suba una imagen con el comprobante de la transferencia</p>
 
         <div class="fallback dropzone">
-          <input name="img_comprobante_recibo" type="file" multiple />
+          <input name="img_comprobante_recibo" type="file" />
         </div>
         <br>
         <button type="submit" class="btn btn-primary block full-width m-b">Subir Pago</button>

@@ -1,8 +1,9 @@
 'use strict'
 
 const ClienteNatural = use('App/Models/ClienteNatural')
+const ClienteJuridico = use('App/Models/ClienteJuridico')
 const Persona = use('Persona')
-const Mail = use('Mail')
+const Event = use('Event')
 
 
 
@@ -96,37 +97,67 @@ class UserController {
    */
   async destroy ({ params, request, response }) {
   }
-
-  async crearAutomatico ({params: { id }, request, response}){
+  /**
+   * Delete a user with id.
+   * DELETE users/:id
+   *
+   * @param {object} ctx
+   * @param {Request} ctx.request
+   * @param {Response} ctx.response
+   */
+  async crearAutomatico ({params: { id, tipoCliente }, request, response}){
     console.log('id:: ',id)
 
-    let cliente = await ClienteNatural.find(id)
+    if (tipoCliente === '!natural') {
+      let cliente = await ClienteNatural.find(id)
 
-    const payload = {
-      email: cliente.correo_electronico,
-      password:'123456',
-      password_confirmation:'123456'
+      const payload = {
+        email: cliente.correo_electronico,
+        password:'123456',
+        password_confirmation:'123456'
+      }
+
+      await Persona.register(payload)
+
+      cliente = cliente.toJSON()
+
+      const datos = {
+        cliente,
+        email: payload.email,
+        password: payload.password
+      }
+
+      Event.fire('usuarioCreado::clienteNatural',datos)
+
+      return response.redirect('/tesoreria!natural',200)
+
+    } else if (tipoCliente === '!juridico') {
+
+      let cliente = await ClienteJuridico.find(id)
+
+      const payload = {
+        email: cliente.correo_electronico,
+        password:'123456',
+        password_confirmation:'123456'
+      }
+
+      await Persona.register(payload)
+
+      cliente = cliente.toJSON()
+
+      const datos = {
+        cliente,
+        email: payload.email,
+        password: payload.password
+      }
+
+      Event.fire('usuarioCreado::clienteJuridico',datos)
+
+
+      return response.redirect('/tesoreria!juridico',200)
+
     }
-    console.log('todo bien')
-    let user = await Persona.register(payload)
-    console.log('creo el usuario')
 
-    cliente = cliente.toJSON()
-
-    const datos = {
-      cliente,
-      email: payload.email,
-      password: payload.password
-    }
-
-    Mail.send('emails.usuario-creado', datos, (message) => {
-      message
-        .to(email, `${cliente.nombre} ${cliente.apellido}`)
-        .from('testapp@per-capital.com', 'PerCapital')
-        .subject('Usuario en PerCapital')
-    })
-    console.log('envio el correo')
-    response.redirect('/tesoreria',200)
   }
 }
 

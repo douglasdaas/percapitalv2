@@ -7,7 +7,7 @@ class PagoUiSchema extends Schema {
   up () {
     this.create('pago_uis', (table) => {
       table.increments()
-      table.string('combrobate_pago')
+      table.text('combrobate_pago')
       table.string('referencia')
       table.decimal('monto', 12, 0)
       table.boolean('estatus_conciliacion').defaultTo(false)

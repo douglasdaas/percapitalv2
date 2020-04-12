@@ -16,12 +16,18 @@ class SolicitudSuscripcionUiSchema extends Schema {
       table.boolean('reprecentacion_asamblea_general')
       table.boolean('unidades_asignadas').defaultTo(false)
       table
-        .integer('cliente_natural_id')
-        .unsigned()
+        .string('cliente_natural_id')
         .index('cliente_natural_id')
       table
         .foreign('cliente_natural_id')
-        .references('cliente_naturals.id')
+        .references('cliente_naturals.documento_identificacion')
+        .onDelete('cascade')
+      table
+        .string('cliente_juridico_id')
+        .index('cliente_juridico_id')
+      table
+        .foreign('cliente_juridico_id')
+        .references('cliente_juridicos.registro_informacion_fiscal')
         .onDelete('cascade')
       table.timestamps()
     })

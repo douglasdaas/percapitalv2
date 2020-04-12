@@ -21,7 +21,7 @@ module.exports = {
   | input
   |
   */
-  uids: ['email'],
+  uids: ['email_natural','email_juridico'],
 
   /*
   |--------------------------------------------------------------------------

@@ -33,12 +33,32 @@ Route.group(() => {
 }).prefix('cliente/natural')
 Route.resource('cliente/natural', 'ClienteNaturalController')
 
-
 //CLIENTES JURIDICO
 Route.group( () => {
 
 }).prefix('cliente/juridico')
 Route.resource('cliente/juridico', 'ClienteJuridicoController')
+
+//USUARIOS
+Route.group( () =>{
+  Route.get('crearAutomatico/:id', 'UserController.crearAutomatico')
+}).prefix('usuario:tipoCliente?')
+Route.resource('usuario:tipoCliente?', 'UserController')
+
+//SOLICITUDES SUSCRIPCION UI
+Route.group(() =>{
+  Route.get('/create/:id','SolicitudSuscripcionUiController.create')
+  Route.post('/:id','SolicitudSuscripcionUiController.store')
+}).prefix('solicitud-suscripcion:tipoCliente?')
+
+
+//PAGO SUSCRIPCION UI
+Route.group(() =>{
+  Route.get('/create/:id', 'PagoController.create')
+  Route.post('/:id','PagoController.store')
+  Route.get('/download/:id', 'PagoController.download')
+}).prefix('pago-suscripcion')
+
 
 //LEGAL
 Route.group( () =>{
@@ -51,20 +71,22 @@ Route.group( () =>{
   Route.resource('leyes-y-normas','LeyNormaController' ).only(['index','store'])
   Route.get('leyes-y-normas/download/:id', 'LeyNormaController.download')
 }).prefix('legal')
-Route.resource('legal', 'LegalController').only(['index','show','update'])
+Route.resource('legal:tipoCliente?', 'LegalController').only(['index','show','update'])
 
 //OPERACIONES
 Route.group( () =>{
-
-}).prefix('operaciones')
-Route.resource('operaciones:option?', 'OperacionesController').only(['index','show','update'])
+  Route.get('conciliacion-pagos','SolicitudSuscripcionUiController.index')
+  Route.get('conciliacion-pagos/:id','SolicitudSuscripcionUiController.show')
+  Route.patch('conciliacion-pagos/:id','SolicitudSuscripcionUiController.update')
+}).prefix('operaciones:tipoCliente?')
+Route.resource('operaciones:tipoCliente?', 'OperacionesController').only(['index','show','update'])
 
 
 //TESORERIA
 Route.group( () =>{
 
 }).prefix('tesoreria')
-Route.resource('tesoreria', 'TesoreriaController').only(['index','show','update'])
+Route.resource('tesoreria:tipoCliente?', 'TesoreriaController').only(['index','show','update'])
 
 
 

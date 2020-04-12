@@ -951,7 +951,7 @@
                     <!--moneda_producto-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Moneda</label>
                       <div class="col-sm-10">
-                        <select class="form-control m-b" name="nombre_producto">
+                        <select class="form-control m-b" name="moneda_producto">
                           <option value="">Seleccione</option>
                           @each(moneda in data.monedas)
                           <option value="{{moneda}}">{{moneda}}</option>
@@ -1132,7 +1132,7 @@
                     <!--origen_fondos-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Origen de los Fondos</label>
                       <div class="col-sm-10">
-                        <select class="form-control m-b" name="moneda_producto_otros_posee_3">
+                        <select class="form-control m-b" name="origen_fondos">
                           <option value="">Seleccione</option>
                           @each(origenFondo in data.origenFondos)
                           <option value="{{origenFondo}}">{{origenFondo}}</option>
@@ -1143,7 +1143,7 @@
                     <!--destino_fondos-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Destino de los Fondos</label>
                       <div class="col-sm-10">
-                        <select class="form-control m-b" name="moneda_producto_otros_posee_3">
+                        <select class="form-control m-b" name="destino_fondos">
                           <option value="">Seleccione</option>
                           @each(destinoFondo in data.destinoFondos)
                           <option value="{{destinoFondo}}">{{destinoFondo}}</option>
@@ -1219,7 +1219,7 @@
                     <!--tipos_instrumentos_financieros_experiencia-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Tipos de Instrumentos Financieros con los que Ha Tenido Experiencia</label>
                       <div class="col-sm-10">
-                        <select class="form-control m-b" name="nivel_riesgo_asumir">
+                        <select class="form-control m-b" name="tipos_instrumentos_financieros_experiencia">
                           <option value="">Seleccionar</option>
                           @each(instrumentoFinanciero in data.tiposInstrumentosFinancieros)
                           <option value="{{instrumentoFinanciero}}">{{instrumentoFinanciero}}</option>
@@ -1233,12 +1233,12 @@
                 <h1>Documentos</h1>
                 <fieldset>
                   <h2>Se necesitan imagenes de los siguientes documentos</h2>
-                  <!--img_cedula_pasaporte-->
+                  <!--documento_constitutivo_empresas-->
                   <div class="form-group  row"><label class="col-sm-2 col-form-label">Cédula o Pasaporte</label>
                     <div class="col-sm-10">
                       <div class="fileinput fileinput-new" data-provides="fileinput">
                         <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar Archivo</span>
-                          <span class="fileinput-exists">Cambiar</span><input type="file" name="img_cedula_pasaporte" required/></span>
+                          <span class="fileinput-exists">Cambiar</span><input type="file" name="documento_constitutivo_empresas" required/></span>
                         <span class="fileinput-filename"></span>
                         <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
                       </div>
@@ -1250,17 +1250,6 @@
                       <div class="fileinput fileinput-new" data-provides="fileinput">
                         <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar Archivo</span>
                           <span class="fileinput-exists">Cambiar</span><input type="file" name="img_rif" required/></span>
-                        <span class="fileinput-filename"></span>
-                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
-                      </div>
-                    </div>
-                  </div>
-                  <!--img_recibo-->
-                  <div class="form-group  row"><label class="col-sm-2 col-form-label">Recibo</label>
-                    <div class="col-sm-10">
-                      <div class="fileinput fileinput-new" data-provides="fileinput">
-                        <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar Archivo</span>
-                          <span class="fileinput-exists">Cambiar</span><input type="file" name="img_recibo" required/></span>
                         <span class="fileinput-filename"></span>
                         <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
                       </div>

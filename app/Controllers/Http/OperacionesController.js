@@ -1,8 +1,8 @@
 'use strict'
 
-const Mail = use('Mail')
 const ClienteNatural = use('App/Models/ClienteNatural')
-const SolicitudSuscripcionUi = use('App/Models/SolicitudSuscripcionUi')
+const ClienteJuridico = use('App/Models/ClienteJuridico')
+const Event = use('Event')
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -21,32 +21,28 @@ class OperacionesController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({params: {option}, request, response, view }) {
+  async index ({params: {tipoCliente}, request, response, view }) {
 
-    if (option === '!pagos'){
-
+    if (tipoCliente === '!natural'){
       let clientes = await ClienteNatural
         .query()
         .where('estatus_legal', true)
-        .where('estatus_CVV', true)
-        .has('solicitudes')
-        .with('solicitudes')
         .fetch()
 
       clientes = clientes.toJSON()
-      console.log(clientes)
-      return view.render('operaciones.index!pagos', {clientes} )
 
+      return view.render('operaciones.natural.index', {clientes})
+
+    } else if (tipoCliente === '!juridico'){
+      let clientes = await ClienteJuridico
+        .query()
+        .where('estatus_legal', true)
+        .fetch()
+
+      clientes = clientes.toJSON()
+
+      return view.render('operaciones.juridico.index', {clientes})
     }
-
-    let clientes = await ClienteNatural
-    .query()
-    .where('estatus_legal', true)
-    .fetch()
-
-    clientes = clientes.toJSON()
-    console.log(clientes)
-    return view.render('operaciones.index', {clientes})
 
   }
 
@@ -82,25 +78,23 @@ class OperacionesController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params: {id, option}, request, response, view }) {
+  async show ({ params: {id, tipoCliente}, request, response, view }) {
 
-    let cliente = await ClienteNatural
-      .query()
-      .where('id', id)
-      .with('solicitudes.pagos')
-      .fetch()
+    if (tipoCliente === '!natural'){
+      let cliente = await ClienteNatural.find(id)
 
-    cliente = cliente.toJSON()
-    cliente = cliente[0]
-    console.log(JSON.stringify(cliente,2,2))
+      cliente = cliente.toJSON()
 
-    if (option === '!pagos'){
+      return view.render('operaciones.natural.show', {cliente})
 
-      return view.render('operaciones.show!pagos', {cliente})
+    } else if (tipoCliente === '!juridico'){
+      let cliente = await ClienteJuridico.find(id)
 
+      cliente = cliente.toJSON()
+
+      return view.render('operaciones.juridico.show', {cliente})
     }
 
-    return view.render('operaciones.show', {cliente})
   }
 
   /**
@@ -123,38 +117,29 @@ class OperacionesController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params: {id}, request, response }) {
+  async update ({ params: {id,tipoCliente}, request, response }) {
 
-    let { solicitud, cvv } = request.post()
-
-    if (solicitud !== undefined) {
-      console.log(solicitud)
-
-       solicitud = await SolicitudSuscripcionUi.find(solicitud)
-
-      solicitud.estatus_conciliacion = true
-
-      await solicitud.save()
-
-      return response.redirect('/operaciones!pagos',200)
-    }
-
-    if (cvv === '1') {
-
+    if (tipoCliente === '!natural'){
       let cliente = await ClienteNatural.find(id)
 
       cliente.estatus_CVV = true
 
       await cliente.save()
 
-       Mail.send('emails.solicitudui', cliente.toJSON(), (message) => {
-        message
-          .to(cliente.correo_electronico, `${cliente.nombre} ${cliente.apellido}`)
-          .from('testapp@per-capital.com', 'PerCapital')
-          .subject('Solicitud de unidades de Inversión')
-      })
+      Event.fire('creacionCuentaCVV::clienteNatural', cliente)
 
-      return response.redirect('/operaciones',200)
+      return response.redirect('/operaciones!natural',200)
+
+    } else if (tipoCliente === '!juridico'){
+
+      var cliente = await ClienteJuridico.find(id)
+      cliente.estatus_CVV = true
+
+      await cliente.save()
+
+      Event.fire('creacionCuentaCVV::clienteJuridico', cliente)
+
+      return response.redirect('/operaciones!juridico',200)
     }
   }
 

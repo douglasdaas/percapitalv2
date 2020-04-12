@@ -4,6 +4,10 @@
 const Model = use('Model')
 
 class ClienteJuridico extends Model {
+  static get primaryKey () {
+    return 'registro_informacion_fiscal'
+  }
+
   static get dates () {
     return super.dates.concat(['aprobadoLegal'])
   }
@@ -26,7 +30,7 @@ class ClienteJuridico extends Model {
   }
 
   usuario () {
-    return this.hasOne('App/Models/User')
+    return this.hasOne('App/Models/Usuario')
   }
 }
 

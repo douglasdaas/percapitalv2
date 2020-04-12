@@ -6,7 +6,7 @@ const Hash = use('Hash')
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
 
-class User extends Model {
+class Usuario extends Model {
   static boot () {
     super.boot()
 
@@ -36,4 +36,4 @@ class User extends Model {
   }
 }
 
-module.exports = User
+module.exports = Usuario

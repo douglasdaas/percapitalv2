@@ -31,6 +31,7 @@
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
                 <h2>Operaciones</h2>
+              <h4>Creacion de Cuentas CVV</h4>
             </div>
         </div>
         <div class="row">
@@ -40,10 +41,7 @@
                     <div class="ibox">
                         <div class="ibox-title">
                             <h2>Inversionistas</h2>
-<!--                            <button class="btn btn-outline btn-link" href="/operaciones ">Creación de Cuentas en la CCV</button>-->
-                          <a class="badge" href="/operaciones">Creación de Cuentas en la CCV</a> / <a class="badge" href="/operaciones!pagos">Conciliación de Pagos Pendietes</a>
-<!--                            <button class="btn btn-outlin btn-link" href="/!pago">Conciliación de Pagos Pendietes</button>-->
-                          </a>
+                        <a class="badge" href="/operaciones!natural">Clientes Naturales</a> / <a class="badge" href="/operaciones!juridico">Clientes Juridicos</a>
                         </div>
                         <div class="ibox-content">
                             <div class="row m-b-sm m-t-sm">
@@ -61,26 +59,29 @@
                                     @each(cliente in clientes)
                                         <tr>
                                             <td class="project-status">
-                                              @each(solicitud in cliente.solicitudes)
-                                                @if( solicitud.estatus_conciliacion === 1)
-                                                  <span class="label label-primary">{{ estatusConciliacion(solicitud.estatus_conciliacion) }}</span>
-                                                @else
-                                                  <span class="label label-danger">{{ estatusConciliacion(solicitud.estatus_conciliacion) }}</span>
-                                                @endif
-                                              @endeach
+                                              @if(cliente.estatus_CVV === 0)
+                                                <span class="label label-danger">{{ estatusCVV(cliente.estatus_CVV) }}</span>
+                                              @else
+                                                <span class="label label-primary">{{ estatusCVV(cliente.estatus_CVV) }}</span>
+                                              @endif
                                             </td>
-                                            <td class="project-title">
-                                              <label>{{cliente.nombre}} {{cliente.apellido}}</label>
-                                                <br/>
-                                                <small>Ultima Actualizacion {{cliente.updated_at}} </small>
-                                            </td>
-                                            <td class="project-completion">
-                                                <h5>Nº documento identidad</h5>
-                                                <small>{{cliente.tipo_documento_identificacion}}-{{cliente.documento_identificacion}}</small>
-                                            </td>
-                                            <td class="project-actions">
-                                                <a href="/operaciones!pagos/{{cliente.id}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
-                                            </td>
+                                          <td class="project-title">
+                                            <label>{{cliente.nombre}} {{cliente.apellido}}</label>
+                                            <br/>
+                                            <small>Creado {{cliente.created_at}} </small>
+                                          </td>
+                                          <td class="project-completion">
+                                            <h5>Nº documento identidad</h5>
+                                            <small>{{cliente.documento_identificacion}}</small>
+                                          </td>
+                                          <td class="project-people">
+                                            <a href="#"><img alt="image" class="rounded-circle" src="{{cliente.img_cedula_pasaporte}}"></a>
+                                            <a href="#"><img alt="image" class="rounded-circle" src="{{cliente.img_rif}}"></a>
+                                            <a href="#"><img alt="image" class="rounded-circle" src="{{cliente.img_recibo}}"></a>
+                                          </td>
+                                          <td class="project-actions">
+                                            <a href="/operaciones!natural/{{cliente.documento_identificacion}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
+                                          </td>
                                         </tr>
                                     @endeach
                                     </tbody>

@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| ClienteNaturalSeeder
+| ClienteJuridicoSeeder
 |--------------------------------------------------------------------------
 |
 | Make use of the Factory instance to seed database with dummy data or
@@ -14,12 +14,12 @@
 const Factory = use('Factory')
 const Database = use('Database')
 
-class ClienteNaturalSeeder {
+class ClienteJuridicoSeeder {
   async run () {
-    await Factory.model('App/Models/ClienteNatural').createMany(3)
-    const clientesNaturales = await Database.table('cliente_naturals')
-    console.log(clientesNaturales)
+    await Factory.model('App/Models/ClienteJuridico').createMany(3)
+    const clientesJuridicos = await Database.table('cliente_juridicos')
+    console.log(clientesJuridicos )
   }
 }
 
-module.exports = ClienteNaturalSeeder
+module.exports = ClienteJuridicoSeeder

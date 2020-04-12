@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from webapplayers.com/inspinia_admin-v2.8/projects.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Aug 2018 01:32:05 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+</head>
+
+@include('partials.header')
+@include('partials.nav')
+
+<body>
+
+<div id="wrapper">
+
+
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+        </div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-sm-4">
+                <h2>Operaciones</h2>
+                <h4>Conciliación de Pagos</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="wrapper wrapper-content animated fadeInUp">
+
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h2>Inversionistas</h2>
+                          <a class="badge" href="/operaciones!natural/conciliacion-pagos">Clientes Naturales</a> / <a class="badge" href="/operaciones!juridico/conciliacion-pagos">Clientes Juridicos</a>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row m-b-sm m-t-sm">
+
+                                <div class="col-md-12">
+                                    <div class="input-group"><input type="text" placeholder="Numero de documento de identidad" class="form-control-sm form-control"> <span class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary"> Buscar !</button> </span></div>
+                                </div>
+                            </div>
+
+                            <div class="project-list">
+
+                                <table class="table table-hover">
+                                    <tbody>
+                                    @each(cliente in clientes)
+                                        <tr>
+                                            <td class="project-status">
+                                                @if( cliente.solicitudes[0].estatus_conciliacion === 1)
+                                                  <span class="label label-primary">{{ estatusConciliacion(cliente.solicitudes[0].estatus_conciliacion)}}</span>
+                                                @else
+                                                  <span class="label label-danger">{{ estatusConciliacion(cliente.solicitudes[0].estatus_conciliacion)}}</span>
+                                                @endif
+                                          <td class="project-title">
+                                            <label>{{cliente.razon_social}}</label>
+                                            <br/>
+                                            <small>Creado {{cliente.created_at}} </small>
+                                          </td>
+                                          <td class="project-completion">
+                                            <h5>Nº RIF</h5>
+                                            <small>{{cliente.registro_informacion_fiscal}}</small>
+                                          </td>
+                                          <td class="project-people">
+                                            <a href="#"><img alt="image" class="rounded-circle" src="{{cliente.documento_constitutivo_empresas}}"></a>
+                                            <a href="#"><img alt="image" class="rounded-circle" src="{{cliente.img_rif}}"></a>
+                                          </td>
+                                          <td class="project-actions">
+                                            <a href="/operaciones!juridico/conciliacion-pagos/{{cliente.registro_informacion_fiscal}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
+                                          </td>
+                                        </tr>
+                                    @endeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="float-right">
+                10GB of <strong>250GB</strong> Free.
+            </div>
+            <div>
+                <strong>Copyright</strong> Example Company &copy; 2014-2018
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Mainly scripts -->
+<script src="/js/jquery-3.1.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="/js/inspinia.js"></script>
+<script src="/js/plugins/pace/pace.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+
+        $('#loading-example-btn').click(function () {
+            btn = $(this);
+            simpleLoad(btn, true)
+
+            // Ajax example
+//                $.ajax().always(function () {
+//                    simpleLoad($(this), false)
+//                });
+
+            simpleLoad(btn, false)
+        });
+    });
+
+    function simpleLoad(btn, state) {
+        if (state) {
+            btn.children().addClass('fa-spin');
+            btn.contents().last().replaceWith(" Loading");
+        } else {
+            setTimeout(function () {
+                btn.children().removeClass('fa-spin');
+                btn.contents().last().replaceWith(" Refresh");
+            }, 2000);
+        }
+    }
+</script>
+</body>
+
+
+<!-- Mirrored from webapplayers.com/inspinia_admin-v2.8/projects.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Aug 2018 01:32:05 GMT -->
+</html>

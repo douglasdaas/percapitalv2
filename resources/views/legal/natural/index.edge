@@ -20,7 +20,6 @@
 
 @include('partials.header')
 @include('partials.nav')
-
 <body>
 
 <div id="wrapper">
@@ -31,7 +30,7 @@
     </div>
     <div class="row wrapper border-bottom white-bg page-heading">
       <div class="col-sm-4">
-        <h2>Tesoreria</h2>
+        <h2>Legal</h2>
       </div>
     </div>
     <div class="row">
@@ -40,7 +39,11 @@
 
           <div class="ibox">
             <div class="ibox-title">
-              <h5>Inversionistas </h5>
+              <h2>Inversionistas </h2>
+              <a class="badge" href="/legal!natural">Clientes Naturales</a> / <a class="badge" href="/legal!juridico">Clientes Juridicos</a>
+              <div class="ibox-tools">
+                <a href="/cliente/natural/create" class="btn btn-primary btn-xs">Agregar nuevo inverionista natural</a>
+              </div>
             </div>
             <div class="ibox-content">
               <div class="row m-b-sm m-t-sm">
@@ -56,28 +59,31 @@
                 <table class="table table-hover">
                   <tbody>
                   @each(cliente in clientes)
-                  <tr>
-                    <td class="project-status">
-                      @each(solicitud in cliente.solicitudes)
-                      @if( solicitud.unidades_asignadas === 1)
-                      <span class="label label-primary">{{ estatusUnidades(solicitud.unidades_asignadas) }}</span>
-                      @else
-                      <span class="label label-danger">{{ estatusUnidades(solicitud.unidades_asignadas) }}</span>
-                      @endif
-                      @endeach
-                    </td>
-                    <td class="project-title">
-                      <label>{{cliente.nombre}} {{cliente.apellido}}</label>
-                      <br/>
-                      <small>Ultima Actualizacion {{cliente.updated_at}} </small>
-                    </td>
-                    <td class="project-completion">
-                      <h5>Nº documento identidad</h5>
-                      <small>{{cliente.tipo_documento_identificacion}}-{{cliente.documento_identificacion}}</small>
-                    </td>
-                    <td class="project-actions">
-                      <a href="/tesoreria/{{cliente.id}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
-                    </td>
+                    <tr>
+                      <td class="project-status">
+                        @if(cliente.estatus_legal === 0)
+                        <span class="label label-danger">{{ estatusLegal(cliente.estatus_legal)}}</span>
+                        @else
+                        <span class="label label-primary">{{ estatusLegal(cliente.estatus_legal)}}</span>
+                        @endif
+                      </td>
+                      <td class="project-title">
+                        <label>{{cliente.nombre}} {{cliente.apellido}}</label>
+                        <br/>
+                        <small>Creado {{cliente.created_at}} </small>
+                      </td>
+                      <td class="project-completion">
+                        <h5>Nº documento identidad</h5>
+                        <small>{{cliente.tipo_documento_identificacion}}-{{cliente.documento_identificacion}}</small>
+                      </td>
+                      <td class="project-people">
+                        <a href="#"><img alt="image" class="rounded-circle" src="{{cliente.img_cedula_pasaporte}}"></a>
+                        <a href="#"><img alt="image" class="rounded-circle" src="{{cliente.img_rif}}"></a>
+                        <a href="#"><img alt="image" class="rounded-circle" src="{{cliente.img_recibo}}"></a>
+                      </td>
+                      <td class="project-actions">
+                        <a href="/legal!natural/{{cliente.documento_identificacion}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
+                      </td>
                   </tr>
                   @endeach
                   </tbody>

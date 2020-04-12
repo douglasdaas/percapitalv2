@@ -39,14 +39,8 @@
                   <div class="col">
                     <!--documento_identificacion-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Documento de Identidad</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_documento_identificacion">
-                        <option value="V">V</option>
-                        <option value="E">E</option>
-                        <option value="P">P</option>
-                      </select>
-                      </div>
 
-                      <div class="col-sm-9"><input type="text" name="documento_identificacion" placeholder="Cédula/Pasaporte"  class="form-control" maxlength="18 " required></div>
+                      <div class="col-sm-10"><input type="text" name="documento_identificacion" placeholder="Documento"  class="form-control" maxlength="18 " required></div>
                     </div>
                     <!--nombre-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre</label>
@@ -99,7 +93,7 @@
                     <!--profecion_oficio-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Profeción U Oficio</label>
                       <div class="col-sm-10">
-                        <select class="form-control m-b" name="lugar_nacimiento">
+                        <select class="form-control m-b" name="profecion_oficio">
                           <option value="">Seleccione</option>
                           @each(profesion in data.profesiones)
                           <option value="{{profesion}}">{{profesion}}</option>
@@ -185,14 +179,8 @@
                     </div>
                     <!--documento_identificacion_conyugue-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Documento de Identidad</label>
-                      <div class="col-sm-1"><select class="form-control m-b" name="tipo_documento_identificacion_conyugue">
-                        <option value="V">V</option>
-                        <option value="E">E</option>
-                        <option value="P">P</option>
-                      </select>
-                      </div>
 
-                      <div class="col-sm-9"><input type="text" name="documento_identificacion_conyugue" placeholder="Cédula/Pasaporte" class="form-control" maxlength="18"></div>
+                      <div class="col-sm-10"><input type="text" name="documento_identificacion_conyugue" placeholder="Cédula/Pasaporte" class="form-control" maxlength="18"></div>
                     </div>
                     <!--fuente_ingresos_conyugue-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Fuente de Ingresos</label>
@@ -343,20 +331,20 @@
 
                       <div class="col-sm-10"><input type="text" name="institucion_bancaria" placeholder="Instución Bancaria" class="form-control" required></div>
                     </div>
-                    <!--nombre_producto-->
+                    <!--nombre_producto_bancario-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre del Producto</label>
 
-                      <div class="col-sm-10"><input type="text" name="nombre_producto" placeholder="Nombre" class="form-control" required></div>
+                      <div class="col-sm-10"><input type="text" name="nombre_producto_bancario" placeholder="Nombre" class="form-control" required></div>
                     </div>
-                    <!--numero_producto-->
+                    <!--numero_producto_bancario-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Numero del Producto</label>
 
-                      <div class="col-sm-10"><input type="text" name="numero_producto" placeholder="Numero" class="form-control" required></div>
+                      <div class="col-sm-10"><input type="text" name="numero_producto_bancario" placeholder="Numero" class="form-control" required></div>
                     </div>
-                    <!--cifras_promedio-->
+                    <!--cifras_promedio_bancario-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Cifras Promedio</label>
 
-                      <div class="col-sm-10"><input type="text" name="cifras_promedio" placeholder="Cifras" class="form-control" required></div>
+                      <div class="col-sm-10"><input type="text" name="cifras_promedio_bancario" placeholder="Cifras" class="form-control" required></div>
                     </div>
                   </div>
                   <div class="form-group col">
@@ -469,7 +457,7 @@
                       <!--categoria_especial-->
                       <div class="form-group  row"><label class="col-sm-2 col-form-label">Categoria Especial</label>
                         <div class="col-sm-10">
-                          <select class="form-control m-b" name="actividad_economica">
+                          <select class="form-control m-b" name="categoria_especial">
                             <option value="">Seleccione</option>
                             @each(categoriaEspecial in data.categoriasEspeciales)
                             <option value="{{categoriaEspecial}}">{{categoriaEspecial}}</option>
@@ -695,17 +683,17 @@
                         <!--total_pasivos_otros-->
                         <div class="form-group  row"><label class="col-sm-2 col-form-label">Total Pasivos</label>
 
-                          <div class="col-sm-10"><input type="text" name="direccion_empresa_dependencia" placeholder="Pasivos" class="form-control"></div>
+                          <div class="col-sm-10"><input type="text" name="total_pasivos_otros" placeholder="Pasivos" class="form-control"></div>
                         </div>
                         <!--otras_inversiones_otros-->
                         <div class="form-group  row"><label class="col-sm-2 col-form-label">Otras Inversiones</label>
 
-                          <div class="col-sm-10"><input type="text" name="telefono_empresa_dependencia" placeholder="Otras Inversiones" class="form-control"></div>
+                          <div class="col-sm-10"><input type="text" name="otras_inversiones_otros" placeholder="Otras Inversiones" class="form-control"></div>
                         </div>
                         <!--total_patrimonio_otros-->
                         <div class="form-group  row"><label class="col-sm-2 col-form-label">Total Patrimonio</label>
 
-                          <div class="col-sm-10"><input type="text" name="ramo_negocio_empresa_dependencia" placeholder="Total Patrimonio" class="form-control"></div>
+                          <div class="col-sm-10"><input type="text" name="total_patrimonio_otros" placeholder="Total Patrimonio" class="form-control"></div>
                         </div>
                       </div>
                       <hr>
@@ -735,7 +723,7 @@
                     <!--moneda_producto-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Moneda</label>
                       <div class="col-sm-10">
-                        <select class="form-control m-b" name="nombre_producto">
+                        <select class="form-control m-b" name="moneda_producto">
                           <option value="">Seleccione</option>
                           @each(moneda in data.monedas)
                           <option value="{{moneda}}">{{moneda}}</option>
@@ -771,7 +759,7 @@
                       <!--enviar_recibir_fondos_exterior_pais_origen-->
                       <div class="form-group  row"><label class="col-sm-2 col-form-label">País Origen</label>
                         <div class="col-sm-10">
-                          <select class="form-control m-b" name="enviar_recibir_fondos_exterior_pais_origen">
+                              <select class="form-control m-b" name="enviar_recibir_fondos_exterior_pais_origen">
                             <option value="">Seleccione</option>
                             @each(pais in data.paises)
                             <option value="{{pais.name}}">{{pais.name}}</option>
@@ -856,10 +844,10 @@
 
                       <div class="col-sm-10"><input type="text" name="numero_producto_otros_posee_2" placeholder="Beneficiario" class="form-control" maxlength="80" ></div>
                     </div>
-                    <!--moneda_producto_otros_posee_1-->
+                    <!--moneda_producto_otros_posee_2-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Moneda</label>
                       <div class="col-sm-10">
-                        <select class="form-control m-b" name="moneda_producto_otros_posee_1">
+                        <select class="form-control m-b" name="moneda_producto_otros_posee_2">
                           <option value="">Seleccione</option>
                           @each(moneda in data.monedas)
                           <option value="{{moneda}}">{{moneda}}</option>
@@ -916,7 +904,7 @@
                     <!--origen_fondos-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Origen de los Fondos</label>
                       <div class="col-sm-10">
-                        <select class="form-control m-b" name="moneda_producto_otros_posee_3">
+                        <select class="form-control m-b" name="origen_fondos">
                           <option value="">Seleccione</option>
                           @each(origenFondo in data.origenFondos)
                           <option value="{{origenFondo}}">{{origenFondo}}</option>
@@ -927,7 +915,7 @@
                     <!--destino_fondos-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Destino de los Fondos</label>
                       <div class="col-sm-10">
-                        <select class="form-control m-b" name="moneda_producto_otros_posee_3">
+                        <select class="form-control m-b" name="destino_fondos">
                           <option value="">Seleccione</option>
                           @each(destinoFondo in data.destinoFondos)
                           <option value="{{destinoFondo}}">{{destinoFondo}}</option>
@@ -1002,7 +990,7 @@
                     <!--tipos_instrumentos_financieros_experiencia-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Tipos de Instrumentos Financieros con los que Ha Tenido Experiencia</label>
                       <div class="col-sm-10">
-                        <select class="form-control m-b" name="nivel_riesgo_asumir">
+                        <select class="form-control m-b" name="tipos_instrumentos_financieros_experiencia">
                           <option value="">Seleccionar</option>
                           @each(instrumentoFinanciero in data.tiposInstrumentosFinancieros)
                           <option value="{{instrumentoFinanciero}}">{{instrumentoFinanciero}}</option>
