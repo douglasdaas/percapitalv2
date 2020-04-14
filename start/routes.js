@@ -23,19 +23,15 @@ Route.on('/').render('welcome')
 
 //CLIENTES NATURAL
 Route.group(() => {
-  Route.get('crearAutomatico/:id', 'UserController.crearAutomatico')
   Route.get('signup', 'ClienteNaturalController.signup')
-  Route.get('solicitudui/:id', 'ClienteNaturalController.solicitudui')
-  Route.post('solicitudui/:id', 'ClienteNaturalController.createSolicitudui')
-  Route.get('pago/:id', 'ClienteNaturalController.pago')
-  Route.post('pago/:id', 'ClienteNaturalController.createPago')
-  Route.post('registro', 'ClienteNaturalController.registro')
+  Route.get('/download/:id/:tipoArchivo', 'ClienteNaturalController.download')
 }).prefix('cliente/natural')
 Route.resource('cliente/natural', 'ClienteNaturalController')
 
 //CLIENTES JURIDICO
 Route.group( () => {
-
+  Route.get('signup', 'ClienteJuridicoController.signup')
+  Route.get('/download/:id/:tipoArchivo', 'ClienteJuridicoController.download')
 }).prefix('cliente/juridico')
 Route.resource('cliente/juridico', 'ClienteJuridicoController')
 

@@ -14,7 +14,7 @@ class ClienteJuridico extends Model {
 
   static castDates (field, value) {
     if (field === 'updated_at') {
-      return `hace ${value.fromNow(true)}`
+      return `hace ${value.locale('es').fromNow(true)}`
     }
     if (field === 'created_at') {
       return value.format('DD/MM/YYYY')

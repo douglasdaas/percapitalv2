@@ -208,44 +208,10 @@ class ClienteNaturalController {
     return clienteInformacion
   }
 
-  /**
-   * Display a single clientenatural.
-   * GET clientenaturals/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-
-  /**
-   * Display a single clientenatural.
-   * GET clientenaturals/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async pago ({ params:{id}, request, response, view }) {
-
-    let solicitud = await SolicitudSuscripcionUi.find(id)
-    // solicitud.total = `${solicitud.total.toLocaleString('de-DE')} Bs`
-    solicitud = solicitud.toJSON()
-    return view.render('cliente.natural.pago', {solicitud})
-  }
-
-  async createPago ({ params:{id}, request, response, view }) {
-
-    const solicitud = await SolicitudSuscripcionUi.find(id)
-    let informacionPago = request.post()
-    informacionPago.monto = solicitud.total
-
-    const pago = await solicitud
-      .pagos()
-      .create(informacionPago)
-
-    response.redirect('http://per-capital.com/',200)
+  async download ({ params: {id, tipo_archivo }, response}) {
+    console.log(tipo_archivo)
+    const cliente = await ClienteNatural.find(id)
+    response.download(Helpers.appRoot(`archivos/clientes/natural/${cliente.documento_identificacion}/${tipo_archivo}`))
   }
 
 }

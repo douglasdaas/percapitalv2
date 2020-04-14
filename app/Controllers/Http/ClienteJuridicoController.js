@@ -157,6 +157,12 @@ class ClienteJuridicoController {
    */
   async destroy ({ params, request, response }) {
   }
+
+  async download ({ params: {id, tipo_archivo }, response}) {
+    console.log(tipo_archivo)
+    const cliente = await ClienteJuridico.find(id)
+    response.download(Helpers.appRoot(`archivos/clientes/juridico/${cliente.registro_informacion_fiscal}/${tipo_archivo}`))
+  }
 }
 
 module.exports = ClienteJuridicoController
