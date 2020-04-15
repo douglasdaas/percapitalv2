@@ -21,7 +21,7 @@ module.exports = {
   | input
   |
   */
-  uids: ['email_natural','email_juridico'],
+  uids: ['email'],
 
   /*
   |--------------------------------------------------------------------------
@@ -71,7 +71,7 @@ module.exports = {
   | The model to be used for verifying and creating users
   |
   */
-  model: 'App/Models/User',
+  model: 'App/Models/Usuario',
 
   /*
   |--------------------------------------------------------------------------

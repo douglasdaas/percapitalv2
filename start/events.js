@@ -78,7 +78,7 @@ Event.on('asignacionUnidades::clienteNatural', async (datos) =>{
 Event.on('usuarioCreado::clienteJuridico', async (datos) =>{
   Mail.send('emails.usuario-creado', datos, (message) => {
     message
-      .to( cliente.correo_electronico, `${cliente.razon_social}`)
+      .to( datos.cliente.correo_electronico, `${datos.cliente.razon_social}`)
       .from('testapp@per-capital.com', 'PerCapital')
       .subject('Usuario en PerCapital')
   })
@@ -87,7 +87,7 @@ Event.on('usuarioCreado::clienteJuridico', async (datos) =>{
 Event.on('usuarioCreado::clienteNatural', async (datos) =>{
   Mail.send('emails.usuario-creado', datos, (message) => {
     message
-      .to( cliente.correo_electronico, `${cliente.nombre} ${cliente.apellido}`)
+      .to( datos.cliente.correo_electronico, `${datos.cliente.nombre} ${datos.cliente.apellido}`)
       .from('testapp@per-capital.com', 'PerCapital')
       .subject('Usuario en PerCapital')
   })

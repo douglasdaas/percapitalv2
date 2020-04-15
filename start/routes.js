@@ -37,9 +37,9 @@ Route.resource('cliente/juridico', 'ClienteJuridicoController')
 
 //USUARIOS
 Route.group( () =>{
-  Route.get('crearAutomatico/:id', 'UserController.crearAutomatico')
+  Route.get('crearAutomatico/:id', 'UsuarioController.crearAutomatico')
 }).prefix('usuario:tipoCliente?')
-Route.resource('usuario:tipoCliente?', 'UserController')
+// Route.resource('usuario:tipoCliente?', 'UsuarioController')
 
 //SOLICITUDES SUSCRIPCION UI
 Route.group(() =>{

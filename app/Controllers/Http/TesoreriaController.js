@@ -60,6 +60,7 @@ class TesoreriaController {
         .fetch()
 
       clientes = clientes.toJSON()
+      console.log(clientes)
 
       return view.render('tesoreria.juridico.index', {clientes})
     }
@@ -163,15 +164,16 @@ class TesoreriaController {
       }
 
       Event.fire('asignacionUnidades::clienteNatural',datos)
-      //
-      // await cliente.load('usuario')
-      //
-      // const usuario = cliente.getRelated('usuario')
-      // console.log('usuario',usuario)
-      //
-      // // if (usuario === (null || undefined)) {
-      // //   return response.redirect(`/cliente/crearautomatico/${clienteId}` )
-      // // }
+
+      await cliente.load('usuario')
+
+      const usuario = cliente.getRelated('usuario')
+      console.log('usuario',usuario)
+
+      if (usuario === null ) {
+        return response.redirect(`/usuario!natural/crearautomatico/${clienteId}` )
+
+      }
 
       return response.redirect('/tesoreria!natural',200)
 
@@ -193,14 +195,15 @@ class TesoreriaController {
 
       Event.fire('asignacionUnidades::clienteJuridico',datos)
 
-      // await cliente.load('usuario')
-      //
-      // const usuario = cliente.getRelated('usuario')
-      // console.log('usuario',usuario)
-      //
-      // if (usuario === (null || undefined)) {
-      //   return response.redirect(`/cliente/crearautomatico/${clienteId}` )
-      // }
+      await cliente.load('usuario')
+
+      const usuario = cliente.getRelated('usuario')
+      console.log('usuario',usuario)
+      console.log(`/usuario!juridico/crearautomatico/${clienteId}`)
+
+      if (usuario === null ) {
+        return response.redirect(`/usuario!juridico/crearautomatico/${clienteId}` )
+      }
 
       return response.redirect('/tesoreria!juridico',200)
     }
