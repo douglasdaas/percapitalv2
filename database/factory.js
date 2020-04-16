@@ -72,7 +72,7 @@ Factory.blueprint('App/Models/ClienteJuridico', (faker) =>{
     telefono: faker.phone({ formatted: false }),
     sitio_web: faker.url(),
     // correo_electronico: faker.email(),
-    correo_electronico: 'salazarseijas@gmail.com',
+    correo_electronico: 'salazarseijasempresa@gmail.com',
     direccion: faker.address(),
     ciudad: faker.city(),
     estado: faker.state({ full: true }),
