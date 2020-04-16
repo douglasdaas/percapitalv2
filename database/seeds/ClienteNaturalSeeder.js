@@ -16,7 +16,7 @@ const Database = use('Database')
 
 class ClienteNaturalSeeder {
   async run () {
-    await Factory.model('App/Models/ClienteNatural').createMany(3)
+    await Factory.model('App/Models/ClienteNatural').createMany(1)
     const clientesNaturales = await Database.table('cliente_naturals')
     console.log(clientesNaturales)
   }
