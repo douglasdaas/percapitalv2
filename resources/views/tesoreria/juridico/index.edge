@@ -60,10 +60,10 @@
                   @each(cliente in clientes)
                   <tr>
                     <td class="project-status">
-                      @if( cliente.solicitudes[0].unidades_asignadas === 1)
-                      <span class="label label-primary">{{ estatusUnidades(cliente.solicitudes[0].unidades_asignadas) }}</span>
+                      @if( cliente.solicitudesSuscripcion[0].unidades_asignadas === 1)
+                      <span class="label label-primary">{{ estatusUnidades(cliente.solicitudesSuscripcion[0].unidades_asignadas) }}</span>
                       @else
-                      <span class="label label-danger">{{ estatusUnidades(cliente.solicitudes[0].unidades_asignadas) }}</span>
+                      <span class="label label-danger">{{ estatusUnidades(cliente.solicitudesSuscripcion[0].unidades_asignadas) }}</span>
                       @endif
                     </td>
                     <td class="project-title">

@@ -1,0 +1,32 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+  <div class="sidebar-collapse">
+    <ul class="nav metismenu" id="side-menu">
+        @loggedIn
+          <li>
+            @if( auth.user.cliente_natural_id )
+            <a href="/usuario!natural/{{auth.user.cliente_natural_id}}"><i class="fa fa-diamond"></i> <span class="nav-label">Perfil</span></a>
+            @else
+            <a href="/usuario!juridico/{{auth.user.cliente_juridico_id}}"><i class="fa fa-diamond"></i> <span class="nav-label">Perfil</span></a>
+            @endif
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">Solicitudes</span><span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level collapse">
+              @if( auth.user.cliente_natural_id )
+              <li><a href="/solicitud-suscripcion!natural/create/{{auth.user.cliente_natural_id}}">Solicitud de Suscripción</a></li>
+              <li><a href="/solicitud-rescate!natural/create/{{auth.user.cliente_natural_id}}">Solicitud de Rescate</a></li>
+              @else
+              <li><a href="/solicitud-suscripcion!juridico/create/{{auth.user.cliente_juridico_id}}">Solicitud de Suscripción</a></li>
+              <li><a href="/solicitud-rescate!juridico/create/{{auth.user.cliente_juridico_id}}">Solicitud de Rescate</a></li>
+              @endif
+            </ul>
+          </li>
+        @else
+          <li>
+            <a href="/usuarios/login"><i class="fa fa-diamond"></i> <span class="nav-label">Iniciar Sesión</span></a>
+            <a href="/cliente/natural/signup"><i class="fa fa-diamond"></i> <span class="nav-label">Registrarse en PerCapital</span></a>
+          </li>
+         @endloggedIn
+    </ul>
+  </div>
+</nav>

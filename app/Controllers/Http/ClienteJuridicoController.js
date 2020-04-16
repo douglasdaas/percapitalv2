@@ -163,6 +163,32 @@ class ClienteJuridicoController {
     const cliente = await ClienteJuridico.find(id)
     response.download(Helpers.appRoot(`archivos/clientes/juridico/${cliente.registro_informacion_fiscal}/${tipo_archivo}`))
   }
+
+  async signup ({ params, request, response, view }) {
+    return view.render('cliente.juridico.signup')
+  }
+
+  /**
+   * Create/save a new clientenatural.
+   * POST clientenaturals
+   *
+   * @param {object} ctx
+   * @param {Request} ctx.request
+   * @param {Response} ctx.response
+   */
+  async registro ({ request, response }) {
+
+    let clienteInformacion = request.post()
+
+    Mail.send('emails.informacion-de-registro', clienteInformacion, (message) => {
+      message
+        .to(clienteInformacion.correo_electronico, `${clienteInformacion.razon_social}`)
+        .from('testapp@per-capital.com', 'PerCapital')
+        .subject('Informacion de Registro')
+    })
+
+    return clienteInformacion
+  }
 }
 
 module.exports = ClienteJuridicoController

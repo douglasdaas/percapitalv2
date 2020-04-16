@@ -59,11 +59,11 @@
                                     @each(cliente in clientes)
                                         <tr>
                                             <td class="project-status">
-                                                @if( cliente.solicitudes[0].estatus_conciliacion === 1)
+                                                @if( cliente.solicitudesSuscripcion[0].estatus_conciliacion === 1)
 
-                                                  <span class="label label-primary">{{ estatusConciliacion(cliente.solicitudes[0].estatus_conciliacion)}}</span>
+                                                  <span class="label label-primary">{{ estatusConciliacion(cliente.solicitudesSuscripcion[0].estatus_conciliacion)}}</span>
                                                 @else
-                                                  <span class="label label-danger">{{ estatusConciliacion(cliente.solicitudes[0].estatus_conciliacion)}}</span>
+                                                  <span class="label label-danger">{{ estatusConciliacion(cliente.solicitudesSuscripcion[0].estatus_conciliacion)}}</span>
                                                 @endif
                                             </td>
                                           <td class="project-title">

@@ -31,8 +31,8 @@ class SolicitudSuscripcionUiController {
           .query()
           .where('estatus_legal', true)
           .where('estatus_CVV', true)
-          .has('solicitudes')
-          .with('solicitudes', (builder) => {
+          .has('solicitudesSuscripcion')
+          .with('solicitudesSuscripcion', (builder) => {
             builder
               .orderBy('created_at', 'asc')
               .limit(1)
@@ -41,6 +41,8 @@ class SolicitudSuscripcionUiController {
 
       clientes = clientes.toJSON()
 
+      console.log(clientes)
+
       return view.render('solicitud-suscripcion.natural.index', {clientes})
 
     } else if (tipoCliente === '!juridico'){
@@ -48,8 +50,8 @@ class SolicitudSuscripcionUiController {
         .query()
         .where('estatus_legal', true)
         .where('estatus_CVV', true)
-        .has('solicitudes')
-        .with('solicitudes', (builder) => {
+        .has('solicitudesSuscripcion')
+        .with('solicitudesSuscripcion', (builder) => {
           builder
             .orderBy('created_at', 'asc')
             .limit(1)
@@ -74,10 +76,10 @@ class SolicitudSuscripcionUiController {
   async create ({ params:{ id, tipoCliente },request, response, view }) {
     if ( tipoCliente === '!natural'){
       const precio = 50000
-      return view.render('cliente.natural.solicitudui',{id,precio})
+      return view.render('solicitud-suscripcion.natural.create',{id,precio})
     } else if (tipoCliente === '!juridico'){
       const precio = 50000
-      return view.render('cliente.juridico.solicitudui',{id,precio})
+      return view.render('solicitud-suscripcion.juridico.create',{id,precio})
     }
 
   }
@@ -90,7 +92,7 @@ class SolicitudSuscripcionUiController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ params: {id, tipoCliente}, request, response }) {
+  async store ({ params: {id, tipoCliente}, auth, request, response }) {
     if (tipoCliente === '!natural'){
       const cliente = await ClienteNatural.find(id)
       const precio = 5000
@@ -100,7 +102,7 @@ class SolicitudSuscripcionUiController {
       informacionSolicitudUI.total = cantidad_unidades_inversion*precio
 
       const solicitudUI = await cliente
-        .solicitudes()
+        .solicitudesSuscripcion()
         .create(informacionSolicitudUI)
 
       let datos = {
@@ -110,7 +112,11 @@ class SolicitudSuscripcionUiController {
 
       Event.fire('pagoSolicitudSuscripcionUI::clienteNatural', datos)
 
-      response.redirect('http://per-capital.com/',200)
+      if (auth.user) {
+        return response.redirect(`/usuario!natural/${usuario.cliente_natural_id}`)
+      } else {
+        return response.redirect('http://per-capital.com/',200)
+      }
 
     } else if (tipoCliente === '!juridico') {
 
@@ -122,7 +128,7 @@ class SolicitudSuscripcionUiController {
       informacionSolicitudUI.total = cantidad_unidades_inversion*precio
 
       const solicitudUI = await cliente
-        .solicitudes()
+        .solicitudesSuscripcion()
         .create(informacionSolicitudUI)
 
       let datos = {
@@ -132,8 +138,11 @@ class SolicitudSuscripcionUiController {
 
       Event.fire('pagoSolicitudSuscripcionUI::clienteJuridico', datos)
 
-      response.redirect('http://per-capital.com/',200)
-
+      if (auth.user) {
+        return response.redirect(`/usuario!juridico/${usuario.cliente_juridico_id}`)
+      } else {
+        return response.redirect('http://per-capital.com/',200)
+      }
     }
 
 
@@ -152,7 +161,7 @@ class SolicitudSuscripcionUiController {
     if (tipoCliente === '!natural'){
       let cliente = await ClienteNatural.find(id)
       await cliente.loadMany({
-        solicitudes: (builder) => builder .with('pagos').orderBy('created_at', 'asc').limit(1)
+        solicitudesSuscripcion: (builder) => builder .with('pagos').orderBy('created_at', 'asc').limit(1)
       })
 
 
@@ -163,7 +172,7 @@ class SolicitudSuscripcionUiController {
     } else if (tipoCliente === '!juridico'){
       let cliente = await ClienteJuridico.find(id)
       await cliente.loadMany({
-        solicitudes: (builder) => builder .with('pagos').orderBy('created_at', 'asc').limit(1)
+        solicitudesSuscripcion: (builder) => builder .with('pagos').orderBy('created_at', 'asc').limit(1)
       })
 
       cliente = cliente.toJSON()

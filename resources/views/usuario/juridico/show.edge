@@ -1,0 +1,140 @@
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="/css/animate.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+
+</head>
+
+@include('partials.header')
+@include('partials.nav-cliente')
+
+
+<body>
+
+<div id="wrapper">
+
+
+  <div id="page-wrapper" class="gray-bg">
+    <div class="row wrapper border-bottom white-bg page-heading">
+      <div class="col-lg-10">
+        <h2>Perfil {{cliente.razon_social}} </h2>
+        <ul class="nav navbar-top-links navbar-right" >
+          <li>
+            <span class="m-r-sm text-muted welcome-message">Bienvenido a PerCapital.</span>
+          </li>
+          <li>
+            <a href="{{ route('logout') }}">
+              <i class="fa fa-sign-out"></i> Cerrar sesión
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-2">
+
+      </div>
+    </div>
+    <div class="wrapper wrapper-content">
+      <div class="row animated fadeInRight">
+        <div class="col-md-6">
+          <div class="ibox ">
+            <div class="ibox-title">
+              <h3>Detalles</h3>
+            </div>
+            <div>
+              <div class="ibox-content profile-content">
+                <h4><strong>{{cliente.nombre_comercial}}</strong></h4>
+                <p><i class="fa fa-map-marker"></i> {{cliente.direccion}}, {{cliente.ciudad}}, {{cliente.estado}}, {{cliente.pais}}</p>
+                <dl class="row mb-0">
+                  <div class="col-sm-5 text-sm-left"><dt>Registro de Información Fiscal:</dt> </div>
+                  <div class="col-sm-4 text-sm-left"><dd class="mb-1">{{cliente.registro_informacion_fiscal}}</dd> </div>
+                </dl>
+                <dl class="row mb-0">
+                  <div class="col-sm-5 text-sm-left"><dt>Nombre Comercial:</dt> </div>
+                  <div class="col-sm-4 text-sm-left"><dd class="mb-1">{{cliente.nombre_comercial}}</dd> </div>
+                </dl>
+                <dl class="row mb-0">
+                  <div class="col-sm-5 text-sm-left"><dt>Actividad Economica:</dt> </div>
+                  <div class="col-sm-4 text-sm-left"><dd class="mb-1">{{cliente.actividad_economica}}</dd> </div>
+                </dl>
+                <dl class="row mb-0">
+                  <div class="col-sm-5 text-sm-left"><dt>Fecha Inicial de Registro:</dt> </div>
+                  <div class="col-sm-4 text-sm-left"><dd class="mb-1">{{ cliente.fecha_registro_inicial}}</dd> </div>
+                </dl>
+                <dl class="row mb-0">
+                  <div class="col-sm-5 text-sm-left"><dt>Capital Actual:</dt> </div>
+                  <div class="col-sm-4 text-sm-left"><dd class="mb-1">{{cliente.capital_actual_modificicaion}}</dd> </div>
+                </dl>
+                <dl class="row mb-0">
+                  <div class="col-sm-5 text-sm-left"><dt>Sitio Web:</dt> </div>
+                  <div class="col-sm-4 text-sm-left"><dd class="mb-1">{{cliente.sitio_web}}</dd> </div>
+                </dl>
+                <dl class="row mb-0">
+                  <div class="col-sm-5 text-sm-left"><dt>Telefono:</dt> </div>
+                  <div class="col-sm-4 text-sm-left"><dd class="mb-1">{{cliente.telefono}}</dd> </div>
+                </dl>
+                <dl class="row mb-0">
+                  <div class="col-sm-5 text-sm-left"><dt>Correo Electrónico:</dt> </div>
+                  <div class="col-sm-4 text-sm-left"><dd class="mb-1">{{cliente.correo_electronico}}</dd> </div>
+                </dl>
+                <dl class="row mb-0">
+                  <div class="col-sm-5 text-sm-left"><dt>Dirección:</dt> </div>
+                  <div class="col-sm-4 text-sm-left"><dd class="mb-1">{{cliente.direccion}}</dd> </div>
+                </dl>
+                <dl class="row mb-0">
+                  <div class="col-sm-5 text-sm-left"><dt>Ciudad:</dt> </div>
+                  <div class="col-sm-4 text-sm-left"><dd class="mb-1">{{cliente.ciudad}}</dd> </div>
+                </dl>
+                <dl class="row mb-0">
+                  <div class="col-sm-5 text-sm-left"><dt>Estado:</dt> </div>
+                  <div class="col-sm-4 text-sm-left"><dd class="mb-1">{{cliente.estado}}</dd> </div>
+                </dl>
+                <dl class="row mb-0">
+                  <div class="col-sm-5 text-sm-left"><dt>País:</dt> </div>
+                  <div class="col-sm-4 text-sm-left"><dd class="mb-1">{{cliente.pais}}</dd> </div>
+                </dl>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="footer">
+      <div class="float-right">
+        10GB of <strong>250GB</strong> Free.
+      </div>
+      <div>
+        <strong>Copyright</strong> Example Company &copy; 2014-2018
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- Mainly scripts -->
+<script src="/js/jquery-3.1.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="/js/inspinia.js"></script>
+<script src="/js/plugins/pace/pace.min.js"></script>
+
+<!-- Peity -->
+<script src="/js/plugins/peity/jquery.peity.min.js"></script>
+
+<!-- Peity -->
+<script src="/js/demo/peity-demo.js"></script>
+
+</body>

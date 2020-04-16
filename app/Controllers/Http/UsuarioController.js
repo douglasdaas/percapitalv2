@@ -15,6 +15,65 @@ const Event = use('Event')
  */
 class UsuarioController {
   /**
+   * inicioSesion for usuarios.
+   * GET usuarios/login
+   *
+   * @param {object} ctx
+   * @param {Request} ctx.request
+   * @param {Response} ctx.response
+   * @param {View} ctx.view
+   */
+  async inicioSesion ({ request, response, view }) {
+    return view.render('usuario.login')
+  }
+
+  /**
+   * Login for usuarios.
+   * POST usuarios/login
+   *
+   * @param {object} ctx
+   * @param {Request} ctx.request
+   * @param {Response} ctx.response
+   * @param {View} ctx.view
+   */
+  async login ({ auth ,request, response, view }) {
+    const payload = request.only(['uid', 'password'])
+
+    const usuario = await Persona.verify(payload)
+
+    await auth.logout(usuario)
+
+    await auth.login(usuario)
+
+    if (usuario.cliente_natural_id !==  null){
+      return response.redirect(`/usuario!natural/${usuario.cliente_natural_id}`)
+    } else if (usuario.cliente_juridico_id !== null) {
+      return response.redirect(`/usuario!juridico/${usuario.cliente_juridico_id}`)
+    } else {
+      return 'error'
+    }
+  }
+
+  /**
+   * Logout for usuarios.
+   * POST usuarios/login
+   *
+   * @param {object} ctx
+   * @param {Request} ctx.request
+   * @param {Response} ctx.response
+   * @param {View} ctx.view
+   */
+  async logout ({ auth ,request, response, view }) {
+
+    console.log('logout')
+
+    await auth.logout()
+
+    return response.redirect('/usuarios/login')
+
+  }
+
+  /**
    * Show a list of all usuarios.
    * GET usuarios
    *
@@ -58,7 +117,38 @@ class UsuarioController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
+  async show ({ params: {id,tipoCliente}, auth, request, response, view }) {
+
+    if (tipoCliente === '!natural') {
+
+      if (auth.user.cliente_natural_id !== id) {
+        return "No Autorizado"
+      }
+
+      let cliente = await ClienteNatural.find(id)
+
+      cliente = cliente.toJSON()
+
+      return view.render('usuario.natural.show', {cliente})
+
+    } else if (tipoCliente === '!juridico') {
+
+
+      if (auth.user.cliente_juridico_id !== id) {
+        return "No Autorizado"
+      }
+
+      let cliente = await ClienteJuridico.find(id)
+
+      cliente = cliente.toJSON()
+
+      console.log(cliente)
+
+      return view.render('usuario.juridico.show', {cliente})
+
+    }
+
+
   }
 
   /**

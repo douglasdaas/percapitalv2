@@ -31,8 +31,8 @@ class TesoreriaController {
         .query()
         .where('estatus_legal', true)
         .where('estatus_CVV', true)
-        .has('solicitudes')
-        .with('solicitudes', (builder)  =>{
+        .has('solicitudesSuscripcion')
+        .with('solicitudesSuscripcion', (builder)  =>{
           builder
             .where('estatus_conciliacion', true)
             .orderBy('created_at', 'asc')
@@ -42,6 +42,8 @@ class TesoreriaController {
 
       clientes = clientes.toJSON()
 
+      console.log(clientes)
+
       return view.render('tesoreria.natural.index', {clientes})
 
     } else if (tipoCliente === '!juridico'){
@@ -50,8 +52,8 @@ class TesoreriaController {
         .query()
         .where('estatus_legal', true)
         .where('estatus_CVV', true)
-        .has('solicitudes')
-        .with('solicitudes', (builder)  =>{
+        .has('solicitudesSuscripcion')
+        .with('solicitudesSuscripcion', (builder)  =>{
           builder
             .where('estatus_conciliacion', true)
             .orderBy('created_at', 'asc')
@@ -105,7 +107,7 @@ class TesoreriaController {
     if (tipoCliente === '!natural'){
       let cliente = await ClienteNatural.find(id)
       await cliente.loadMany({
-        solicitudes: (builder) => builder .with('pagos').orderBy('created_at', 'asc').limit(1)
+        solicitudesSuscripcion: (builder) => builder .with('pagos').orderBy('created_at', 'asc').limit(1)
       })
 
       cliente = cliente.toJSON()
@@ -115,7 +117,7 @@ class TesoreriaController {
     } else if (tipoCliente === '!juridico'){
       let cliente = await ClienteJuridico.find(id)
       await cliente.loadMany({
-        solicitudes: (builder) => builder .with('pagos').orderBy('created_at', 'asc').limit(1)
+        solicitudesSuscripcion: (builder) => builder .with('pagos').orderBy('created_at', 'asc').limit(1)
       })
 
       cliente = cliente.toJSON()

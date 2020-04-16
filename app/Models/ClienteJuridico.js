@@ -25,8 +25,12 @@ class ClienteJuridico extends Model {
     return super.formatDates(field, value)
   }
 
-  solicitudes () {
+  solicitudesSuscripcion () {
     return this.hasMany('App/Models/SolicitudSuscripcionUi')
+  }
+
+  solicitudesRescate () {
+    return this.hasMany('App/Models/SolicitudRescateUi')
   }
 
   usuario () {

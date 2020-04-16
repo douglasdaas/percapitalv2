@@ -24,7 +24,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="m-b-md">
-                                        <h2>{{cliente.razon_social}}</h2>
+                                        <h2>{{cliente.nombre}} {{cliente.apellido}}</h2>
                                     </div>
 
                                 </div>
@@ -34,60 +34,72 @@
                                     <dl class="row mb-0">
                                         <div class="col-sm-4 text-sm-right"><dt>Estatus de Pagos:</dt> </div>
                                         <div class="col-sm-8 text-sm-left"><dd class="mb-1">
-                                          @if( cliente.solicitudesSuscripcion[0].estatus_conciliacion === 1)
-                                          <span class="label label-primary">{{ estatusConciliacion(cliente.solicitudesSuscripcion[0].estatus_conciliacion) }}</span>
+                                          @if( cliente.solicitudes[0].estatus_conciliacion === 1)
+                                          <span class="label label-primary">{{ estatusConciliacion(cliente.solicitudes[0].estatus_conciliacion) }}</span>
                                           @else
-                                          <span class="label label-danger">{{ estatusConciliacion(cliente.solicitudesSuscripcion[0].estatus_conciliacion) }}</span>
+                                          <span class="label label-danger">{{ estatusConciliacion(cliente.solicitudes[0].estatus_conciliacion) }}</span>
                                           @endif
                                         </dd></div>
                                     </dl>
                                   <dl class="row mb-0">
-                                    <div class="col-sm-4 text-sm-right"><dt>Registro de Información Fiscal:</dt> </div>
-                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.registro_informacion_fiscal}}</dd> </div>
+                                    <div class="col-sm-4 text-sm-right"><dt>Documento Identificacion:</dt> </div>
+                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.documento_identificacion}}</dd> </div>
                                   </dl>
                                   <dl class="row mb-0">
-                                    <div class="col-sm-4 text-sm-right"><dt>Nombre Comercial:</dt> </div>
-                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.nombre_comercial}}</dd> </div>
+                                    <div class="col-sm-4 text-sm-right"><dt>Lugar de nacimiento:</dt> </div>
+                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.lugar_nacimiento}}</dd> </div>
                                   </dl>
                                   <dl class="row mb-0">
-                                    <div class="col-sm-4 text-sm-right"><dt>Actividad Economica:</dt> </div>
-                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.actividad_economica}}</dd> </div>
+                                    <div class="col-sm-4 text-sm-right"><dt>Fecha de nacimiento:</dt> </div>
+                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.fecha_nacimiento}}</dd> </div>
                                   </dl>
                                   <dl class="row mb-0">
-                                    <div class="col-sm-4 text-sm-right"><dt>Fecha Inicial de Registro:</dt> </div>
-                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{ cliente.fecha_registro_inicial}}</dd> </div>
+                                    <div class="col-sm-4 text-sm-right"><dt>Sexo:</dt> </div>
+                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{ sexo(cliente.genero)}}</dd> </div>
                                   </dl>
                                   <dl class="row mb-0">
-                                    <div class="col-sm-4 text-sm-right"><dt>Capital Actual:</dt> </div>
-                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.capital_actual_modificicaion}}</dd> </div>
+                                    <div class="col-sm-4 text-sm-right"><dt>Estado Civil:</dt> </div>
+                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.estado_civil}}</dd> </div>
                                   </dl>
                                   <dl class="row mb-0">
-                                    <div class="col-sm-4 text-sm-right"><dt>Sitio Web:</dt> </div>
-                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.sitio_web}}</dd> </div>
+                                    <div class="col-sm-4 text-sm-right"><dt>Nacionalidad:</dt> </div>
+                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.nacionalidad}}</dd> </div>
                                   </dl>
                                   <dl class="row mb-0">
-                                    <div class="col-sm-4 text-sm-right"><dt>Telefono:</dt> </div>
-                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.telefono}}</dd> </div>
+                                    <div class="col-sm-4 text-sm-right"><dt>Telefono Fijo:</dt> </div>
+                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.telefono_fijo}}</dd> </div>
+                                  </dl>
+                                  <dl class="row mb-0">
+                                    <div class="col-sm-4 text-sm-right"><dt>Telefono Celular:</dt> </div>
+                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.telefono_celular}}</dd> </div>
                                   </dl>
                                   <dl class="row mb-0">
                                     <div class="col-sm-4 text-sm-right"><dt>Correo Electrónico:</dt> </div>
                                     <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.correo_electronico}}</dd> </div>
                                   </dl>
                                   <dl class="row mb-0">
-                                    <div class="col-sm-4 text-sm-right"><dt>Dirección:</dt> </div>
-                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.direccion}}</dd> </div>
+                                    <div class="col-sm-4 text-sm-right"><dt>Dirección Domicilio:</dt> </div>
+                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.direccion_domicilio}}</dd> </div>
                                   </dl>
                                   <dl class="row mb-0">
                                     <div class="col-sm-4 text-sm-right"><dt>Ciudad:</dt> </div>
-                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.ciudad}}</dd> </div>
+                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.ciudad_domicilio}}</dd> </div>
                                   </dl>
                                   <dl class="row mb-0">
                                     <div class="col-sm-4 text-sm-right"><dt>Estado:</dt> </div>
-                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.estado}}</dd> </div>
+                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.estado_domicilio}}</dd> </div>
+                                  </dl>
+                                  <dl class="row mb-0">
+                                    <div class="col-sm-4 text-sm-right"><dt>Código Postal:</dt> </div>
+                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.codigo_postal_domicilio}}</dd> </div>
                                   </dl>
                                   <dl class="row mb-0">
                                     <div class="col-sm-4 text-sm-right"><dt>País:</dt> </div>
-                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.pais}}</dd> </div>
+                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.pais_domicilio}}</dd> </div>
+                                  </dl>
+                                  <dl class="row mb-0">
+                                    <div class="col-sm-4 text-sm-right"><dt>Profesión u Ocupación :</dt> </div>
+                                    <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.profecion_oficio}}</dd> </div>
                                   </dl>
 
                                 </div>
@@ -111,22 +123,22 @@
                                     </dl>
                                         <dl class="row mb-0">
                                             <div class="col-sm-8 text-sm-left">
-                                                @if(cliente.solicitudesSuscripcion[0].estatus_conciliacion === 0 && cliente.solicitudesSuscripcion[0].pagos !== null)
+                                                @if(cliente.solicitudes[0].estatus_conciliacion === 0 && cliente.solicitudes[0].pagos !== null)
                                                     <h4>Conciliar Pago de Solictud de Unidades de Inversión:</h4>
-                                                    <dt>Pago en fecha: <br> {{cliente.solicitudesSuscripcion[0].pagos.created_at}}</dt>
-                                                    <dt>Por monto: {{cliente.solicitudesSuscripcion[0].pagos.monto.toLocaleString()}} Bs</dt>
-                                                    <dt>Numero de Referencia: {{cliente.solicitudesSuscripcion[0].pagos.referencia}}<dt>
+                                                    <dt>Pago en fecha: <br> {{cliente.solicitudes[0].pagos.created_at}}</dt>
+                                                    <dt>Por monto: {{cliente.solicitudes[0].pagos.monto.toLocaleString()}} Bs</dt>
+                                                    <dt>Numero de Referencia: {{cliente.solicitudes[0].pagos.referencia}}<dt>
                                                     <dt>Comprobante:</dt>
                                                     <div class="col-sm-8 text-sm-left">
                                                       <dd class="project-people mb-1">
-                                                        <a href="/pago-suscripcion/download/{{cliente.solicitudesSuscripcion[0].pagos.id}}">Comprobante</a>
-<!--                                                        <img alt="comprobante-pago" class="img-lg" src="/archivos/comprobantes-pago/{{cliente.solicitudesSuscripcion[0].pagos.combrobate_pago}}">-->
+                                                        <a href="/pago-suscripcion/download/{{cliente.solicitudes[0].pagos.id}}">Comprobante</a>
+<!--                                                        <img alt="comprobante-pago" class="img-lg" src="/archivos/comprobantes-pago/{{cliente.solicitudes[0].pagos.combrobate_pago}}">-->
                                                       </dd>
                                                     </div>
-                                                    <form action="/operaciones!natural/conciliacion-pagos/{{cliente.solicitudesSuscripcion[0].id}}?_method=PATCH" method="post">
+                                                    <form action="/operaciones!natural/conciliacion-pagos/{{cliente.solicitudes[0].id}}?_method=PATCH" method="post">
                                                       <button class="btn btn-block btn-outline btn-primary">Coinciliar Pago</button>
                                                     </form>
-                                                @elseif(cliente.solicitudesSuscripcion[0].estatus_conciliacion === 0 && cliente.solicitudesSuscripcion[0].pagos === null)
+                                                @elseif(cliente.solicitudes[0].estatus_conciliacion === 0 && cliente.solicitudes[0].pagos === null)
                                                     <h4>No se ha registrado ningun pago</h4>
                                                 @else
 

@@ -173,15 +173,13 @@ class ClienteNaturalController {
   async destroy ({ params, request, response }) {
   }
 
-  /**
-   * Display a single clientenatural.
-   * GET clientenaturals/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
+
+  async download ({ params: {id, tipo_archivo }, response}) {
+    console.log(tipo_archivo)
+    const cliente = await ClienteNatural.find(id)
+    response.download(Helpers.appRoot(`archivos/clientes/natural/${cliente.documento_identificacion}/${tipo_archivo}`))
+  }
+
   async signup ({ params, request, response, view }) {
     return view.render('cliente.natural.signup')
   }
@@ -206,12 +204,6 @@ class ClienteNaturalController {
     })
 
     return clienteInformacion
-  }
-
-  async download ({ params: {id, tipo_archivo }, response}) {
-    console.log(tipo_archivo)
-    const cliente = await ClienteNatural.find(id)
-    response.download(Helpers.appRoot(`archivos/clientes/natural/${cliente.documento_identificacion}/${tipo_archivo}`))
   }
 
 }

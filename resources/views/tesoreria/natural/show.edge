@@ -34,10 +34,10 @@
                 <dl class="row mb-0">
                   <div class="col-sm-4 text-sm-right"><dt>Estatus de Unidades:</dt> </div>
                   <div class="col-sm-8 text-sm-left"><dd class="mb-1">
-                    @if( cliente.solicitudes[0].unidades_asignadas === 1)
-                    <span class="label label-primary">{{ estatusUnidades(cliente.solicitudes[0].unidades_asignadas) }}</span>
+                    @if( cliente.solicitudesSuscripcion[0].unidades_asignadas === 1)
+                    <span class="label label-primary">{{ estatusUnidades(cliente.solicitudesSuscripcion[0].unidades_asignadas) }}</span>
                     @else
-                    <span class="label label-danger">{{ estatusUnidades(cliente.solicitudes[0].unidades_asignadas) }}</span>
+                    <span class="label label-danger">{{ estatusUnidades(cliente.solicitudesSuscripcion[0].unidades_asignadas) }}</span>
                     @endif
                   </dd>
                   </div>
@@ -124,14 +124,14 @@
                 </dl>
                 <dl class="row mb-0">
                   <div class="col-sm-8 text-sm-left">
-                    @if(cliente.solicitudes[0].estatus_conciliacion === 1 && cliente.solicitudes[0].pagos !== null &&  cliente.solicitudes[0].unidades_asignadas === 0)
+                    @if(cliente.solicitudesSuscripcion[0].estatus_conciliacion === 1 && cliente.solicitudesSuscripcion[0].pagos !== null &&  cliente.solicitudesSuscripcion[0].unidades_asignadas === 0)
                     <h4>Solictud Unidades:</h4>
-                    <dt>Cantidad de Unidades: <br> {{cliente.solicitudes[0].cantidad_unidades_inversion}}</dt>
+                    <dt>Cantidad de Unidades: <br> {{cliente.solicitudesSuscripcion[0].cantidad_unidades_inversion}}</dt>
                     <dt>Precio por Unidad: <br> 5,000 Bs</dt>
-                    <dt>Monto total: {{cliente.solicitudes[0].total.toLocaleString()}} Bs</dt>
-                    <dt>En Fecha: {{cliente.solicitudes[0].created_at}}<dt>
+                    <dt>Monto total: {{cliente.solicitudesSuscripcion[0].total.toLocaleString()}} Bs</dt>
+                    <dt>En Fecha: {{cliente.solicitudesSuscripcion[0].created_at}}<dt>
                     <br>
-                    <form action="/tesoreria!natural/{{cliente.solicitudes[0].id}}?_method=PATCH" method="post">
+                    <form action="/tesoreria!natural/{{cliente.solicitudesSuscripcion[0].id}}?_method=PATCH" method="post">
                       <button name="clienteId" value="{{cliente.documento_identificacion}}" formenctype="application/x-www-form-urlencoded" class="btn btn-block btn-outline btn-primary">Asignar Unidades</button>
                     </form>
                     @else

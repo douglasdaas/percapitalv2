@@ -23,29 +23,38 @@ Route.on('/').render('welcome')
 
 //CLIENTES NATURAL
 Route.group(() => {
-  Route.get('signup', 'ClienteNaturalController.signup')
+  Route.get('/signup', 'ClienteNaturalController.signup')
   Route.get('/download/:id/:tipoArchivo', 'ClienteNaturalController.download')
 }).prefix('cliente/natural')
 Route.resource('cliente/natural', 'ClienteNaturalController')
 
 //CLIENTES JURIDICO
 Route.group( () => {
-  Route.get('signup', 'ClienteJuridicoController.signup')
+  Route.get('/signup', 'ClienteJuridicoController.signup')
   Route.get('/download/:id/:tipoArchivo', 'ClienteJuridicoController.download')
 }).prefix('cliente/juridico')
 Route.resource('cliente/juridico', 'ClienteJuridicoController')
 
 //USUARIOS
 Route.group( () =>{
-  Route.get('crearAutomatico/:id', 'UsuarioController.crearAutomatico')
+  Route.get('/crearAutomatico/:id', 'UsuarioController.crearAutomatico')
+  Route.get('/login', 'UsuarioController.inicioSesion').as('login')
+  Route.post('/login','UsuarioController.login')
+  Route.get('/logout','UsuarioController.logout').as('logout')
 }).prefix('usuario:tipoCliente?')
-// Route.resource('usuario:tipoCliente?', 'UsuarioController')
+Route.resource('usuario:tipoCliente?', 'UsuarioController').only(['show'])
 
 //SOLICITUDES SUSCRIPCION UI
 Route.group(() =>{
   Route.get('/create/:id','SolicitudSuscripcionUiController.create')
   Route.post('/:id','SolicitudSuscripcionUiController.store')
 }).prefix('solicitud-suscripcion:tipoCliente?')
+
+//SOLICITUDES RESCATE UI
+Route.group(() =>{
+  Route.get('/create/:id','SolicitudRescateUiController.create')
+  Route.post('/:id','SolicitudRescateUiController.store')
+}).prefix('solicitud-rescate:tipoCliente?')
 
 
 //PAGO SUSCRIPCION UI
