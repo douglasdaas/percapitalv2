@@ -9,8 +9,6 @@
 
 
 
-
-
   <link href="/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
 
   <link href="/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
@@ -22,358 +20,359 @@
 </head>
 
 @include('partials.header')
+@include('partials.nav')
+
 
 <div id="wrapper">
 
   <div id="page-wrapper" class="gray-bg gothamHTF">
     <div class="wrapper wrapper-content animated fadeInRight">
       <div class="row">
-        <div class="col-lg-12">
-          <div class="ibox">
+        <div class="col-lg-12" >
+          <div class="ibox" >
             <div class="ibox-content">
               <h2>Registro Inversionistas</h2>
               <form id="form" action="/cliente" method="POST" class="wizard-big" enctype="multipart/form-data">
                 <h1>Datos</h1>
-                <fieldset>
-                  <h2>Datos Personales del Inversionista</h2>
-                  <div class="col">
-                    <!--documento_identificacion-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Documento de Identidad</label>
+                  <fieldset style="height: auto">
+                    <h2>Datos Personales del Inversionista</h2>
+                    <div class="col">
+                      <!--documento_identificacion-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Documento de Identidad</label>
 
-                      <div class="col-sm-10"><input type="text" name="documento_identificacion" placeholder="Documento"  class="form-control" maxlength="18 " required></div>
-                    </div>
-                    <!--nombre-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre</label>
+                        <div class="col-sm-10"><input type="text" name="documento_identificacion" placeholder="Documento"  class="form-control" maxlength="18 " required></div>
+                      </div>
+                      <!--nombre-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre</label>
 
-                      <div class="col-sm-10"><input type="text" name="nombre" placeholder="Nombre" class="form-control" maxlength="30" required></div>
-                    </div>
-                    <!--apellido-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Apellido</label>
+                        <div class="col-sm-10"><input type="text" name="nombre" placeholder="Nombre" class="form-control" maxlength="30" required></div>
+                      </div>
+                      <!--apellido-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Apellido</label>
 
-                      <div class="col-sm-10"><input type="text" name="apellido" placeholder="Apellido" class="form-control" maxlength="30" required></div>
-                    </div>
-                    <!--fecha_nacimiento-->
-                    <div class="form-group row" id="data_1"><label class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
-                      <div class="input-group date col-sm-10">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="fecha_nacimiento" value="03/04/2014" required>
+                        <div class="col-sm-10"><input type="text" name="apellido" placeholder="Apellido" class="form-control" maxlength="30" required></div>
+                      </div>
+                      <!--fecha_nacimiento-->
+                      <div class="form-group row" id="data_1"><label class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
+                        <div class="input-group date col-sm-10">
+                          <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="fecha_nacimiento" value="03/04/2014" required>
+                        </div>
+                      </div>
+                      <!--lugar_nacimiento-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Lugar de Nacimiento</label>
+
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="lugar_nacimiento">
+                            <option value="">Seleccione</option>
+                            @each(pais in data.paises)
+                            <option value="{{pais.name}}">{{pais.name}}</option>
+                            @endeach
+                          </select>
+                        </div>
+                      </div>
+                      <!--nacionalidad-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Nacionalidad</label>
+
+                        <div class="col-sm-10"><input type="text" name="nacionalidad" placeholder="Nacionalidad" class="form-control" maxlength="35" required></div>
+                      </div>
+                      <!--otra_nacionalidad-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Otra Nacionalidad (Si tiene)</label>
+
+                        <div class="col-sm-10"><input type="text" name="otra_nacionalidad" placeholder="Otra Nacionalidad" class="form-control" maxlength="35"></div>
+                      </div>
+                      <!--genero-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Genero</label>
+
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="genero">
+                            <option value="Femenino">Femenino</option>
+                            <option value="Masculino">Masculino</option>
+                          </select>
+                        </div>
+                      </div>
+                      <!--profecion_oficio-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Profeción U Oficio</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="profecion_oficio">
+                            <option value="">Seleccione</option>
+                            @each(profesion in data.profesiones)
+                            <option value="{{profesion}}">{{profesion}}</option>
+                            @endeach
+                          </select>
+                        </div>
+                      </div>
+                      <!--condicion_vivienda-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Condición de la Vivienda</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="condicion_vivienda">
+                            <option value="">Seleccione</option>
+                            <option value="Adjudicada">Adjudicada</option>
+                            <option value="De familiares">De familiares</option>
+                            <option value="Hipotecada">Hipotecada</option>
+                            <option value="Propia">Propia</option>
+                          </select>
+                        </div>
+                      </div>
+                      <!--carga_familiar-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Carga Familiar</label>
+
+                        <div class="col-sm-10"><input type="text" name="carga_familiar" placeholder="Carga Familiar" class="form-control" maxlength="50" required></div>
+                      </div>
+                      <!--estado_civil-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Estado Civil</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="estado_civil">
+                            <option value="">Seleccione</option>
+                            <option value="Casado">Casado</option>
+                            <option value="Divorciado">Divorciado</option>
+                            <option value="Soltero">Soltero</option>
+                            <option value="Unión Estable de Hecho (Concubinato)">Unión Estable de Hecho (Concubinato)</option>
+                            <option value="Viudo">Viudo</option>
+                          </select>
+                        </div>
+                      </div>
+                      <!--direccion_domicilio-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Dirección de Domicilio</label>
+
+                        <div class="col-sm-10"><input type="text" name="direccion_domicilio" placeholder="Dirección de Habitación" class="form-control" maxlength="80" required></div>
+                      </div>
+                      <!--ciudad_domicilio-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Ciudad</label>
+
+                        <div class="col-sm-10"><input type="text" name="ciudad_domicilio" placeholder="Ciudad" class="form-control" maxlength="35" required></div>
+                      </div>
+                      <!--estado_domicilio-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Estado</label>
+
+                        <div class="col-sm-10"><input type="text" name="estado_domicilio" placeholder="Estado" class="form-control" maxlength="35" required></div>
+                      </div>
+                      <!--pais_domicilio-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">País</label>
+
+                        <div class="col-sm-10"><input type="text" name="pais_domicilio" placeholder="País" class="form-control" maxlength="35" required></div>
+                      </div>
+                      <!--codigo_postal_domicilio-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Código Postal</label>
+
+                        <div class="col-sm-10"><input type="text" name="codigo_postal_domicilio" placeholder="Código Postal" class="form-control" maxlength="35" required></div>
+                      </div>
+                      <!--telefono_fijo-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Teléfono Fijo</label>
+
+                        <div class="col-sm-10"><input type="text" name="telefono_fijo" placeholder="Télefono de habitación" class="form-control"maxlength="15" required></div>
+                      </div>
+                      <!--telefono_celular-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Teléfono Celular</label>
+
+                        <div class="col-sm-10"><input type="text" name="telefono_celular" placeholder="Télefono Celular" class="form-control" maxlength="15" required></div>
+                      </div>
+                      <!--correo_electronico-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Correo electrónico</label>
+
+                        <div class="col-sm-10"><input type="email" name="correo_electronico" placeholder="Correo electrónico" class="form-control" maxlength="35" required></div>
+                      </div>
+                      <h2>Cónyuge (si posee cónyuge)</h2>
+                      <!--nombre_completo_conyugue-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre Completo del Cónyugue</label>
+
+                        <div class="col-sm-10"><input type="text" name="nombre_completo_conyugue" placeholder="Nombre Completo" class="form-control" maxlength="30"></div>
+                      </div>
+                      <!--documento_identificacion_conyugue-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Documento de Identidad</label>
+
+                        <div class="col-sm-10"><input type="text" name="documento_identificacion_conyugue" placeholder="Cédula/Pasaporte" class="form-control" maxlength="18"></div>
+                      </div>
+                      <!--fuente_ingresos_conyugue-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Fuente de Ingresos</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="fuente_ingresos_conyugue">
+                            <option value="">Seleccione</option>
+                            @each(actividadEconomica in data.actividadesEconomicas)
+                            <option value="{{actividadEconomica}}">{{actividadesEconomicas}}</option>
+                            @endeach
+                          </select>
+                        </div>
                       </div>
                     </div>
-                    <!--lugar_nacimiento-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Lugar de Nacimiento</label>
+                    <h2>Persona Politicamente Expuesta</h2>
+                    <!--estatus_PEP-->
 
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="lugar_nacimiento">
-                          <option value="">Seleccione</option>
-                          @each(pais in data.paises)
-                          <option value="{{pais.name}}">{{pais.name}}</option>
-                          @endeach
-                        </select>
+                    <p class="text-justify">Bajo la legislacion vigente se define como persona expuesta politicamente (pep), a toda persona que desepeña o ha desempeñado
+                      funciones publicas prominentes en el gobierno nacional o en el extranjero. Por ejemplo, los jefes de estado o gobierno, politicos
+                      de alto nivel, funcionarios gubernamentales, judiciales u oficiales militares de alto nivel, ejecutivos de alto nivel de
+                      corporaciones que pertenecen al estado, funcionarios importantes de partidos politicos, y sus familiares cercanos,
+                      entendiendose por estos los padres, hermanos, hijos , esposo (a), tios de un pep. Esta definicion no persigue cubrir personas
+                      de rango medio o mas bajo que las categorias anteriormente expuestas.</p>
+                    <h3>El Invercionista es (PEP)</h3>
+                    <!--Invercionista-->
+                    <div class="form-group col">
+                      <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">PEP?</label>
+                        <div class="col-sm-1">
+                          <select class="form-control m-b" name="es_pep_inversionista">
+                            <option value="N">No</option>
+                            <option value="S">Si</option>
+                          </select>
+                        </div>
+                        <label class="col-sm-3 col-form-label">Nombre del Ente Adscripción:</label>
+                        <div class="col-sm-7">
+                          <input type="text" name="nombre_ente_adcripcion_inversionista" placeholder="Nombre del Ente Adscripción" class="form-control" maxlength="18">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">País</label>
+                        <div class="col-sm-4">
+                          <select class="form-control m-b" name="pais_inversionista">
+                            <option value="">Seleccione</option>
+                            @each(pais in data.paises)
+                            <option value="{{pais.name}}">{{pais.name}}</option>
+                            @endeach
+                          </select>
+                        </div>
+                        <label class="col-sm-2 col-form-label">Cargo que Desepeña:</label>
+                        <div class="col-sm-5">
+                          <input type="text" name="cargo_desempena_inversionista" placeholder="Cargo" class="form-control">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Identificación de Relacionado:</label>
+                        <div class="col-sm-9">
+                          <input type="text" name="identificador_relacionado_inversionista" placeholder="Identificación" class="form-control">
+                        </div>
                       </div>
                     </div>
-                    <!--nacionalidad-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nacionalidad</label>
 
-                      <div class="col-sm-10"><input type="text" name="nacionalidad" placeholder="Nacionalidad" class="form-control" maxlength="35" required></div>
-                    </div>
-                    <!--otra_nacionalidad-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Otra Nacionalidad (Si tiene)</label>
-
-                      <div class="col-sm-10"><input type="text" name="otra_nacionalidad" placeholder="Otra Nacionalidad" class="form-control" maxlength="35"></div>
-                    </div>
-                    <!--genero-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Genero</label>
-
-                    <div class="col-sm-10">
-                      <select class="form-control m-b" name="genero">
-                        <option value="Femenino">Femenino</option>
-                        <option value="Masculino">Masculino</option>
-                      </select>
-                    </div>
-                  </div>
-                    <!--profecion_oficio-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Profeción U Oficio</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="profecion_oficio">
-                          <option value="">Seleccione</option>
-                          @each(profesion in data.profesiones)
-                          <option value="{{profesion}}">{{profesion}}</option>
-                          @endeach
-                        </select>
+                    <h3>Tiene Parentesco con (PEP)</h3>
+                    <!--Invercionista-->
+                    <div class="form-group col">
+                      <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">PEP?</label>
+                        <div class="col-sm-1">
+                          <select class="form-control m-b" name="es_pep_parentesco">
+                            <option value="N">No</option>
+                            <option value="S">Si</option>
+                          </select>
+                        </div>
+                        <label class="col-sm-3 col-form-label">Nombre del Ente Adscripción:</label>
+                        <div class="col-sm-7">
+                          <input type="text" name="nombre_ente_adcripcion_parentesco" placeholder="Nombre del Ente Adscripción" class="form-control" maxlength="18">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">País</label>
+                        <div class="col-sm-4">
+                          <select class="form-control m-b" name="pais_parentesco">
+                            <option value="">Seleccione</option>
+                            @each(pais in data.paises)
+                            <option value="{{pais.name}}">{{pais.name}}</option>
+                            @endeach
+                          </select>
+                        </div>
+                        <label class="col-sm-2 col-form-label">Cargo que Desepeña:</label>
+                        <div class="col-sm-5">
+                          <input type="text" name="cargo_desempena_parentesco" placeholder="Cargo" class="form-control">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Identificación de Relacionado:</label>
+                        <div class="col-sm-9">
+                          <input type="text" name="identificador_relacionado_parentesco" placeholder="Identificación" class="form-control">
+                        </div>
                       </div>
                     </div>
-                    <!--condicion_vivienda-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Condición de la Vivienda</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="condicion_vivienda">
-                          <option value="">Seleccione</option>
-                          <option value="Adjudicada">Adjudicada</option>
-                          <option value="De familiares">De familiares</option>
-                          <option value="Hipotecada">Hipotecada</option>
-                          <option value="Propia">Propia</option>
-                        </select>
+
+                    <h3>Es Asociado Cercano de (PEP)</h3>
+                    <!--Invercionista-->
+                    <div class="form-group col">
+                      <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">PEP?</label>
+                        <div class="col-sm-1">
+                          <select class="form-control m-b" name="es_pep_asociado">
+                            <option value="N">No</option>
+                            <option value="S">Si</option>
+                          </select>
+                        </div>
+                        <label class="col-sm-3 col-form-label">Nombre del Ente Adscripción:</label>
+                        <div class="col-sm-7">
+                          <input type="text" name="nombre_ente_adcripcion_asociado" placeholder="Nombre del Ente Adscripción" class="form-control" maxlength="18">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-1 col-form-label">País</label>
+                        <div class="col-sm-4">
+                          <select class="form-control m-b" name="pais_asociado">
+                            <option value="">Seleccione</option>
+                            @each(pais in data.paises)
+                            <option value="{{pais.name}}">{{pais.name}}</option>
+                            @endeach
+                          </select>
+                        </div>
+                        <label class="col-sm-2 col-form-label">Cargo que Desepeña:</label>
+                        <div class="col-sm-5">
+                          <input type="text" name="cargo_desempena_asociado" placeholder="Cargo" class="form-control">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Identificación de Relacionado:</label>
+                        <div class="col-sm-9">
+                          <input type="text" name="identificador_relacionado_asociado" placeholder="Identificación" class="form-control">
+                        </div>
                       </div>
                     </div>
-                    <!--carga_familiar-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Carga Familiar</label>
+                  </fieldset>
 
-                      <div class="col-sm-10"><input type="text" name="carga_familiar" placeholder="Carga Familiar" class="form-control" maxlength="50" required></div>
-                    </div>
-                    <!--estado_civil-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Estado Civil</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="estado_civil">
-                          <option value="">Seleccione</option>
-                          <option value="Casado">Casado</option>
-                          <option value="Divorciado">Divorciado</option>
-                          <option value="Soltero">Soltero</option>
-                          <option value="Unión Estable de Hecho (Concubinato)">Unión Estable de Hecho (Concubinato)</option>
-                          <option value="Viudo">Viudo</option>
-                        </select>
+                  <h1>Referencias</h1>
+                  <fieldset style="height: auto">
+                    <div class="form-group col">
+                      <h2>Referencias Bancarias</h2>
+                      <!--institucion_bancaria-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Institución del Sector Bancario</label>
+
+                        <div class="col-sm-10"><input type="text" name="institucion_bancaria" placeholder="Instución Bancaria" class="form-control" required></div>
+                      </div>
+                      <!--nombre_producto_bancario-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre del Producto</label>
+
+                        <div class="col-sm-10"><input type="text" name="nombre_producto_bancario" placeholder="Nombre" class="form-control" required></div>
+                      </div>
+                      <!--numero_producto_bancario-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Numero del Producto</label>
+
+                        <div class="col-sm-10"><input type="text" name="numero_producto_bancario" placeholder="Numero" class="form-control" required></div>
+                      </div>
+                      <!--cifras_promedio_bancario-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Cifras Promedio</label>
+
+                        <div class="col-sm-10"><input type="text" name="cifras_promedio_bancario" placeholder="Cifras" class="form-control" required></div>
                       </div>
                     </div>
-                    <!--direccion_domicilio-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Dirección de Domicilio</label>
+                    <div class="form-group col">
+                      <h2>Referencias Personales</h2>
+                      <!--nombre_apellido-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombres y Apellidos</label>
 
-                      <div class="col-sm-10"><input type="text" name="direccion_domicilio" placeholder="Dirección de Habitación" class="form-control" maxlength="80" required></div>
-                    </div>
-                    <!--ciudad_domicilio-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Ciudad</label>
+                        <div class="col-sm-10"><input type="text" name="nombre_apellido" placeholder="Nombre o Razón" class="form-control" maxlength="18 " required></div>
+                      </div>
+                      <!--cedula_identidad-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Cedula de Identidad</label>
 
-                      <div class="col-sm-10"><input type="text" name="ciudad_domicilio" placeholder="Ciudad" class="form-control" maxlength="35" required></div>
-                    </div>
-                    <!--estado_domicilio-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Estado</label>
+                        <div class="col-sm-10"><input type="text" name="cedula_identidad" placeholder="Cedula" class="form-control" maxlength="30" required></div>
+                      </div>
+                      <!--direccion_referencias_personal_natural-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Telefono Local (Línea Fija)</label>
 
-                      <div class="col-sm-10"><input type="text" name="estado_domicilio" placeholder="Estado" class="form-control" maxlength="35" required></div>
-                    </div>
-                    <!--pais_domicilio-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">País</label>
+                        <div class="col-sm-10"><input type="text" name="telefono_local" placeholder="Telefono" class="form-control" maxlength="30" required></div>
+                      </div>
+                      <!--nombre_institucion_referencias_institucion_natural-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Celular (Movil)</label>
 
-                      <div class="col-sm-10"><input type="text" name="pais_domicilio" placeholder="País" class="form-control" maxlength="35" required></div>
-                    </div>
-                    <!--codigo_postal_domicilio-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Código Postal</label>
-
-                      <div class="col-sm-10"><input type="text" name="codigo_postal_domicilio" placeholder="Código Postal" class="form-control" maxlength="35" required></div>
-                    </div>
-                    <!--telefono_fijo-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Teléfono Fijo</label>
-
-                      <div class="col-sm-10"><input type="text" name="telefono_fijo" placeholder="Télefono de habitación" class="form-control"maxlength="15" required></div>
-                    </div>
-                    <!--telefono_celular-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Teléfono Celular</label>
-
-                      <div class="col-sm-10"><input type="text" name="telefono_celular" placeholder="Télefono Celular" class="form-control" maxlength="15" required></div>
-                    </div>
-                    <!--correo_electronico-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Correo electrónico</label>
-
-                      <div class="col-sm-10"><input type="email" name="correo_electronico" placeholder="Correo electrónico" class="form-control" maxlength="35" required></div>
-                    </div>
-                    <h2>Cónyuge (si posee cónyuge)</h2>
-                    <!--nombre_completo_conyugue-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre Completo del Cónyugue</label>
-
-                      <div class="col-sm-10"><input type="text" name="nombre_completo_conyugue" placeholder="Nombre Completo" class="form-control" maxlength="30"></div>
-                    </div>
-                    <!--documento_identificacion_conyugue-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Documento de Identidad</label>
-
-                      <div class="col-sm-10"><input type="text" name="documento_identificacion_conyugue" placeholder="Cédula/Pasaporte" class="form-control" maxlength="18"></div>
-                    </div>
-                    <!--fuente_ingresos_conyugue-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Fuente de Ingresos</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="fuente_ingresos_conyugue">
-                          <option value="">Seleccione</option>
-                          @each(actividadEconomica in data.actividadesEconomicas)
-                          <option value="{{actividadEconomica}}">{{actividadesEconomicas}}</option>
-                          @endeach
-                        </select>
+                        <div class="col-sm-10"><input type="text" name="celular" placeholder="Celular" class="form-control" maxlength="18 " required></div>
                       </div>
                     </div>
-                  </div>
-                  <h2>Persona Politicamente Expuesta</h2>
-                  <!--estatus_PEP-->
+                  </fieldset>
 
-                  <p class="text-justify">Bajo la legislacion vigente se define como persona expuesta politicamente (pep), a toda persona que desepeña o ha desempeñado
-                    funciones publicas prominentes en el gobierno nacional o en el extranjero. Por ejemplo, los jefes de estado o gobierno, politicos
-                    de alto nivel, funcionarios gubernamentales, judiciales u oficiales militares de alto nivel, ejecutivos de alto nivel de
-                    corporaciones que pertenecen al estado, funcionarios importantes de partidos politicos, y sus familiares cercanos,
-                    entendiendose por estos los padres, hermanos, hijos , esposo (a), tios de un pep. Esta definicion no persigue cubrir personas
-                    de rango medio o mas bajo que las categorias anteriormente expuestas.</p>
-                  <h3>El Invercionista es (PEP)</h3>
-                  <!--Invercionista-->
-                  <div class="form-group col">
-                    <div class="form-group row">
-                      <label class="col-sm-1 col-form-label">PEP?</label>
-                      <div class="col-sm-1">
-                        <select class="form-control m-b" name="es_pep_inversionista">
-                          <option value="N">No</option>
-                          <option value="S">Si</option>
-                        </select>
-                      </div>
-                      <label class="col-sm-3 col-form-label">Nombre del Ente Adscripción:</label>
-                      <div class="col-sm-7">
-                        <input type="text" name="nombre_ente_adcripcion_inversionista" placeholder="Nombre del Ente Adscripción" class="form-control" maxlength="18">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-sm-1 col-form-label">País</label>
-                      <div class="col-sm-4">
-                        <select class="form-control m-b" name="pais_inversionista">
-                          <option value="">Seleccione</option>
-                          @each(pais in data.paises)
-                          <option value="{{pais.name}}">{{pais.name}}</option>
-                          @endeach
-                        </select>
-                      </div>
-                      <label class="col-sm-2 col-form-label">Cargo que Desepeña:</label>
-                      <div class="col-sm-5">
-                        <input type="text" name="cargo_desempena_inversionista" placeholder="Cargo" class="form-control">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Identificación de Relacionado:</label>
-                      <div class="col-sm-9">
-                        <input type="text" name="identificador_relacionado_inversionista" placeholder="Identificación" class="form-control">
-                      </div>
-                    </div>
-                  </div>
-
-                  <h3>Tiene Parentesco con (PEP)</h3>
-                  <!--Invercionista-->
-                  <div class="form-group col">
-                    <div class="form-group row">
-                      <label class="col-sm-1 col-form-label">PEP?</label>
-                      <div class="col-sm-1">
-                        <select class="form-control m-b" name="es_pep_parentesco">
-                          <option value="N">No</option>
-                          <option value="S">Si</option>
-                        </select>
-                      </div>
-                      <label class="col-sm-3 col-form-label">Nombre del Ente Adscripción:</label>
-                      <div class="col-sm-7">
-                        <input type="text" name="nombre_ente_adcripcion_parentesco" placeholder="Nombre del Ente Adscripción" class="form-control" maxlength="18">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-sm-1 col-form-label">País</label>
-                      <div class="col-sm-4">
-                        <select class="form-control m-b" name="pais_parentesco">
-                          <option value="">Seleccione</option>
-                          @each(pais in data.paises)
-                          <option value="{{pais.name}}">{{pais.name}}</option>
-                          @endeach
-                        </select>
-                      </div>
-                      <label class="col-sm-2 col-form-label">Cargo que Desepeña:</label>
-                      <div class="col-sm-5">
-                        <input type="text" name="cargo_desempena_parentesco" placeholder="Cargo" class="form-control">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Identificación de Relacionado:</label>
-                      <div class="col-sm-9">
-                        <input type="text" name="identificador_relacionado_parentesco" placeholder="Identificación" class="form-control">
-                      </div>
-                    </div>
-                  </div>
-
-                  <h3>Es Asociado Cercano de (PEP)</h3>
-                  <!--Invercionista-->
-                  <div class="form-group col">
-                    <div class="form-group row">
-                      <label class="col-sm-1 col-form-label">PEP?</label>
-                      <div class="col-sm-1">
-                        <select class="form-control m-b" name="es_pep_asociado">
-                          <option value="N">No</option>
-                          <option value="S">Si</option>
-                        </select>
-                      </div>
-                      <label class="col-sm-3 col-form-label">Nombre del Ente Adscripción:</label>
-                      <div class="col-sm-7">
-                        <input type="text" name="nombre_ente_adcripcion_asociado" placeholder="Nombre del Ente Adscripción" class="form-control" maxlength="18">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-sm-1 col-form-label">País</label>
-                      <div class="col-sm-4">
-                        <select class="form-control m-b" name="pais_asociado">
-                          <option value="">Seleccione</option>
-                          @each(pais in data.paises)
-                          <option value="{{pais.name}}">{{pais.name}}</option>
-                          @endeach
-                        </select>
-                      </div>
-                      <label class="col-sm-2 col-form-label">Cargo que Desepeña:</label>
-                      <div class="col-sm-5">
-                        <input type="text" name="cargo_desempena_asociado" placeholder="Cargo" class="form-control">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Identificación de Relacionado:</label>
-                      <div class="col-sm-9">
-                        <input type="text" name="identificador_relacionado_asociado" placeholder="Identificación" class="form-control">
-                      </div>
-                    </div>
-                  </div>
-
-                </fieldset>
-
-                <h1>Referencias</h1>
-                <fieldset>
-                  <div class="form-group col">
-                    <h2>Referencias Bancarias</h2>
-                    <!--institucion_bancaria-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Institución del Sector Bancario</label>
-
-                      <div class="col-sm-10"><input type="text" name="institucion_bancaria" placeholder="Instución Bancaria" class="form-control" required></div>
-                    </div>
-                    <!--nombre_producto_bancario-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre del Producto</label>
-
-                      <div class="col-sm-10"><input type="text" name="nombre_producto_bancario" placeholder="Nombre" class="form-control" required></div>
-                    </div>
-                    <!--numero_producto_bancario-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Numero del Producto</label>
-
-                      <div class="col-sm-10"><input type="text" name="numero_producto_bancario" placeholder="Numero" class="form-control" required></div>
-                    </div>
-                    <!--cifras_promedio_bancario-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Cifras Promedio</label>
-
-                      <div class="col-sm-10"><input type="text" name="cifras_promedio_bancario" placeholder="Cifras" class="form-control" required></div>
-                    </div>
-                  </div>
-                  <div class="form-group col">
-                    <h2>Referencias Personales</h2>
-                    <!--nombre_apellido-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombres y Apellidos</label>
-
-                      <div class="col-sm-10"><input type="text" name="nombre_apellido" placeholder="Nombre o Razón" class="form-control" maxlength="18 " required></div>
-                    </div>
-                    <!--cedula_identidad-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Cedula de Identidad</label>
-
-                      <div class="col-sm-10"><input type="text" name="cedula_identidad" placeholder="Cedula" class="form-control" maxlength="30" required></div>
-                    </div>
-                    <!--direccion_referencias_personal_natural-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Telefono Local (Línea Fija)</label>
-
-                      <div class="col-sm-10"><input type="text" name="telefono_local" placeholder="Telefono" class="form-control" maxlength="30" required></div>
-                    </div>
-                    <!--nombre_institucion_referencias_institucion_natural-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Celular (Movil)</label>
-
-                      <div class="col-sm-10"><input type="text" name="celular" placeholder="Celular" class="form-control" maxlength="18 " required></div>
-                    </div>
-                  </div>
-                </fieldset>
-
-                <h1>Cuentas en Divisas</h1>
-                <fieldset>
+                  <h1>Cuentas en Divisas</h1>
+                  <fieldset style="height: auto">
                     <h3>Banco Beneficiario</h3>
                     <div class="form-group col">
                       <!--nombre_banco_beneficiario-->
@@ -391,7 +390,7 @@
 
                         <div class="col-sm-10"><input type="text" name="SWIFT_ABA_beneficiario" placeholder="SWIFT/ABA" class="form-control" maxlength="80" ></div>
                       </div>
-                        <!--direccion_banco_beneficiario-->
+                      <!--direccion_banco_beneficiario-->
                       <div class="form-group  row"><label class="col-sm-2 col-form-label">Dirección Banco Beneficiario</label>
 
                         <div class="col-sm-10"><input type="text" name="direccion_banco_beneficiario" placeholder="Dirección" class="form-control" maxlength="80" ></div>
@@ -409,7 +408,7 @@
 
                         <div class="col-sm-10"><input type="text" name="numero_cuenta_IBAN_intermediario" placeholder="Nº Cuenta/IBAN" class="form-control" maxlength="35" ></div>
                       </div>
-                        <!--SWIFT_ABA_intermediario-->
+                      <!--SWIFT_ABA_intermediario-->
                       <div class="form-group  row"><label class="col-sm-2 col-form-label">SWIFT/ABA</label>
 
                         <div class="col-sm-10"><input type="text" name="SWIFT_ABA_intermediario" placeholder="SWIFT/ABA" class="form-control" maxlength="80" ></div>
@@ -433,10 +432,10 @@
                         <div class="col-sm-10"><input type="text" name="direccion_beneficiario" placeholder="Dirección" class="form-control" maxlength="80" ></div>
                       </div>
                     </div>
-                </fieldset>
+                  </fieldset>
 
-                <h1>Información Economica Financiera</h1>
-                <fieldset>
+                  <h1>Información Economica Financiera</h1>
+                  <fieldset style="height: auto">
                     <div class="form-group col">
                       <!--actividad_economica-->
                       <div class="form-group  row"><label class="col-sm-2 col-form-label">Actividad Economica</label>
@@ -501,7 +500,7 @@
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="fecha_ingreso_empresa_dependencia" value="03/04/2014">
                           </div>
                         </div>
-                          <!--cargo_ocupa_empresa_dependencia-->
+                        <!--cargo_ocupa_empresa_dependencia-->
                         <div class="form-group  row"><label class="col-sm-2 col-form-label">Cargo que Ocupa</label>
 
                           <div class="col-sm-10"><input type="text" name="cargo_ocupa_empresa_dependencia" placeholder="Cargo" class="form-control"></div>
@@ -616,12 +615,12 @@
                           <label class="col-sm-2 col-form-label">Nombre o Razon Social</label>
                           <div class="col-sm-4"><input type="text" name="cliente_nombre_razon_1_propio" placeholder="Nombre" class="form-control"></div>
 
-                            <!--cliente_ubicacion_1_propio-->
+                          <!--cliente_ubicacion_1_propio-->
                           <label class="col-sm-1 col-form-label">Ubicación</label>
                           <div class="col-sm-5"><input type="text" name="cliente_ubicacion_1_propio" placeholder="Ubicación" class="form-control"></div>
                         </div>
                         <div class="form-group  row">
-                            <!--cliente_nombre_razon_2_propio-->
+                          <!--cliente_nombre_razon_2_propio-->
                           <label class="col-sm-2 col-form-label">Nombre o Razon Social</label>
                           <div class="col-sm-4"><input type="text" name="cliente_nombre_razon_2_propio" placeholder="Nombre" class="form-control"></div>
 
@@ -640,7 +639,7 @@
                         </div>
                       </div>
                       <hr>
-                        <!--otras_fuentes_ingreso-->
+                      <!--otras_fuentes_ingreso-->
                       <div class="form-group  row"><label class="col-sm-2 col-form-label">Otras Fuentes de Ingreso</label>
                         <div class="col-sm-10">
                           <select class="form-control m-b" name="otras_fuentes_ingreso">
@@ -698,348 +697,347 @@
                       </div>
                       <hr>
                     </div>
-                </fieldset>
+                  </fieldset>
 
 
-                <h1>Información Producto o Servicio</h1>
-                <fieldset>
-                  <div class="form-group col">
-                    <!--nombre_producto-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre del Producto</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="nombre_producto">
-                          <option value="">Seleccione</option>
-                          @each(tipoInstrumentoFinanciero in data.tiposInstrumentosFinancieros)
-                          <option value="{{tipoInstrumentoFinanciero}}">{{tipoInstrumentoFinanciero}}</option>
-                          @endeach
-                        </select>
-                      </div>
-                    </div>
-                    <!--numero_producto-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Número de Producto</label>
-
-                      <div class="col-sm-10"><input type="text" name="numero_producto" placeholder="Beneficiario" class="form-control" maxlength="80" ></div>
-                    </div>
-                    <!--moneda_producto-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Moneda</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="moneda_producto">
-                          <option value="">Seleccione</option>
-                          @each(moneda in data.monedas)
-                          <option value="{{moneda}}">{{moneda}}</option>
-                          @endeach
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <h3>Información Sobre Movilización de Fondos </h3>
-                  <hr>
-                  <div class="form-group col">
-                    <!--monto_promedio_mensual-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Monto Promedio Mensual</label>
-
-                      <div class="col-sm-10"><input type="text" name="monto_promedio_mensual" placeholder="Monto" class="form-control" maxlength="80" ></div>
-                    </div>
-                    <h4>Numero de Transacciones por Transferencias</h4>
+                  <h1>Información Producto o Servicio</h1>
+                  <fieldset style="height: auto">
                     <div class="form-group col">
-                      <!--numero_promedio_transaccoines_debito-->
-                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Credito</label>
-
-                        <div class="col-sm-10"><input type="text" name="numero_promedio_transaccoines_debito" placeholder="Número" class="form-control" maxlength="80" ></div>
+                      <!--nombre_producto-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre del Producto</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="nombre_producto">
+                            <option value="">Seleccione</option>
+                            @each(tipoInstrumentoFinanciero in data.tiposInstrumentosFinancieros)
+                            <option value="{{tipoInstrumentoFinanciero}}">{{tipoInstrumentoFinanciero}}</option>
+                            @endeach
+                          </select>
+                        </div>
                       </div>
-                      <!--numero_promedio_transaccoines_credito-->
-                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Debito</label>
+                      <!--numero_producto-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Número de Producto</label>
 
-                        <div class="col-sm-10"><input type="text" name="numero_promedio_transaccoines_credito" placeholder="Número" class="form-control" maxlength="80" ></div>
+                        <div class="col-sm-10"><input type="text" name="numero_producto" placeholder="Beneficiario" class="form-control" maxlength="80" ></div>
+                      </div>
+                      <!--moneda_producto-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Moneda</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="moneda_producto">
+                            <option value="">Seleccione</option>
+                            @each(moneda in data.monedas)
+                            <option value="{{moneda}}">{{moneda}}</option>
+                            @endeach
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <h3>Información Sobre Movilización de Fondos </h3>
+                    <hr>
+                    <div class="form-group col">
+                      <!--monto_promedio_mensual-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Monto Promedio Mensual</label>
+
+                        <div class="col-sm-10"><input type="text" name="monto_promedio_mensual" placeholder="Monto" class="form-control" maxlength="80" ></div>
+                      </div>
+                      <h4>Numero de Transacciones por Transferencias</h4>
+                      <div class="form-group col">
+                        <!--numero_promedio_transaccoines_debito-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Credito</label>
+
+                          <div class="col-sm-10"><input type="text" name="numero_promedio_transaccoines_debito" placeholder="Número" class="form-control" maxlength="80" ></div>
+                        </div>
+                        <!--numero_promedio_transaccoines_credito-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Debito</label>
+
+                          <div class="col-sm-10"><input type="text" name="numero_promedio_transaccoines_credito" placeholder="Número" class="form-control" maxlength="80" ></div>
+                        </div>
+                      </div>
+                      <br>
+                      <h4>Enviar o Recibir Fondos de Exterior</h4>
+                      <div class="form-group col">
+                        <!--enviar_recibir_fondos_exterior_pais_origen-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">País Origen</label>
+                          <div class="col-sm-10">
+                            <select class="form-control m-b" name="enviar_recibir_fondos_exterior_pais_origen">
+                              <option value="">Seleccione</option>
+                              @each(pais in data.paises)
+                              <option value="{{pais.name}}">{{pais.name}}</option>
+                              @endeach
+                            </select>
+                          </div>
+                        </div>
+                        <!--enviar_recibir_fondos_exterior_pais_destino-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">País Destino</label>
+                          <div class="col-sm-10">
+                            <select class="form-control m-b" name="enviar_recibir_fondos_exterior_pais_destino">
+                              <option value="">Seleccione</option>
+                              @each(pais in data.paises)
+                              <option value="{{pais.name}}">{{pais.name}}</option>
+                              @endeach
+                            </select>
+                          </div>
+                        </div>
+                        <!--enviar_recibir_fondos_exterior_uso_moneda_virtual-->
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Uso de Moneda Virtual</label>
+                          <div class="col-sm-10">
+                            <select class="form-control m-b" name="enviar_recibir_fondos_exterior_uso_moneda_virtual">
+                              <option value="">Seleccione</option>
+                              @each(monedaVirtual in data.monedasVirtuales)
+                              <option value="{{monedaVirtual}}">{{monedaVirtual}}</option>
+                              @endeach
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                    <br>
+                    <h3>Cuentas u Otros Productos que Posea en la Institución del Sector Valores </h3>
+                    <hr>
+                    <div class="form-group col">
+                      <h4>Primer Producto</h4>
+                      <!--nombre_producto_otros_posee_1-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre del Producto</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="nombre_producto_otros_posee_1">
+                            <option value="">Seleccione</option>
+                            @each(tipoInstrumentoFinanciero in data.tiposInstrumentosFinancieros)
+                            <option value="{{tipoInstrumentoFinanciero}}">{{tipoInstrumentoFinanciero}}</option>
+                            @endeach
+                          </select>
+                        </div>
+                      </div>
+                      <!--numero_producto_otros_posee_1-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Número de Producto</label>
+
+                        <div class="col-sm-10"><input type="text" name="numero_producto_otros_posee_1" placeholder="Beneficiario" class="form-control" maxlength="80" ></div>
+                      </div>
+                      <!--moneda_producto_otros_posee_1-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Moneda</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="moneda_producto_otros_posee_1">
+                            <option value="">Seleccione</option>
+                            @each(moneda in data.monedas)
+                            <option value="{{moneda}}">{{moneda}}</option>
+                            @endeach
+                          </select>
+                        </div>
                       </div>
                     </div>
                     <br>
-                    <h4>Enviar o Recibir Fondos de Exterior</h4>
                     <div class="form-group col">
-                      <!--enviar_recibir_fondos_exterior_pais_origen-->
-                      <div class="form-group  row"><label class="col-sm-2 col-form-label">País Origen</label>
+                      <h4>Segundo Producto</h4>
+                      <!--nombre_producto_otros_posee_2-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre del Producto</label>
                         <div class="col-sm-10">
-                              <select class="form-control m-b" name="enviar_recibir_fondos_exterior_pais_origen">
+                          <select class="form-control m-b" name="nombre_producto_otros_posee_2">
                             <option value="">Seleccione</option>
-                            @each(pais in data.paises)
-                            <option value="{{pais.name}}">{{pais.name}}</option>
+                            @each(tipoInstrumentoFinanciero in data.tiposInstrumentosFinancieros)
+                            <option value="{{tipoInstrumentoFinanciero}}">{{tipoInstrumentoFinanciero}}</option>
                             @endeach
                           </select>
                         </div>
                       </div>
-                      <!--enviar_recibir_fondos_exterior_pais_destino-->
-                      <div class="form-group  row"><label class="col-sm-2 col-form-label">País Destino</label>
-                        <div class="col-sm-10">
-                          <select class="form-control m-b" name="enviar_recibir_fondos_exterior_pais_destino">
-                            <option value="">Seleccione</option>
-                            @each(pais in data.paises)
-                            <option value="{{pais.name}}">{{pais.name}}</option>
-                            @endeach
-                          </select>
-                        </div>
+                      <!--numero_producto_otros_posee_2-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Número de Producto</label>
+
+                        <div class="col-sm-10"><input type="text" name="numero_producto_otros_posee_2" placeholder="Beneficiario" class="form-control" maxlength="80" ></div>
                       </div>
-                      <!--enviar_recibir_fondos_exterior_uso_moneda_virtual-->
-                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Uso de Moneda Virtual</label>
+                      <!--moneda_producto_otros_posee_2-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Moneda</label>
                         <div class="col-sm-10">
-                          <select class="form-control m-b" name="enviar_recibir_fondos_exterior_uso_moneda_virtual">
+                          <select class="form-control m-b" name="moneda_producto_otros_posee_2">
                             <option value="">Seleccione</option>
-                            @each(monedaVirtual in data.monedasVirtuales)
-                            <option value="{{monedaVirtual}}">{{monedaVirtual}}</option>
+                            @each(moneda in data.monedas)
+                            <option value="{{moneda}}">{{moneda}}</option>
                             @endeach
                           </select>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <hr>
-                  <br>
-                  <h3>Cuentas u Otros Productos que Posea en la Institución del Sector Valores </h3>
-                  <hr>
-                  <div class="form-group col">
-                    <h4>Primer Producto</h4>
-                    <!--nombre_producto_otros_posee_1-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre del Producto</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="nombre_producto_otros_posee_1">
-                          <option value="">Seleccione</option>
-                          @each(tipoInstrumentoFinanciero in data.tiposInstrumentosFinancieros)
-                          <option value="{{tipoInstrumentoFinanciero}}">{{tipoInstrumentoFinanciero}}</option>
-                          @endeach
-                        </select>
+                    <br>
+                    <div class="form-group col">
+                      <h4>Tercer Producto</h4>
+                      <!--nombre_producto_otros_posee_3-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre del Producto</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="nombre_producto_otros_posee_3">
+                            <option value="">Seleccione</option>
+                            @each(tipoInstrumentoFinanciero in data.tiposInstrumentosFinancieros)
+                            <option value="{{tipoInstrumentoFinanciero}}">{{tipoInstrumentoFinanciero}}</option>
+                            @endeach
+                          </select>
+                        </div>
                       </div>
-                    </div>
-                    <!--numero_producto_otros_posee_1-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Número de Producto</label>
+                      <!--numero_producto_otros_posee_3-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Número de Producto</label>
 
-                      <div class="col-sm-10"><input type="text" name="numero_producto_otros_posee_1" placeholder="Beneficiario" class="form-control" maxlength="80" ></div>
-                    </div>
-                    <!--moneda_producto_otros_posee_1-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Moneda</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="moneda_producto_otros_posee_1">
-                          <option value="">Seleccione</option>
-                          @each(moneda in data.monedas)
-                          <option value="{{moneda}}">{{moneda}}</option>
-                          @endeach
-                        </select>
+                        <div class="col-sm-10"><input type="text" name="numero_producto_otros_posee_3" placeholder="Beneficiario" class="form-control" maxlength="80" ></div>
+                      </div>
+                      <!--moneda_producto_otros_posee_3-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Moneda</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="moneda_producto_otros_posee_3">
+                            <option value="">Seleccione</option>
+                            @each(moneda in data.monedas)
+                            <option value="{{moneda}}">{{moneda}}</option>
+                            @endeach
+                          </select>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <br>
-                  <div class="form-group col">
-                    <h4>Segundo Producto</h4>
-                    <!--nombre_producto_otros_posee_2-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre del Producto</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="nombre_producto_otros_posee_2">
-                          <option value="">Seleccione</option>
-                          @each(tipoInstrumentoFinanciero in data.tiposInstrumentosFinancieros)
-                          <option value="{{tipoInstrumentoFinanciero}}">{{tipoInstrumentoFinanciero}}</option>
-                          @endeach
-                        </select>
+                    <hr>
+                    <br>
+                    <div class="form-group col">
+                      <!--motivo_solicita_servicios-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Motivo por el Cual Solicita los Servicios</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="motivo_solicita_servicios">
+                            <option value="">Seleccione</option>
+                            @each(tipoInstrumentoFinanciero in data.tiposInstrumentosFinancieros)
+                            <option value="{{tipoInstrumentoFinanciero}}">{{tipoInstrumentoFinanciero}}</option>
+                            @endeach
+                          </select>
+                        </div>
                       </div>
-                    </div>
-                    <!--numero_producto_otros_posee_2-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Número de Producto</label>
+                      <!--origen_fondos-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Origen de los Fondos</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="origen_fondos">
+                            <option value="">Seleccione</option>
+                            @each(origenFondo in data.origenFondos)
+                            <option value="{{origenFondo}}">{{origenFondo}}</option>
+                            @endeach
+                          </select>
+                        </div>
+                      </div>
+                      <!--destino_fondos-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Destino de los Fondos</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="destino_fondos">
+                            <option value="">Seleccione</option>
+                            @each(destinoFondo in data.destinoFondos)
+                            <option value="{{destinoFondo}}">{{destinoFondo}}</option>
+                            @endeach
+                          </select>
+                        </div>
+                      </div>
 
-                      <div class="col-sm-10"><input type="text" name="numero_producto_otros_posee_2" placeholder="Beneficiario" class="form-control" maxlength="80" ></div>
                     </div>
-                    <!--moneda_producto_otros_posee_2-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Moneda</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="moneda_producto_otros_posee_2">
-                          <option value="">Seleccione</option>
-                          @each(moneda in data.monedas)
-                          <option value="{{moneda}}">{{moneda}}</option>
-                          @endeach
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <br>
-                  <div class="form-group col">
-                    <h4>Tercer Producto</h4>
-                    <!--nombre_producto_otros_posee_3-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre del Producto</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="nombre_producto_otros_posee_3">
-                          <option value="">Seleccione</option>
-                          @each(tipoInstrumentoFinanciero in data.tiposInstrumentosFinancieros)
-                          <option value="{{tipoInstrumentoFinanciero}}">{{tipoInstrumentoFinanciero}}</option>
-                          @endeach
-                        </select>
-                      </div>
-                    </div>
-                    <!--numero_producto_otros_posee_3-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Número de Producto</label>
+                  </fieldset>
 
-                      <div class="col-sm-10"><input type="text" name="numero_producto_otros_posee_3" placeholder="Beneficiario" class="form-control" maxlength="80" ></div>
-                    </div>
-                    <!--moneda_producto_otros_posee_3-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Moneda</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="moneda_producto_otros_posee_3">
-                          <option value="">Seleccione</option>
-                          @each(moneda in data.monedas)
-                          <option value="{{moneda}}">{{moneda}}</option>
-                          @endeach
-                        </select>
+                  <h1>Perfil del Inversionista</h1>
+                  <fieldset style="height: auto">
+                    <div class="form-group col">
+                      <!--experiencia_inversiones-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Tiene Experiencia en Inversiones</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="experiencia_inversiones">
+                            <option value="">Seleccionar</option>
+                            <option value="1">Si</option>
+                            <option value="0">No</option>
+                          </select>
+                        </div>
+                      </div>
+                      <!--tipo_inversion-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Tiene Experiencia en Inversiones</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="tipo_inversion">
+                            <option value="">Seleccionar</option>
+                            <option value="Inmobiliaria">Inmobiliaria</option>
+                            <option value="Bursatil">Bursatil</option>
+                            <option value="Riesgo">Riesgo</option>
+                          </select>
+                        </div>
+                      </div>
+                      <!--tiempo_inversion-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Tiene Experiencia en Inversiones</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="tiempo_inversion">
+                            <option value="">Seleccionar</option>
+                            <option value="1">1 Año</option>
+                            <option value="2">2 Años</option>
+                            <option value="3">3 Años</option>
+                            <option value="Mas De 3">Mas De 3 Años</option>
+                          </select>
+                        </div>
+                      </div>
+                      <h4>Nivel de Conocimiento y Experiencia como Inversionista</h4>
+                      <!--anos_experiencia-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Años de Experiencia</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="anos_experiencia">
+                            <option value="">Seleccionar</option>
+                            <option value="1">1 Año</option>
+                            <option value="2">2 Años</option>
+                            <option value="3">3 Años</option>
+                            <option value="Mas De 3">Mas De 3 Años</option>
+                          </select>
+                        </div>
+                      </div>
+                      <!--nivel_riesgo_asumir-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Nivel de Riesgo a Asumir</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="nivel_riesgo_asumir">
+                            <option value="">Seleccionar</option>
+                            <option value="Bajo">Bajo</option>
+                            <option value="Medio">Medio</option>
+                            <option value="Alto">Alto</option>
+                          </select>
+                        </div>
+                      </div>
+                      <!--tipos_instrumentos_financieros_experiencia-->
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Tipos de Instrumentos Financieros con los que Ha Tenido Experiencia</label>
+                        <div class="col-sm-10">
+                          <select class="form-control m-b" name="tipos_instrumentos_financieros_experiencia">
+                            <option value="">Seleccionar</option>
+                            @each(instrumentoFinanciero in data.tiposInstrumentosFinancieros)
+                            <option value="{{instrumentoFinanciero}}">{{instrumentoFinanciero}}</option>
+                            @endeach
+                          </select>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <hr>
-                  <br>
-                  <div class="form-group col">
-                    <!--motivo_solicita_servicios-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Motivo por el Cual Solicita los Servicios</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="motivo_solicita_servicios">
-                          <option value="">Seleccione</option>
-                          @each(tipoInstrumentoFinanciero in data.tiposInstrumentosFinancieros)
-                          <option value="{{tipoInstrumentoFinanciero}}">{{tipoInstrumentoFinanciero}}</option>
-                          @endeach
-                        </select>
-                      </div>
-                    </div>
-                    <!--origen_fondos-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Origen de los Fondos</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="origen_fondos">
-                          <option value="">Seleccione</option>
-                          @each(origenFondo in data.origenFondos)
-                          <option value="{{origenFondo}}">{{origenFondo}}</option>
-                          @endeach
-                        </select>
-                      </div>
-                    </div>
-                    <!--destino_fondos-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Destino de los Fondos</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="destino_fondos">
-                          <option value="">Seleccione</option>
-                          @each(destinoFondo in data.destinoFondos)
-                          <option value="{{destinoFondo}}">{{destinoFondo}}</option>
-                          @endeach
-                        </select>
-                      </div>
-                    </div>
-
-                  </div>
-                </fieldset>
-
-                <h1>Perfil del Inversionista</h1>
-                <fieldset>
-                  <div class="form-group col">
-                    <!--experiencia_inversiones-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Tiene Experiencia en Inversiones</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="experiencia_inversiones">
-                          <option value="">Seleccionar</option>
-                          <option value="1">Si</option>
-                          <option value="0">No</option>
-                        </select>
-                      </div>
-                    </div>
-                    <!--tipo_inversion-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Tiene Experiencia en Inversiones</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="tipo_inversion">
-                          <option value="">Seleccionar</option>
-                          <option value="Inmobiliaria">Inmobiliaria</option>
-                          <option value="Bursatil">Bursatil</option>
-                          <option value="Riesgo">Riesgo</option>
-                        </select>
-                      </div>
-                    </div>
-                    <!--tiempo_inversion-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Tiene Experiencia en Inversiones</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="tiempo_inversion">
-                          <option value="">Seleccionar</option>
-                          <option value="1">1 Año</option>
-                          <option value="2">2 Años</option>
-                          <option value="3">3 Años</option>
-                          <option value="Mas De 3">Mas De 3 Años</option>
-                        </select>
-                      </div>
-                    </div>
-                    <h4>Nivel de Conocimiento y Experiencia como Inversionista</h4>
-                    <!--anos_experiencia-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Años de Experiencia</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="anos_experiencia">
-                          <option value="">Seleccionar</option>
-                          <option value="1">1 Año</option>
-                          <option value="2">2 Años</option>
-                          <option value="3">3 Años</option>
-                          <option value="Mas De 3">Mas De 3 Años</option>
-                        </select>
-                      </div>
-                    </div>
-                    <!--nivel_riesgo_asumir-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Nivel de Riesgo a Asumir</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="nivel_riesgo_asumir">
-                          <option value="">Seleccionar</option>
-                          <option value="Bajo">Bajo</option>
-                          <option value="Medio">Medio</option>
-                          <option value="Alto">Alto</option>
-                        </select>
-                      </div>
-                    </div>
-                    <!--tipos_instrumentos_financieros_experiencia-->
-                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Tipos de Instrumentos Financieros con los que Ha Tenido Experiencia</label>
-                      <div class="col-sm-10">
-                        <select class="form-control m-b" name="tipos_instrumentos_financieros_experiencia">
-                          <option value="">Seleccionar</option>
-                          @each(instrumentoFinanciero in data.tiposInstrumentosFinancieros)
-                          <option value="{{instrumentoFinanciero}}">{{instrumentoFinanciero}}</option>
-                          @endeach
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </fieldset>
+                  </fieldset>
 
 
-                <h1>Documentos</h1>
-                <fieldset>
-                  <h2>Se necesitan imagenes de los siguientes documentos</h2>
-                  <!--img_cedula_pasaporte-->
-                  <div class="form-group  row"><label class="col-sm-2 col-form-label">Cédula o Pasaporte</label>
-                    <div class="col-sm-10">
-                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                  <h1>Documentos</h1>
+                  <fieldset style="height: auto">
+                    <h2>Se necesitan imagenes de los siguientes documentos</h2>
+                    <!--img_cedula_pasaporte-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Cédula o Pasaporte</label>
+                      <div class="col-sm-10">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
                         <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar Archivo</span>
                           <span class="fileinput-exists">Cambiar</span><input type="file" name="img_cedula_pasaporte" required/></span>
-                        <span class="fileinput-filename"></span>
-                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+                          <span class="fileinput-filename"></span>
+                          <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <!--img_rif-->
-                  <div class="form-group  row"><label class="col-sm-2 col-form-label">RIF</label>
-                    <div class="col-sm-10">
-                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <!--img_rif-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">RIF</label>
+                      <div class="col-sm-10">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
                         <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar Archivo</span>
                           <span class="fileinput-exists">Cambiar</span><input type="file" name="img_rif" required/></span>
-                        <span class="fileinput-filename"></span>
-                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+                          <span class="fileinput-filename"></span>
+                          <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <!--img_recibo-->
-                  <div class="form-group  row"><label class="col-sm-2 col-form-label">Recibo</label>
-                    <div class="col-sm-10">
-                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <!--img_recibo-->
+                    <div class="form-group  row"><label class="col-sm-2 col-form-label">Recibo</label>
+                      <div class="col-sm-10">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
                         <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar Archivo</span>
                           <span class="fileinput-exists">Cambiar</span><input type="file" name="img_recibo" required/></span>
-                        <span class="fileinput-filename"></span>
-                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+                          <span class="fileinput-filename"></span>
+                          <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </fieldset>
-
+                  </fieldset>
             </form>
           </div>
         </div>

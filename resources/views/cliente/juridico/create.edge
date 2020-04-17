@@ -22,6 +22,7 @@
 </head>
 
 @include('partials.header')
+@include('partials.nav')
 
 <div id="wrapper">
 
@@ -34,7 +35,7 @@
               <h2>Registro Inversionistas Juridico</h2>
               <form id="form" action="/cliente/juridico" method="POST" class="wizard-big" enctype="multipart/form-data">
                 <h1>Datos</h1>
-                <fieldset>
+                <fieldset style="height: auto">
                   <h2>Datos de Identificación de la Empresa</h2>
                   <div class="form-group col">
                     <!--registro_informacion_fiscal-->
@@ -227,7 +228,7 @@
                 </fieldset>
 
                 <h1>Información Economica Financiera</h1>
-                <fieldset>
+                <fieldset style="height: auto">
                   <div class="form-group col">
                     <h3>Accionistas/Junta Directiva</h3>
                     <hr>
@@ -867,7 +868,7 @@
                 </fieldset>
 
                 <h1>Cuentas en Divisas</h1>
-                <fieldset>
+                <fieldset style="height: auto">
                   <h3>Banco Beneficiario</h3>
                   <div class="form-group col">
                     <!--nombre_banco_beneficiario-->
@@ -930,7 +931,7 @@
                 </fieldset>
 
                 <h1>Información Producto o Servicio</h1>
-                <fieldset>
+                <fieldset style="height: auto">
                   <div class="form-group col">
                     <!--nombre_producto-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Nombre del Producto</label>
@@ -1157,7 +1158,7 @@
 
 
                 <h1>Perfil del Inversionista</h1>
-                <fieldset>
+                <fieldset style="height: auto">
                   <div class="form-group col">
                     <!--experiencia_inversiones-->
                     <div class="form-group  row"><label class="col-sm-2 col-form-label">Tiene Experiencia en Inversiones</label>
@@ -1231,7 +1232,7 @@
                 </fieldset>
 
                 <h1>Documentos</h1>
-                <fieldset>
+                <fieldset style="height: auto">
                   <h2>Se necesitan imagenes de los siguientes documentos</h2>
                   <!--documento_constitutivo_empresas-->
                   <div class="form-group  row"><label class="col-sm-2 col-form-label">Cédula o Pasaporte</label>

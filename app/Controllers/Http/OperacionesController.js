@@ -23,7 +23,7 @@ class OperacionesController {
    */
   async index ({params: {tipoCliente}, request, response, view }) {
 
-    if (tipoCliente === '!natural'){
+    if (!(tipoCliente) ||tipoCliente === '!natural'){
       let clientes = await ClienteNatural
         .query()
         .where('estatus_legal', true)

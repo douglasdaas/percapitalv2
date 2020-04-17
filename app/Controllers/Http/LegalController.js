@@ -24,8 +24,7 @@ class LegalController {
    * @param {View} ctx.view
    */
   async index ({ params:{tipoCliente}, request, response, view }) {
-
-    if (tipoCliente === '!natural'){
+    if (!(tipoCliente) || tipoCliente === '!natural'){
       let clientes = await ClienteNatural.all()
 
       clientes = clientes.toJSON()
