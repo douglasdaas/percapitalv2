@@ -34,10 +34,10 @@
                 <dl class="row mb-0">
                   <div class="col-sm-4 text-sm-right"><dt>Estatus de Unidades:</dt> </div>
                   <div class="col-sm-8 text-sm-left"><dd class="mb-1">
-                    @if( cliente.solicitudesSuscripcion[0].unidades_asignadas === 1)
-                    <span class="label label-primary">{{ estatusUnidadesAsignadas(cliente.solicitudesSuscripcion[0].unidades_asignadas) }}</span>
+                    @if( cliente.solicitudesRescate[0].unidades_rescatadas === 1)
+                    <span class="label label-primary">{{ estatusUnidadesRescatadas(cliente.solicitudesRescate[0].unidades_rescatadas) }}</span>
                     @else
-                    <span class="label label-danger">{{ estatusUnidadesAsignadas(cliente.solicitudesSuscripcion[0].unidades_asignadas) }}</span>
+                    <span class="label label-danger">{{ estatusUnidadesRescatadas(cliente.solicitudesRescate[0].unidades_rescatadas) }}</span>
                     @endif
                   </dd>
                   </div>
@@ -124,18 +124,26 @@
                 </dl>
                 <dl class="row mb-0">
                   <div class="col-sm-8 text-sm-left">
-                    @if(cliente.solicitudesSuscripcion[0].estatus_conciliacion === 1 && cliente.solicitudesSuscripcion[0].pagos !== null &&  cliente.solicitudesSuscripcion[0].unidades_asignadas === 0)
-                    <h4>Solictud Unidades:</h4>
-                    <dt>Cantidad de Unidades: <br> {{cliente.solicitudesSuscripcion[0].cantidad_unidades_inversion}}</dt>
+                    @if(cliente.solicitudesRescate[0].estatus_conciliacion === 1 &&  cliente.solicitudesRescate[0].unidades_rescatadas === 0)
+                    <h4>Solictud de Rescate de Unidades:</h4>
+                    <dt>Cantidad de Unidades: <br> {{cliente.solicitudesRescate[0].cantidad_unidades_inversion}}</dt>
                     <dt>Precio por Unidad: <br> 5,000 Bs</dt>
-                    <dt>Monto total: {{cliente.solicitudesSuscripcion[0].total.toLocaleString()}} Bs</dt>
-                    <dt>En Fecha: {{cliente.solicitudesSuscripcion[0].created_at}}<dt>
+                    <dt>Monto total: {{cliente.solicitudesRescate[0].total.toLocaleString()}} Bs</dt>
+                    <dt>En Fecha: {{cliente.solicitudesRescate[0].created_at}}<dt>
+                    <dt>En Fecha: {{cliente.solicitudesRescate[0].created_at}}<dt>
+                    <dt>Comprobante:</dt>
+                    <div class="col-sm-8 text-sm-left">
+                      <dd class="project-people mb-1">
+                        <a href="/pago-rescate/download/{{cliente.solicitudesRescate[0].pagoRescate.id}}">Comprobante</a>
+                        <!--                                                        <img alt="comprobante-pago" class="img-lg" src="/archivos/comprobantes-pago/{{cliente.solicitudesSuscripcion[0].pagos.combrobate_pago}}">-->
+                      </dd>
+                    </div>
                     <br>
-                    <form action="/tesoreria!natural/{{cliente.solicitudesSuscripcion[0].id}}?_method=PATCH" method="post">
-                      <button name="clienteId" value="{{cliente.documento_identificacion}}" formenctype="application/x-www-form-urlencoded" class="btn btn-block btn-outline btn-primary">Asignar Unidades</button>
+                    <form action="/tesoreria!natural/rescate/{{cliente.solicitudesRescate[0].id}}?_method=PATCH" method="post">
+                      <button name="clienteId" value="{{cliente.documento_identificacion}}" formenctype="application/x-www-form-urlencoded" class="btn btn-block btn-outline btn-primary">Rescatar Unidades</button>
                     </form>
                     @else
-                    <h4>No posee unidades sin asignar</h4>
+                    <h4>No posee unidades sin rescatar</h4>
                     @endif
                   </div>
                 </dl>

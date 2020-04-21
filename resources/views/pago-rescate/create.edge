@@ -1,0 +1,87 @@
+<head>
+
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="/css/plugins/iCheck/custom.css" rel="stylesheet">
+  <link href="/css/animate.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+
+  <link href="/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
+
+  <link href="/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+
+  <link href="/css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
+
+
+</head>
+
+@include('partials.header')
+@include('partials.nav')
+
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+  <div>
+    <div>
+
+      <!--<h1 class="logo-name">PerCapital</h1>-->
+
+    </div>
+    <h3 class="ibox-title">Rescate de Unidades de Inversión</h3>
+    <!--<p>Create account to see it in action.</p>-->
+    <div class="ibox-content">
+      <form action="/pago-rescate/{{solicitudRescate.id}}" method="post" enctype="multipart/form-data">
+        <h3  style="text-align: justify">Monto: {{solicitudRescate.total.toLocaleString('de-DE')}} Bs</h3>
+<!--        <div class="form-group">-->
+<!--          <input type="text" class="form-control" name="monto" placeholder="monto" value="{{solicitudRescate.total.toLocaleString('de-DE')}} Bs" readonly>-->
+<!--        </div>-->
+        <h3 style="text-align: justify">Unidades a Rescatar: {{solicitudRescate.cantidad_unidades_inversion}}</h3>
+        <h3 style="text-align: justify">Precio Unidades: {{precio.toLocaleString('de-DE')}} Bs</h3>
+        <h3 style="text-align: left">Fecha en que se hace la trasnferencia:</h3>
+        <div class="form-group" id="data_1">
+          <div class="input-group date ">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="fecha_realizada_transferencia" value="03/04/2014" required>
+          </div>
+        </div>
+        <h3>Refrencia:</h3>
+        <div class="form-group">
+          <input type="text" class="form-control" name="referencia" placeholder="Referencia" required>
+        </div>
+        <h3>Comoprobante de pago</h3>
+        <p>Por favor suba una imagen con el comprobante de la transferencia</p>
+
+        <div class="fallback dropzone">
+          <input name="img_comprobante_recibo" type="file" required />
+        </div>
+        <br>
+
+        <button type="submit" class="btn btn-primary block full-width m-b">Subir Pago</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<!-- Mainly scripts -->
+<script src="/js/jquery-3.1.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<!-- iCheck -->
+<script src="/js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- Data picker -->
+<script src="/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script>
+  $(document).ready(function(){
+    $('.i-checks').iCheck({
+      checkboxClass: 'icheckbox_square-green',
+      radioClass: 'iradio_square-green',
+    });
+    var mem = $('#data_1 .input-group.date').datepicker({
+      startView: 2,
+      todayBtn: "linked",
+      keyboardNavigation: false,
+      forceParse: false,
+      calendarWeeks: false,
+      autoclose: true
+    });
+  });
+</script>

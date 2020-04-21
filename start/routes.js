@@ -64,6 +64,12 @@ Route.group(() =>{
   Route.get('/download/:id', 'PagoController.download')
 }).prefix('pago-suscripcion')
 
+//PAGO RESCATE UI
+Route.group(() =>{
+  Route.get('/create/:id', 'PagoRescateUiController.create')
+  Route.post('/:id','PagoRescateUiController.store')
+  Route.get('/download/:id', 'PagoRescateUiController.download')
+}).prefix('pago-rescate')
 
 //LEGAL
 Route.group( () =>{
@@ -83,14 +89,19 @@ Route.group( () =>{
   Route.get('conciliacion-pagos','SolicitudSuscripcionUiController.index')
   Route.get('conciliacion-pagos/:id','SolicitudSuscripcionUiController.show')
   Route.patch('conciliacion-pagos/:id','SolicitudSuscripcionUiController.update')
+  Route.get('solicitud-rescate','SolicitudRescateUiController.index')
+  Route.get('solicitud-rescate/:id','SolicitudRescateUiController.show')
+  Route.patch('solicitud-rescate/:id','SolicitudRescateUiController.update')
 }).prefix('operaciones:tipoCliente?')
 Route.resource('operaciones:tipoCliente?', 'OperacionesController').only(['index','show','update'])
 
 
 //TESORERIA
 Route.group( () =>{
-
-}).prefix('tesoreria')
+  Route.get('/rescate','RescateUiController.index')
+  Route.get('/rescate/:id','RescateUiController.show')
+  Route.patch('/rescate/:id','RescateUiController.update')
+}).prefix('tesoreria:tipoCliente?')
 Route.resource('tesoreria:tipoCliente?', 'TesoreriaController').only(['index','show','update'])
 
 

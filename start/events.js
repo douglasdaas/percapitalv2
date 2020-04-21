@@ -2,6 +2,7 @@
 
 const Event = use('Event')
 const Mail = use('Mail')
+const Helpers = use('Helpers')
 
 Event.on('aprobadoLegal::clienteJuridico', async (cliente) => {
   Mail.send('emails.juridico.aprobacion-legal', cliente.toJSON(), (message) => {
@@ -91,6 +92,27 @@ Event.on('usuarioCreado::clienteNatural', async (datos) =>{
       .from('testapp@per-capital.com', 'PerCapital')
       .subject('Usuario en PerCapital')
   })
+})
+
+Event.on('rescateUnidades::clienteJuridico', async (datos) =>{
+  Mail.send('emails.unidades-rescatadas', datos, (message) => {
+    message
+      .to(datos.cliente.correo_electronico, `${datos.cliente.razon_social} `)
+      .from('testapp@per-capital.com', 'PerCapital')
+      .subject('Rescate de Unidades de Inverción')
+      .attach( Helpers.appRoot(`archivos/comprobantes-pago/rescate/${datos.pagoRescate.comprobate_pago}`))
+  })
+})
+
+Event.on('rescateUnidades::clienteNatural', async (datos) =>{
+  const mail = await Mail.send('emails.unidades-rescatadas', datos, (message) => {
+    message
+      .to(datos.cliente.correo_electronico, `${datos.cliente.nombre} ${datos.cliente.apellido}`)
+      .from('testapp@per-capital.com', 'PerCapital')
+      .subject('Rescate de Unidades de Inverción')
+      .attach( Helpers.appRoot(`archivos/comprobantes-pago/rescate/${datos.pagoRescate.comprobate_pago}`))
+  })
+  console.log('mail:: ',mail)
 })
 
 

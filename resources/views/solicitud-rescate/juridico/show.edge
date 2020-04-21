@@ -35,9 +35,9 @@
                                         <div class="col-sm-4 text-sm-right"><dt>Estatus de Pagos:</dt> </div>
                                         <div class="col-sm-8 text-sm-left"><dd class="mb-1">
                                           @if( cliente.solicitudes[0].estatus_conciliacion === 1)
-                                          <span class="label label-primary">{{ estatusConciliacion(cliente.solicitudes[0].estatus_conciliacion) }}</span>
+                                          <span class="label label-primary">{{ estatusRescateConciliacion(cliente.solicitudesRescate[0].estatus_conciliacion) }}</span>
                                           @else
-                                          <span class="label label-danger">{{ estatusConciliacion(cliente.solicitudes[0].estatus_conciliacion) }}</span>
+                                          <span class="label label-danger">{{ estatusRescateConciliacion(cliente.solicitudesRescate[0].estatus_conciliacion) }}</span>
                                           @endif
                                         </dd></div>
                                     </dl>
@@ -111,26 +111,24 @@
                                     </dl>
                                         <dl class="row mb-0">
                                             <div class="col-sm-8 text-sm-left">
-                                                @if(cliente.solicitudes[0].estatus_conciliacion === 0 && cliente.solicitudes[0].pagos !== null)
-                                                    <h4>Conciliar Pago de Solictud de Unidades de Inversión:</h4>
-                                                    <dt>Pago en fecha: <br> {{cliente.solicitudes[0].pagos.created_at}}</dt>
-                                                    <dt>Por monto: {{cliente.solicitudes[0].pagos.monto.toLocaleString()}} Bs</dt>
-                                                    <dt>Numero de Referencia: {{cliente.solicitudes[0].pagos.referencia}}<dt>
-                                                    <dt>Comprobante:</dt>
-                                                    <div class="col-sm-8 text-sm-left">
-                                                      <dd class="project-people mb-1">
-                                                        <a href="/pago-suscripcion/download/{{cliente.solicitudes[0].pagos.id}}">Comprobante</a>
-<!--                                                        <img alt="comprobante-pago" class="img-lg" src="/archivos/comprobantes-pago/{{cliente.solicitudes[0].pagos.combrobate_pago}}">-->
-                                                      </dd>
-                                                    </div>
-                                                    <form action="/operaciones!natural/conciliacion-pagos/{{cliente.solicitudes[0].id}}?_method=PATCH" method="post">
-                                                      <button class="btn btn-block btn-outline btn-primary">Coinciliar Pago</button>
-                                                    </form>
-                                                @elseif(cliente.solicitudes[0].estatus_conciliacion === 0 && cliente.solicitudes[0].pagos === null)
-                                                    <h4>No se ha registrado ningun pago</h4>
-                                                @else
+                                              @if(cliente.solicitudesRescate[0].estatus_conciliacion === 0)
+                                              <h4>Conciliar Rescate de Solictud de Unidades de Inversión:</h4>
+                                              <dt>Solicitud de Rescate en fecha: <br> {{cliente.solicitudesRescate[0].created_at}}</dt>
+                                              <dt>Por Unidades: {{cliente.solicitudesRescate[0].cantidad_unidades_inversion}} UI(s)</dt>
+                                              <dt>Precio de la UI : 50,000 Bs</dt>
+                                              <dt>Monto a Rescatar: {{(cliente.solicitudesRescate[0].cantidad_unidades_inversion*50000)}} Bs</dt>
+                                              <dt>Banco a Realizar la Transferencia: {{cliente.institucion_bancaria}}<dt>
+                                              <dt>Tipo de Cuenta: {{cliente.nombre_producto_bancario}}<dt>
+                                              <dt>Numero de Cuenta: {{cliente.numero_producto_bancario}}<dt>
+                                              <br>
+                                              <form action="/pago-rescate/create/{{cliente.solicitudesRescate[0].id}}" method="get">
+                                                <button class="btn btn-block btn-outline btn-primary">Realizar del Rescate </button>
+                                                <br>
+                                                <small>Recuerde Tomar Captura o Guardar el Comprobante de la Transferencia</small>
+                                              </form>
+                                              @else
 
-                                                @endif
+                                              @endif
                                             </div>
                                         </dl>
                                 </div>

@@ -24,7 +24,45 @@ class SolicitudRescateUiController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
+  async index ({params:{tipoCliente}, request, response, view }) {
+
+    if (!(tipoCliente) || tipoCliente === '!natural'){
+      let clientes = await ClienteNatural
+        .query()
+        .where('estatus_legal', true)
+        .where('estatus_CVV', true)
+        .has('solicitudesRescate')
+        .with('solicitudesRescate', (builder) => {
+          builder
+            .orderBy('created_at', 'asc')
+            .limit(1)
+        })
+        .fetch()
+
+      clientes = clientes.toJSON()
+
+      console.log(clientes)
+
+      return view.render('solicitud-rescate.natural.index', {clientes})
+
+    } else if (tipoCliente === '!juridico'){
+      let clientes = await ClienteJuridico
+        .query()
+        .where('estatus_legal', true)
+        .where('estatus_CVV', true)
+        .has('solicitudesRescate')
+        .with('solicitudesRescate', (builder) => {
+          builder
+            .orderBy('created_at', 'asc')
+            .limit(1)
+        })
+        .fetch()
+
+      clientes = clientes.toJSON()
+
+      return view.render('solicitud-rescate.juridico.index', {clientes})
+    }
+
   }
 
   /**
@@ -76,7 +114,7 @@ class SolicitudRescateUiController {
       // Event.fire('pagoSolicitudSuscripcionUI::clienteNatural', datos)
 
       if (auth.user) {
-        return response.redirect(`/usuario!natural/${usuario.cliente_natural_id}`)
+        return response.redirect(`/usuario!natural/${auth.user.cliente_natural_id}`)
       } else {
         return response.redirect('http://per-capital.com/',200)
       }
@@ -102,7 +140,7 @@ class SolicitudRescateUiController {
       // Event.fire('pagoSolicitudSuscripcionUI::clienteJuridico', datos)
 
       if (auth.user) {
-        return response.redirect(`/usuario!juridico/${usuario.cliente_juridico_id}`)
+        return response.redirect(`/usuario!juridico/${auth.user.cliente_juridico_id}`)
       } else {
         return response.redirect('http://per-capital.com/',200)
       }
@@ -121,7 +159,28 @@ class SolicitudRescateUiController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
+  async show ({ params: {id, tipoCliente}, request, response, view }) {
+    if (tipoCliente === '!natural'){
+      let cliente = await ClienteNatural.find(id)
+      await cliente.loadMany({
+        solicitudesRescate: (builder) => builder.orderBy('created_at', 'asc').limit(1)
+      })
+
+
+      cliente = cliente.toJSON()
+
+      return view.render('solicitud-rescate.natural.show', {cliente})
+
+    } else if (tipoCliente === '!juridico'){
+      let cliente = await ClienteJuridico.find(id)
+      await cliente.loadMany({
+        solicitudesRescate: (builder) => builder.orderBy('created_at', 'asc').limit(1)
+      })
+
+      cliente = cliente.toJSON()
+
+      return view.render('solicitud-rescate.juridico.show', {cliente})
+    }
   }
 
   /**
@@ -144,7 +203,32 @@ class SolicitudRescateUiController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
+  async update ({ params:{id, tipoCliente}, request, response }) {
+    //TODO Que esta verga funcione (redireccionar a update desde el store de pago rescate)
+
+    // console.log('entra update')
+    //
+    // if (tipoCliente === '!natural'){
+    //   let solicitudRescate = await SolicitudRescateUi.find(id)
+    //
+    //   solicitudRescate.estatus_conciliacion = true
+    //
+    //   await solicitudRescate.save()
+    //
+    //
+    //   return response.redirect('/operaciones!natural/solicitud-rescate',200)
+    //
+    // } else if (tipoCliente === '!juridico'){
+    //   let solicitudRescate = await SolicitudRescateUi.find(id)
+    //
+    //   solicitudRescate.estatus_conciliacion = true
+    //
+    //   await solicitudRescate.save()
+    //
+    //
+    //   return response.redirect('/operaciones!natural/solicitud-rescate',200)
+    // }
+
   }
 
   /**

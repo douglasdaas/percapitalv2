@@ -8,6 +8,13 @@ tmp
 # Environment variables, never commit this file
 .env
 
+# Archivos
+archivos/comprobantes-pago
+archivos/deberes-legales
+archivos/documentos-empresas
+archivos/formatos
+archivos/leyes-y-normas
+
 # The development sqlite file
 database/*.sqlite
 

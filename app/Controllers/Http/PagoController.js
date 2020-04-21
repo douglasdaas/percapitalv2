@@ -58,10 +58,10 @@ class PagoController {
       size: '5mb'
     })
 
-    informacionPago.combrobate_pago = `comprobante-${new Date().getTime()}.${archivoComprobante.subtype}`
+    informacionPago.comprobate_pago = `comprobante-${new Date().getTime()}.${archivoComprobante.subtype}`
 
-    await archivoComprobante.move(Helpers.appRoot('archivos/comprobantes-pago'), {
-      name: informacionPago.combrobate_pago,
+    await archivoComprobante.move(Helpers.appRoot('archivos/comprobantes-pago/suscripcion'), {
+      name: informacionPago.comprobate_pago,
       overwrite: true
     })
 
@@ -125,8 +125,8 @@ class PagoController {
 
   async download ({ params: {id}, response}) {
     const file = await PagoUi.find(id)
-    console.log(file.ruta)
-    response.download(Helpers.appRoot(`archivos/comprobantes-pago/${file.combrobate_pago}`))
+    console.log(file.comprobate_pago)
+    response.download(Helpers.appRoot(`archivos/comprobantes-pago/suscripcion/${file.comprobate_pago}`))
   }
 }
 

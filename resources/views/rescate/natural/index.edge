@@ -8,7 +8,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
   <link href="/css/bootstrap.min.css" rel="stylesheet">
   <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
 
@@ -31,7 +30,7 @@
     <div class="row wrapper border-bottom white-bg page-heading">
       <div class="col-sm-4">
         <h2>Tesoreria</h2>
-        <h4>Asignacion de Unidades</h4>
+        <h4>Rescate de Unidades</h4>
       </div>
     </div>
     <div class="row">
@@ -41,7 +40,7 @@
           <div class="ibox">
             <div class="ibox-title">
               <h2>Inversionistas </h2>
-              <a class="badge" href="/tesoreria!natural">Clientes Naturales</a> / <a class="badge" href="/tesoreria!juridico">Clientes Juridicos</a>
+              <a class="badge" href="/tesoreria!natural/rescate">Clientes Naturales</a> / <a class="badge" href="/tesoreria!juridico/rescate">Clientes Juridicos</a>
             </div>
             <div class="ibox-content">
               <div class="row m-b-sm m-t-sm">
@@ -59,27 +58,28 @@
                   @each(cliente in clientes)
                   <tr>
                     <td class="project-status">
-                      @if( cliente.solicitudesSuscripcion[0].unidades_asignadas === 1)
-                      <span class="label label-primary">{{ estatusUnidadesAsignadas(cliente.solicitudesSuscripcion[0].unidades_asignadas) }}</span>
+                      @if( cliente.solicitudesRescate[0].unidades_rescatadas === 1)
+                      <span class="label label-primary">{{ estatusUnidadesRescatadas(cliente.solicitudesRescate[0].unidades_rescatadas) }}</span>
                       @else
-                      <span class="label label-danger">{{ estatusUnidadesAsignadas(cliente.solicitudesSuscripcion[0].unidades_asignadas) }}</span>
+                      <span class="label label-danger">{{ estatusUnidadesRescatadas(cliente.solicitudesRescate[0].unidades_rescatadas) }}</span>
                       @endif
                     </td>
                     <td class="project-title">
-                      <label>{{cliente.razon_social}}</label>
+                      <label>{{cliente.nombre}} {{cliente.apellido}}</label>
                       <br/>
                       <small>Creado {{cliente.created_at}} </small>
                     </td>
                     <td class="project-completion">
-                      <h5>Nº RIF</h5>
-                      <small>{{cliente.registro_informacion_fiscal}}</small>
+                      <h5>Nº documento identidad</h5>
+                      <small>{{cliente.documento_identificacion}}</small>
                     </td>
                     <td class="project-people">
-                      <a href="#"><img alt="image" class="rounded-circle" src="{{cliente.documento_constitutivo_empresas}}"></a>
+                      <a href="#"><img alt="image" class="rounded-circle" src="{{cliente.img_cedula_pasaporte}}"></a>
                       <a href="#"><img alt="image" class="rounded-circle" src="{{cliente.img_rif}}"></a>
+                      <a href="#"><img alt="image" class="rounded-circle" src="{{cliente.img_recibo}}"></a>
                     </td>
                     <td class="project-actions">
-                      <a href="/tesoreria!juridico/{{cliente.registro_informacion_fiscal}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
+                      <a href="/tesoreria!natural/rescate/{{cliente.documento_identificacion}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
                     </td>
                   </tr>
                   @endeach

@@ -61,9 +61,9 @@
                                             <td class="project-status">
                                                 @if( cliente.solicitudesSuscripcion[0].estatus_conciliacion === 1)
 
-                                                  <span class="label label-primary">{{ estatusConciliacion(cliente.solicitudesSuscripcion[0].estatus_conciliacion)}}</span>
+                                                  <span class="label label-primary">{{ estatusPagoConciliacion(cliente.solicitudesSuscripcion[0].estatus_conciliacion)}}</span>
                                                 @else
-                                                  <span class="label label-danger">{{ estatusConciliacion(cliente.solicitudesSuscripcion[0].estatus_conciliacion)}}</span>
+                                                  <span class="label label-danger">{{ estatusPagoConciliacion(cliente.solicitudesSuscripcion[0].estatus_conciliacion)}}</span>
                                                 @endif
                                             </td>
                                           <td class="project-title">

@@ -5,6 +5,10 @@ const Model = use('Model')
 
 class SolicitudRescateUi extends Model {
 
+  pagoRescate () {
+    return this.hasOne('App/Models/PagoRescateUi')
+  }
+
   static castDates (field, value) {
     if (field === 'updated_at') {
       return `hace ${value.fromNow(true)}`
