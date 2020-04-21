@@ -18,9 +18,9 @@ Factory.blueprint('App/Models/ClienteNatural', (faker) => {
   return {
     documento_identificacion: faker.integer({ min:0, max:30000000 }),
     // nombre: faker.first(),
-    nombre: 'Douglas',
+    nombre: 'Marcos',
     // apellido: faker.last(),
-    apellido: 'Acosta',
+    apellido: 'Salazar',
     lugar_nacimiento: faker.city(),
     fecha_nacimiento: faker.birthday({string: true, american: false}),
     nacionalidad: 'Venezolano',
@@ -37,7 +37,7 @@ Factory.blueprint('App/Models/ClienteNatural', (faker) => {
     telefono_fijo: faker.phone({ formatted: false }),
     telefono_celular: faker.phone({ formatted: false, mobile: true }),
     // correo_electronico: faker.email(),
-    correo_electronico: 'douglasdaas@gmail.com',
+    correo_electronico: 'salazarseijas@gmail.com',
     img_cedula_pasaporte: faker.avatar({protocol: 'https', fileExtension: 'jpg'}),
     img_rif: faker.avatar({protocol: 'https', fileExtension: 'jpg'}),
     img_recibo: faker.avatar({protocol: 'https', fileExtension: 'jpg'})
@@ -47,7 +47,8 @@ Factory.blueprint('App/Models/ClienteNatural', (faker) => {
 Factory.blueprint('App/Models/ClienteJuridico', (faker) =>{
   return{
     registro_informacion_fiscal: faker.integer({ min:0, max:30000000 }),
-    razon_social: faker.company(),
+    // razon_social: faker.company(),
+    razon_social: 'Empresa de Marcos',
     nombre_comercial: faker.company(),
     actividad_economica: faker.pickone(['primaria','secundaria','universitaria','postgrado','doctorado']),
     actividad_economica_especifica: faker.pickone(['primaria','secundaria','universitaria','postgrado','doctorado']),
@@ -71,7 +72,7 @@ Factory.blueprint('App/Models/ClienteJuridico', (faker) =>{
     telefono: faker.phone({ formatted: false }),
     sitio_web: faker.url(),
     // correo_electronico: faker.email(),
-    correo_electronico: 'douglasdaas@gmail.com',
+    correo_electronico: 'salazarseijas@gmail.com',
     direccion: faker.address(),
     ciudad: faker.city(),
     estado: faker.state({ full: true }),
