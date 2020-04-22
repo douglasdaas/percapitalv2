@@ -77,7 +77,7 @@ class ClienteNaturalController {
    */
   async store ({ request, response }) {
     const informacionCliente = request.post()
-    const documento_identificacion = request.only(['documento_identificacion'])
+    let {documento_identificacion} = request.post()
 
     const archivoIdentidad = request.file('img_cedula_pasaporte', {
       types: ['image'],
@@ -174,10 +174,18 @@ class ClienteNaturalController {
   }
 
 
-  async download ({ params: {id, tipo_archivo }, response}) {
-    console.log(tipo_archivo)
+  async download ({ params: {id, tipoArchivo }, response}) {
     const cliente = await ClienteNatural.find(id)
-    response.download(Helpers.appRoot(`archivos/clientes/natural/${cliente.documento_identificacion}/${tipo_archivo}`))
+    if (tipoArchivo === 'img_cedula_pasaporte'){
+      response.download(Helpers.appRoot(`archivos/clientes/natural/${cliente.documento_identificacion}/${cliente.img_cedula_pasaporte}`))
+    } else if (tipoArchivo === 'img_rif') {
+      response.download(Helpers.appRoot(`archivos/clientes/natural/${cliente.documento_identificacion}/${cliente.img_rif}`))
+    } else if (tipoArchivo === 'img_recibo') {
+      response.download(Helpers.appRoot(`archivos/clientes/natural/${cliente.documento_identificacion}/${cliente.img_recibo}`))
+    } else {
+      return 'Archivo no encontrado'
+    }
+
   }
 
   async signup ({ params, request, response, view }) {

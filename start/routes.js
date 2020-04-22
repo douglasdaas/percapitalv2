@@ -26,14 +26,14 @@ Route.group(() => {
   Route.get('/signup', 'ClienteNaturalController.signup')
   Route.get('/download/:id/:tipoArchivo', 'ClienteNaturalController.download')
 }).prefix('cliente/natural')
-Route.resource('cliente/natural', 'ClienteNaturalController')
+Route.resource('cliente/natural', 'ClienteNaturalController').only(['create','store'])
 
 //CLIENTES JURIDICO
 Route.group( () => {
   Route.get('/signup', 'ClienteJuridicoController.signup')
   Route.get('/download/:id/:tipoArchivo', 'ClienteJuridicoController.download')
 }).prefix('cliente/juridico')
-Route.resource('cliente/juridico', 'ClienteJuridicoController')
+Route.resource('cliente/juridico', 'ClienteJuridicoController').only(['create','store'])
 
 //USUARIOS
 Route.group( () =>{
@@ -104,9 +104,3 @@ Route.group( () =>{
 }).prefix('tesoreria:tipoCliente?')
 Route.resource('tesoreria:tipoCliente?', 'TesoreriaController').only(['index','show','update'])
 
-
-
-
-
-
-//04124442130

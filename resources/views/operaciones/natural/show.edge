@@ -66,11 +66,11 @@
                                     <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.nacionalidad}}</dd> </div>
                                   </dl>
                                   <dl class="row mb-0">
-                                    <div class="col-sm-4 text-sm-right"><dt>Telefono Fijo:</dt> </div>
+                                    <div class="col-sm-4 text-sm-right"><dt>Teléfono Fijo:</dt> </div>
                                     <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.telefono_fijo}}</dd> </div>
                                   </dl>
                                   <dl class="row mb-0">
-                                    <div class="col-sm-4 text-sm-right"><dt>Telefono Celular:</dt> </div>
+                                    <div class="col-sm-4 text-sm-right"><dt>Teléfono Celular:</dt> </div>
                                     <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.telefono_celular}}</dd> </div>
                                   </dl>
                                   <dl class="row mb-0">
@@ -126,7 +126,8 @@
                                             <div>
                                                 <h4>Confirmar Creacion de cuenta CVV:</h4>
                                                 <form action="/operaciones!natural/{{cliente.documento_identificacion}}?_method=PATCH" method="post">
-                                                    <button class="btn btn-block btn-outline btn-primary">Confirmar</button>
+                                                  <input class="form-control form-group" type="text" name="numero_cuenta_cvv" placeholder="Numero Cuenta CVV" required>
+                                                  <button class="btn btn-block btn-outline btn-primary">Confirmar</button>
                                                 </form>
                                             </div>
                                           @endif

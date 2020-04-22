@@ -158,10 +158,17 @@ class ClienteJuridicoController {
   async destroy ({ params, request, response }) {
   }
 
-  async download ({ params: {id, tipo_archivo }, response}) {
-    console.log(tipo_archivo)
+  async download ({ params: {id, tipoArchivo }, response}) {
+
     const cliente = await ClienteJuridico.find(id)
-    response.download(Helpers.appRoot(`archivos/clientes/juridico/${cliente.registro_informacion_fiscal}/${tipo_archivo}`))
+    if (tipoArchivo === 'documento_constitutivo_empresas'){
+      response.download(Helpers.appRoot(`archivos/clientes/juridico/${cliente.registro_informacion_fiscal}/${cliente.documento_constitutivo_empresas}`))
+    } else if (tipoArchivo === 'img_rif') {
+      response.download(Helpers.appRoot(`archivos/clientes/juridico/${cliente.registro_informacion_fiscal}/${cliente.img_rif}`))
+    } else {
+      return 'Archivo no encontrado'
+    }
+
   }
 
   async signup ({ params, request, response, view }) {

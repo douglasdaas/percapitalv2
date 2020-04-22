@@ -144,6 +144,7 @@ class ClienteNaturalSchema extends Schema {
       //ESTATUS
       table.boolean('estatus_legal').defaultTo(false)
       table.boolean('estatus_CVV').defaultTo(false)
+      table.text('numero_cuenta_cvv')
       //HORAS
       table.timestamp('aprobadoLegal', { precision: 6 })
       table.timestamps()

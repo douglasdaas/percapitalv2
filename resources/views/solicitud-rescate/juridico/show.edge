@@ -66,7 +66,7 @@
                                     <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.sitio_web}}</dd> </div>
                                   </dl>
                                   <dl class="row mb-0">
-                                    <div class="col-sm-4 text-sm-right"><dt>Telefono:</dt> </div>
+                                    <div class="col-sm-4 text-sm-right"><dt>Teléfono:</dt> </div>
                                     <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{cliente.telefono}}</dd> </div>
                                   </dl>
                                   <dl class="row mb-0">
@@ -119,7 +119,7 @@
                                               <dt>Monto a Rescatar: {{(cliente.solicitudesRescate[0].cantidad_unidades_inversion*50000)}} Bs</dt>
                                               <dt>Banco a Realizar la Transferencia: {{cliente.institucion_bancaria}}<dt>
                                               <dt>Tipo de Cuenta: {{cliente.nombre_producto_bancario}}<dt>
-                                              <dt>Numero de Cuenta: {{cliente.numero_producto_bancario}}<dt>
+                                              <dt>Número de Cuenta: {{cliente.numero_producto_bancario}}<dt>
                                               <br>
                                               <form action="/pago-rescate/create/{{cliente.solicitudesRescate[0].id}}" method="get">
                                                 <button class="btn btn-block btn-outline btn-primary">Realizar del Rescate </button>

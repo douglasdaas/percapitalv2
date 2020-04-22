@@ -32,7 +32,7 @@
           <div class="ibox" >
             <div class="ibox-content">
               <h2>Registro Inversionistas</h2>
-              <form id="form" action="/cliente" method="POST" class="wizard-big" enctype="multipart/form-data">
+              <form id="form" action="/cliente/natural" method="POST" class="wizard-big" enctype="multipart/form-data">
                 <h1>Datos</h1>
                   <fieldset style="height: auto">
                     <h2>Datos Personales del Inversionista</h2>
@@ -207,7 +207,7 @@
                     <!--Invercionista-->
                     <div class="form-group col">
                       <div class="form-group row">
-                        <label class="col-sm-1 col-form-label">PEP?</label>
+                        <label class="col-sm-1 col-form-label">¿PEP?</label>
                         <div class="col-sm-1">
                           <select class="form-control m-b" name="es_pep_inversionista">
                             <option value="N">No</option>
@@ -336,9 +336,9 @@
                         <div class="col-sm-10"><input type="text" name="nombre_producto_bancario" placeholder="Nombre" class="form-control" required></div>
                       </div>
                       <!--numero_producto_bancario-->
-                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Numero del Producto</label>
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Número del Producto</label>
 
-                        <div class="col-sm-10"><input type="text" name="numero_producto_bancario" placeholder="Numero" class="form-control" required></div>
+                        <div class="col-sm-10"><input type="text" name="numero_producto_bancario" placeholder="Número" class="form-control" required></div>
                       </div>
                       <!--cifras_promedio_bancario-->
                       <div class="form-group  row"><label class="col-sm-2 col-form-label">Cifras Promedio</label>
@@ -354,14 +354,14 @@
                         <div class="col-sm-10"><input type="text" name="nombre_apellido" placeholder="Nombre o Razón" class="form-control" maxlength="18 " required></div>
                       </div>
                       <!--cedula_identidad-->
-                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Cedula de Identidad</label>
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Cédula de Identidad</label>
 
                         <div class="col-sm-10"><input type="text" name="cedula_identidad" placeholder="Cedula" class="form-control" maxlength="30" required></div>
                       </div>
                       <!--direccion_referencias_personal_natural-->
-                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Telefono Local (Línea Fija)</label>
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Teléfono Local (Línea Fija)</label>
 
-                        <div class="col-sm-10"><input type="text" name="telefono_local" placeholder="Telefono" class="form-control" maxlength="30" required></div>
+                        <div class="col-sm-10"><input type="text" name="telefono_local" placeholder="Teléfono" class="form-control" maxlength="30" required></div>
                       </div>
                       <!--nombre_institucion_referencias_institucion_natural-->
                       <div class="form-group  row"><label class="col-sm-2 col-form-label">Celular (Movil)</label>
@@ -381,7 +381,7 @@
                         <div class="col-sm-10"><input type="text" name="nombre_banco_beneficiario" placeholder="Beneficiario" class="form-control" maxlength="80" ></div>
                       </div>
                       <!--numero_cuenta_IBAN_beneficiario-->
-                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Numero de Cuenta/IBAN</label>
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Número de Cuenta/IBAN</label>
 
                         <div class="col-sm-10"><input type="text" name="numero_cuenta_IBAN_beneficiario" placeholder="Nº Cuenta/IBAN" class="form-control" maxlength="35" ></div>
                       </div>
@@ -404,7 +404,7 @@
                         <div class="col-sm-10"><input type="text" name="nombre_banco_intermediario" placeholder="Intermediario" class="form-control" maxlength="80" ></div>
                       </div>
                       <!--numero_cuenta_IBAN_intermediario-->
-                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Numero de Cuenta/IBAN</label>
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Número de Cuenta/IBAN</label>
 
                         <div class="col-sm-10"><input type="text" name="numero_cuenta_IBAN_intermediario" placeholder="Nº Cuenta/IBAN" class="form-control" maxlength="35" ></div>
                       </div>
@@ -434,7 +434,7 @@
                     </div>
                   </fieldset>
 
-                  <h1>Información Economica Financiera</h1>
+                  <h1>Información Economica/Financiera</h1>
                   <fieldset style="height: auto">
                     <div class="form-group col">
                       <!--actividad_economica-->
@@ -449,7 +449,7 @@
                         </div>
                       </div>
                       <!--actividad_especifica-->
-                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Actividad Especifica</label>
+                      <div class="form-group  row"><label class="col-sm-2 col-form-label">Actividad Específica</label>
 
                         <div class="col-sm-10"><input type="text" name="actividad_especifica" placeholder="Actividad" class="form-control"></div>
                       </div>
@@ -582,7 +582,7 @@
                       <div class="form-group col">
                         <div class="form-group  row">
                           <!--provedor_nombre_razon_1_propio-->
-                          <label class="col-sm-2 col-form-label">Nombre o Razon Social</label>
+                          <label class="col-sm-2 col-form-label">Nombre o Razón Social</label>
                           <div class="col-sm-4"><input type="text" name="provedor_nombre_razon_1_propio" placeholder="Nombre" class="form-control"></div>
 
                           <!--provedor_ubicacion_1_propio-->
@@ -591,7 +591,7 @@
                         </div>
                         <div class="form-group  row">
                           <!--provedor_nombre_razon_2_propio-->
-                          <label class="col-sm-2 col-form-label">Nombre o Razon Social</label>
+                          <label class="col-sm-2 col-form-label">Nombre o Razón Social</label>
                           <div class="col-sm-4"><input type="text" name="provedor_nombre_razon_2_propio" placeholder="Nombre" class="form-control"></div>
 
                           <!--provedor_ubicacion_2_propio-->
@@ -600,7 +600,7 @@
                         </div>
                         <div class="form-group  row">
                           <!--provedor_nombre_razon_3_propio-->
-                          <label class="col-sm-2 col-form-label">Nombre o Razon Social</label>
+                          <label class="col-sm-2 col-form-label">Nombre o Razón Social</label>
                           <div class="col-sm-4"><input type="text" name="provedor_nombre_razon_3_propio" placeholder="Nombre" class="form-control"></div>
 
                           <!--provedor_ubicacion_3_propio-->
@@ -612,7 +612,7 @@
                       <div class="form-group col">
                         <div class="form-group  row">
                           <!--cliente_nombre_razon_1_propio-->
-                          <label class="col-sm-2 col-form-label">Nombre o Razon Social</label>
+                          <label class="col-sm-2 col-form-label">Nombre o Razón Social</label>
                           <div class="col-sm-4"><input type="text" name="cliente_nombre_razon_1_propio" placeholder="Nombre" class="form-control"></div>
 
                           <!--cliente_ubicacion_1_propio-->
@@ -621,7 +621,7 @@
                         </div>
                         <div class="form-group  row">
                           <!--cliente_nombre_razon_2_propio-->
-                          <label class="col-sm-2 col-form-label">Nombre o Razon Social</label>
+                          <label class="col-sm-2 col-form-label">Nombre o Razón Social</label>
                           <div class="col-sm-4"><input type="text" name="cliente_nombre_razon_2_propio" placeholder="Nombre" class="form-control"></div>
 
                           <!--cliente_ubicacion_2_propio-->
@@ -630,7 +630,7 @@
                         </div>
                         <div class="form-group  row">
                           <!--cliente_nombre_razon_3_propio-->
-                          <label class="col-sm-2 col-form-label">Nombre o Razon Social</label>
+                          <label class="col-sm-2 col-form-label">Nombre o Razón Social</label>
                           <div class="col-sm-4"><input type="text" name="cliente_nombre_razon_3_propio" placeholder="Nombre" class="form-control"></div>
 
                           <!--cliente_ubicacion_3_propio-->
@@ -739,7 +739,7 @@
 
                         <div class="col-sm-10"><input type="text" name="monto_promedio_mensual" placeholder="Monto" class="form-control" maxlength="80" ></div>
                       </div>
-                      <h4>Numero de Transacciones por Transferencias</h4>
+                      <h4>Número de Transacciones por Transferencias</h4>
                       <div class="form-group col">
                         <!--numero_promedio_transaccoines_debito-->
                         <div class="form-group  row"><label class="col-sm-2 col-form-label">Credito</label>

@@ -36,8 +36,8 @@ Factory.blueprint('App/Models/ClienteNatural', (faker) => {
     pais_domicilio: faker.country({ full: true }),
     telefono_fijo: faker.phone({ formatted: false }),
     telefono_celular: faker.phone({ formatted: false, mobile: true }),
-    // correo_electronico: faker.email(),
-    correo_electronico: 'salazarseijas@gmail.com',
+    correo_electronico: faker.email(),
+    // correo_electronico: 'salazarseijas@gmail.com',
     img_cedula_pasaporte: faker.avatar({protocol: 'https', fileExtension: 'jpg'}),
     img_rif: faker.avatar({protocol: 'https', fileExtension: 'jpg'}),
     img_recibo: faker.avatar({protocol: 'https', fileExtension: 'jpg'})

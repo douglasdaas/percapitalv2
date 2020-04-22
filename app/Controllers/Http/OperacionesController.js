@@ -119,10 +119,13 @@ class OperacionesController {
    */
   async update ({ params: {id,tipoCliente}, request, response }) {
 
+    const { numero_cuenta_cvv } = request.post()
+
     if (tipoCliente === '!natural'){
       let cliente = await ClienteNatural.find(id)
 
       cliente.estatus_CVV = true
+      cliente.numero_cuenta_cvv = numero_cuenta_cvv
 
       await cliente.save()
 
@@ -132,8 +135,10 @@ class OperacionesController {
 
     } else if (tipoCliente === '!juridico'){
 
-      var cliente = await ClienteJuridico.find(id)
+      let cliente = await ClienteJuridico.find(id)
+
       cliente.estatus_CVV = true
+      cliente.numero_cuenta_cvv = numero_cuenta_cvv
 
       await cliente.save()
 
