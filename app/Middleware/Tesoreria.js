@@ -15,13 +15,15 @@ class Tesoreria {
    * @param {Function} next
    */
   async handle ({ auth, request , response, view}, next) {
-
-    const personal = await Personal.find(auth.user.personal_id)
-    if (personal.tesoreria === 0) {
-      return response.redirect('otras-paginas/no-autorizado')
+    if (auth.user){
+      const personal = await Personal.find(auth.user.personal_id)
+      if (personal.tesoreria === 0) {
+        return response.redirect('otras-paginas/no-autorizado')
+      }
+      await next()
+    } else {
+      return response.redirect('personal/login')
     }
-
-    await next()
   }
 }
 
