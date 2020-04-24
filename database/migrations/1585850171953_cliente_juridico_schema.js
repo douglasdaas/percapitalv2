@@ -7,11 +7,11 @@ class ClienteJuridicoSchema extends Schema {
   up () {
     this.create('cliente_juridicos', (table) => {
       table.string('registro_informacion_fiscal',18).notNullable().index().unique()
-      table.text('razon_social').notNullable()
-      table.text('nombre_comercial').notNullable()
-      table.text('actividad_economica').notNullable()
-      table.text('actividad_economica_especifica').notNullable()
-      table.text('actividad_economica_categoria_especial').notNullable()
+      table.text('razon_social')
+      table.text('nombre_comercial')
+      table.text('actividad_economica')
+      table.text('actividad_economica_especifica')
+      table.text('actividad_economica_categoria_especial')
       table.text('nombre_registro_inicial')
       table.text('numero_registro_inicial')
       table.text('tomo_registro_inicial')
