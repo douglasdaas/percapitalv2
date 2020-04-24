@@ -94,6 +94,15 @@ Event.on('usuarioCreado::clienteNatural', async (datos) =>{
   })
 })
 
+Event.on('usuarioCreado::personal', async (datos) =>{
+  Mail.send('emails.personal.usuario-creado', datos, (message) => {
+    message
+      .to( datos.personal.correo_electronico, `${datos.personal.nombre} ${datos.personal.apellido}`)
+      .from('testapp@per-capital.com', 'PerCapital')
+      .subject('Usuario en PerCapital')
+  })
+})
+
 Event.on('rescateUnidades::clienteJuridico', async (datos) =>{
   Mail.send('emails.unidades-rescatadas', datos, (message) => {
     message

@@ -174,7 +174,6 @@ class TesoreriaController {
 
       if (usuario === null ) {
         return response.redirect(`/usuario!natural/crearautomatico/${clienteId}` )
-
       }
 
       return response.redirect('/tesoreria!natural',200)

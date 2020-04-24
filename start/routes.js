@@ -41,8 +41,8 @@ Route.group( () =>{
   Route.get('/login', 'UsuarioController.inicioSesion').as('login')
   Route.post('/login','UsuarioController.login')
   Route.get('/logout','UsuarioController.logout').as('logout')
-}).prefix('usuario:tipoCliente?')
-Route.resource('usuario:tipoCliente?', 'UsuarioController').only(['show'])
+}).prefix('usuario:tipo?')
+Route.resource('usuario:tipo?', 'UsuarioController').only(['show'])
 
 //SOLICITUDES SUSCRIPCION UI
 Route.group(() =>{
@@ -81,8 +81,10 @@ Route.group( () =>{
   Route.get('deberes-legales/download/:id', 'DeberLegalController.download')
   Route.resource('leyes-y-normas','LeyNormaController' ).only(['index','store'])
   Route.get('leyes-y-normas/download/:id', 'LeyNormaController.download')
-}).prefix('legal')
-Route.resource('legal:tipoCliente?', 'LegalController').only(['index','show','update'])
+}).prefix('legal').middleware(['legal'])
+Route.resource('legal:tipoCliente?', 'LegalController')
+  .only(['index','show','update'])
+  .middleware(['legal'])
 
 //OPERACIONES
 Route.group( () =>{
@@ -92,8 +94,10 @@ Route.group( () =>{
   Route.get('solicitud-rescate','SolicitudRescateUiController.index')
   Route.get('solicitud-rescate/:id','SolicitudRescateUiController.show')
   Route.patch('solicitud-rescate/:id','SolicitudRescateUiController.update')
-}).prefix('operaciones:tipoCliente?')
-Route.resource('operaciones:tipoCliente?', 'OperacionesController').only(['index','show','update'])
+}).prefix('operaciones:tipoCliente?').middleware(['operaciones'])
+Route.resource('operaciones:tipoCliente?', 'OperacionesController')
+  .only(['index','show','update'])
+  .middleware(['operaciones'])
 
 
 //TESORERIA
@@ -101,6 +105,20 @@ Route.group( () =>{
   Route.get('/rescate','RescateUiController.index')
   Route.get('/rescate/:id','RescateUiController.show')
   Route.patch('/rescate/:id','RescateUiController.update')
-}).prefix('tesoreria:tipoCliente?')
-Route.resource('tesoreria:tipoCliente?', 'TesoreriaController').only(['index','show','update'])
+}).prefix('tesoreria:tipoCliente?').middleware(['tesoreria'])
+Route.resource('tesoreria:tipoCliente?', 'TesoreriaController')
+  .only(['index','show','update'])
+  .middleware(['tesoreria'])
 
+//PERSONAL
+Route.group( () =>{
+  Route.get('login', 'PersonalController.inicioSesion')
+  Route.post('login','PersonalController.login')
+  Route.get('logout','PersonalController.logout')
+}).prefix('personal')
+Route.resource('personal', 'PersonalController').only(['create','store'])
+
+//OTRAS PAGINAS
+Route.group( () =>{
+  Route.get('no-autorizado', 'OtrasPaginaController.noAutorizado')
+}).prefix('otras-paginas')

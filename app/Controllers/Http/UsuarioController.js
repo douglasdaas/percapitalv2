@@ -2,6 +2,7 @@
 
 const ClienteNatural = use('App/Models/ClienteNatural')
 const ClienteJuridico = use('App/Models/ClienteJuridico')
+const Personal = use('App/Models/Personal')
 const Persona = use('Persona')
 const Event = use('Event')
 
@@ -45,9 +46,9 @@ class UsuarioController {
 
     await auth.login(usuario)
 
-    if (usuario.cliente_natural_id !==  null){
+    if (usuario.cliente_natural_id){
       return response.redirect(`/usuario!natural/${usuario.cliente_natural_id}`)
-    } else if (usuario.cliente_juridico_id !== null) {
+    } else if (usuario.cliente_juridico_id) {
       return response.redirect(`/usuario!juridico/${usuario.cliente_juridico_id}`)
     } else {
       return 'error'
@@ -117,9 +118,9 @@ class UsuarioController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params: {id,tipoCliente}, auth, request, response, view }) {
+  async show ({ params: {id,tipo}, auth, request, response, view }) {
 
-    if (tipoCliente === '!natural') {
+    if (tipo === '!natural') {
 
       if (auth.user.cliente_natural_id !== id) {
         return "No Autorizado"
@@ -131,7 +132,7 @@ class UsuarioController {
 
       return view.render('usuario.natural.show', {cliente})
 
-    } else if (tipoCliente === '!juridico') {
+    } else if (tipo === '!juridico') {
 
 
       if (auth.user.cliente_juridico_id !== id) {
@@ -185,8 +186,10 @@ class UsuarioController {
   async destroy ({ params, request, response }) {
   }
 
-  async crearAutomatico ({params: { id, tipoCliente }, request, response}){
-    if (tipoCliente === '!natural') {
+  async crearAutomatico ({params: { id, tipo }, request, response}){
+
+
+    if (tipo === '!natural') {
       let cliente = await ClienteNatural.find(id)
 
       cliente = cliente.toJSON()
@@ -196,7 +199,8 @@ class UsuarioController {
         password:'123456',
         password_confirmation:'123456',
         cliente_natural_id: cliente.documento_identificacion,
-        cliente_juridico_id: null
+        cliente_juridico_id: null,
+        personal_id: null
       }
 
       // const payload = request.only(['email', 'password', 'password_confirmation'])
@@ -215,7 +219,7 @@ class UsuarioController {
 
       return response.redirect('/tesoreria!natural',200)
 
-    } else if (tipoCliente === '!juridico') {
+    } else if (tipo === '!juridico') {
       console.log(id)
 
       let cliente = await ClienteJuridico.find(id)
@@ -228,6 +232,7 @@ class UsuarioController {
         password_confirmation:'123456',
         cliente_natural_id: null,
         cliente_juridico_id: cliente.registro_informacion_fiscal,
+        personal_id: null
       }
 
       console.log(payload)
@@ -247,6 +252,40 @@ class UsuarioController {
 
 
       return response.redirect('/tesoreria!juridico',200)
+
+    } else if (tipo === '!personal') {
+
+      console.log(id)
+
+      let personal = await Personal.find(id)
+
+      personal = personal.toJSON()
+
+      const payload = {
+        email: personal.correo_electronico,
+        password:'123456',
+        password_confirmation:'123456',
+        cliente_natural_id: null,
+        cliente_juridico_id: null,
+        personal_id: personal.documento_identificacion
+      }
+
+      console.log(payload)
+
+      // const payload = request.only(['email', 'password', 'password_confirmation'])
+
+      const user = await Persona.register(payload)
+
+      const datos = {
+        personal,
+        email: payload.email,
+        password: payload.password
+      }
+
+      Event.fire('usuarioCreado::personal',datos)
+
+
+      return response.redirect('/legal',201)
 
     }
 

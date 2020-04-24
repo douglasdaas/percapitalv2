@@ -81,3 +81,23 @@ Factory.blueprint('App/Models/ClienteJuridico', (faker) =>{
     img_rif: faker.avatar({protocol: 'https', fileExtension: 'jpg'})
   }
 })
+Factory.blueprint('App/Models/Personal', (faker) =>{
+  return{
+    nombre:'Personal Maestro',
+    apellido:'',
+    documento_identificacion: '0',
+    correo_electronico: 'perfilmaestro@per-capital.com',
+    legal: 1,
+    operaciones: 1,
+    tesoreria: 1,
+  }
+})
+Factory.blueprint('App/Models/Usuario', (faker) =>{
+  return{
+    email: 'perfilmaestro@per-capital.com',
+    password:'123456',
+    cliente_natural_id: null,
+    cliente_juridico_id: null,
+    personal_id:'0'
+  }
+})

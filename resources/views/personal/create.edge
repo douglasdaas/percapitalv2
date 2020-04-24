@@ -1,0 +1,66 @@
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+  <link href="/css/animate.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+</head>
+
+@include('partials.header')
+@include('partials.nav')
+
+<body class="gray-bg">
+
+<h1 class="logo-name text-center">REGISTRO</h1>
+
+<div class="middle-box text-center loginscreen   animated fadeInDown">
+
+  <div>
+    <h3>Registro de Personal</h3>
+    <form class="m-t" role="form"  action="/personal" method="post">
+      <div class="form-group">
+        <input type="text" class="form-control col-sm-12" name="nombre" placeholder="Nombre" required=>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control col-sm-12" name="apellido" placeholder="Apellido" required=>
+      </div>
+      <div class="form-group">
+        <input type="email" class="form-control col-sm-12" name="correo_electronico" placeholder="Email" required=>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control col-sm-12" name="documento_identificacion" placeholder="Nº Doc. Identificación" required=>
+      </div>
+      <hr>
+      <h4>Accesos Disponibles:</h4>
+      <div class="col-sm-12"><label>
+        <input type="checkbox" value="1" name="legal" id="inlineCheckbox1"> Legal </label> <label class="checkbox-inline">
+        <input type="checkbox" value="1" name="operaciones" id="inlineCheckbox2"> Operaciones </label> <label>
+        <input type="checkbox" value="1" name="tesoreria" id="inlineCheckbox3"> Tesoreria </label> </div>
+      <hr>
+      <button type="submit" class="btn btn-primary block full-width m-b">Registrar</button>
+
+    </form>
+  </div>
+
+</div>
+
+</body>
+
+<!-- Mainly scripts -->
+<script src="/js/jquery-3.1.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<!-- iCheck -->
+<script src="/js/plugins/iCheck/icheck.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('.i-checks').iCheck({
+      checkboxClass: 'icheckbox_square-green',
+      radioClass: 'iradio_square-green',
+    });
+  });
+</script>
