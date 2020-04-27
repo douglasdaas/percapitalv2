@@ -1,7 +1,6 @@
 'use strict'
 
 const Mail = use('Mail')
-const Encryption = use('Encryption')
 const ClienteNatural = use('App/Models/ClienteNatural')
 const SolicitudSuscripcionUi = use('App/Models/SolicitudSuscripcionUi')
 const Helpers = use('Helpers')
@@ -124,7 +123,7 @@ class ClienteNaturalController {
 
     const clienteNatural = await ClienteNatural.create(informacionCliente)
 
-    response.json(clienteNatural)
+    return response.redirect('http://per-capital.com/',200)
   }
 
   /**
@@ -204,14 +203,14 @@ class ClienteNaturalController {
 
     let clienteInformacion = request.post()
 
-    Mail.send('emails.informacion-de-registro', clienteInformacion, (message) => {
+    Mail.send('emails.natural.informacion-de-registro', clienteInformacion, (message) => {
       message
         .to(clienteInformacion.correo_electronico, `${clienteInformacion.nombre} ${clienteInformacion.apellido}`)
         .from('testapp@per-capital.com', 'PerCapital')
         .subject('Informacion de Registro')
     })
 
-    return clienteInformacion
+    return response.redirect('http://per-capital.com/',200)
   }
 
 }

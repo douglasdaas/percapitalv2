@@ -1,6 +1,8 @@
 'use strict'
 
+const Mail = use('Mail')
 const ClienteJuridico = use('App/Models/ClienteJuridico')
+const Helpers = use('Helpers')
 const paises = require('../../../archivos/listas/paises')
 const profesiones = require('../../../archivos/listas/profesiones')
 const actividadesEconomicas = require('../../../archivos/listas/actividadesEconomicas')
@@ -109,7 +111,7 @@ class ClienteJuridicoController {
     }
 
 
-    response.json(informacionCliente)
+   return response.redirect('http://per-capital.com/',200)
   }
 
   /**
@@ -187,14 +189,14 @@ class ClienteJuridicoController {
 
     let clienteInformacion = request.post()
 
-    Mail.send('emails.informacion-de-registro', clienteInformacion, (message) => {
+    Mail.send('emails.juridico.informacion-de-registro', clienteInformacion, (message) => {
       message
         .to(clienteInformacion.correo_electronico, `${clienteInformacion.razon_social}`)
         .from('testapp@per-capital.com', 'PerCapital')
         .subject('Informacion de Registro')
     })
 
-    return clienteInformacion
+    return response.redirect('http://per-capital.com/',200)
   }
 }
 
