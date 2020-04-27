@@ -78,7 +78,7 @@ class ClienteJuridicoController {
    */
   async store ({ request, response }) {
     const informacionCliente = request.post()
-    const registro_informacion_fiscal = request.only(['registro_informacion_fiscal'])
+    const registro_informacion_fiscal = request.post()
 
 
     const archivoConstitutivo = request.file('documento_constitutivo_empresas', {
@@ -110,6 +110,7 @@ class ClienteJuridicoController {
       return archivoRif.error()
     }
 
+    const clienteJuridico = await ClienteJuridico.create(informacionCliente)
 
    return response.redirect('http://per-capital.com/',200)
   }

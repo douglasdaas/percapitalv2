@@ -117,9 +117,9 @@
                                               <dt>Por Unidades: {{cliente.solicitudesRescate[0].cantidad_unidades_inversion}} UI(s)</dt>
                                               <dt>Precio de la UI : 50,000 Bs</dt>
                                               <dt>Monto a Rescatar: {{(cliente.solicitudesRescate[0].cantidad_unidades_inversion*50000)}} Bs</dt>
-                                              <dt>Banco a Realizar la Transferencia: {{cliente.institucion_bancaria}}<dt>
-                                              <dt>Tipo de Cuenta: {{cliente.nombre_producto_bancario}}<dt>
-                                              <dt>Número de Cuenta: {{cliente.numero_producto_bancario}}<dt>
+                                              <dt>Banco a Realizar la Transferencia: {{cliente.institucion_bancaria_1}}<dt>
+                                              <dt>Tipo de Cuenta: {{cliente.nombre_producto_1}}<dt>
+                                              <dt>Número de Cuenta: {{cliente.numero_producto_1}}<dt>
                                               <br>
                                               <form action="/pago-rescate/create/{{cliente.solicitudesRescate[0].id}}" method="get">
                                                 <button class="btn btn-block btn-outline btn-primary">Realizar del Rescate </button>

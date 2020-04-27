@@ -179,6 +179,7 @@ class SolicitudRescateUiController {
 
       cliente = cliente.toJSON()
 
+
       return view.render('solicitud-rescate.juridico.show', {cliente})
     }
   }

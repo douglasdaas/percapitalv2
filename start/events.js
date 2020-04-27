@@ -108,7 +108,7 @@ Event.on('rescateUnidades::clienteJuridico', async (datos) =>{
     message
       .to(datos.cliente.correo_electronico, `${datos.cliente.razon_social} `)
       .from('testapp@per-capital.com', 'PerCapital')
-      .subject('Rescate de Unidades de Inverción')
+      .subject('Rescate de Unidades de Inversión')
       .attach( Helpers.appRoot(`archivos/comprobantes-pago/rescate/${datos.pagoRescate.comprobate_pago}`))
   })
 })
@@ -118,7 +118,7 @@ Event.on('rescateUnidades::clienteNatural', async (datos) =>{
     message
       .to(datos.cliente.correo_electronico, `${datos.cliente.nombre} ${datos.cliente.apellido}`)
       .from('testapp@per-capital.com', 'PerCapital')
-      .subject('Rescate de Unidades de Inverción')
+      .subject('Rescate de Unidades de Inversión')
       .attach( Helpers.appRoot(`archivos/comprobantes-pago/rescate/${datos.pagoRescate.comprobate_pago}`))
   })
   console.log('mail:: ',mail)
