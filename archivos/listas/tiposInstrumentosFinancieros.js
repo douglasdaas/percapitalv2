@@ -1,1 +1,4 @@
-module.exports = ["Obligaciones Quirografarias","Papeles Comerciales","Titularizaci\u00f3n","Unidad De Inversi\u00f3n","Pagar\u00e9 Burs\u00e1til","Bono De Deuda P\u00fablica Nacional ","Bono De Prenda","Contratos De Compra Y Venta De Productos F\u00edsicos","Contratos De Opciones Y Futuros","Certificados De Depósitos","Titulos De Participaci\u00f3n","Obligaciones","Facturas","Contrato De Reportos Burs\u00e1tiles Agricolas"]
+module.exports = ["Obligaciones Quirografarias","Papeles Comerciales","Titularización","Unidad De Inversión","Pagaré Bursátil","Bono De Deuda Pública Nacional ","Bono De Prenda","Contratos De Compra Y Venta De Productos Fideicomiso","Contratos De Opciones Y Futuros","Certificados De Depósitos","Títulos De Participación","Obligaciones","Facturas","Contrato De Reportes Bursátiles Agrícolas"]
+
+
+
