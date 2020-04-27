@@ -4,7 +4,6 @@ const ClienteNatural = use('App/Models/ClienteNatural')
 const ClienteJuridico = use('App/Models/ClienteJuridico')
 const SolicitudSuscripcionUi = use('App/Models/SolicitudSuscripcionUi')
 const Event = use('Event')
-const Mail = use('Mail')
 
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
@@ -31,7 +30,12 @@ class TesoreriaController {
         .query()
         .where('estatus_legal', true)
         .where('estatus_CVV', true)
-        .has('solicitudesSuscripcion')
+        .whereHas('solicitudesSuscripcion', (builder) =>{
+          builder
+            .where('estatus_conciliacion', true)
+            .orderBy('created_at', 'asc')
+            .limit(1)
+        })
         .with('solicitudesSuscripcion', (builder)  =>{
           builder
             .where('estatus_conciliacion', true)
@@ -52,7 +56,12 @@ class TesoreriaController {
         .query()
         .where('estatus_legal', true)
         .where('estatus_CVV', true)
-        .has('solicitudesSuscripcion')
+        .whereHas('solicitudesSuscripcion', (builder) =>{
+          builder
+            .where('estatus_conciliacion', true)
+            .orderBy('created_at', 'asc')
+            .limit(1)
+        })
         .with('solicitudesSuscripcion', (builder)  =>{
           builder
             .where('estatus_conciliacion', true)
