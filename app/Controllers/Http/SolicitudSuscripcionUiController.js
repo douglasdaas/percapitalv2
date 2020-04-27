@@ -112,8 +112,8 @@ class SolicitudSuscripcionUiController {
 
       Event.fire('pagoSolicitudSuscripcionUI::clienteNatural', datos)
 
-      if (auth.user) {
-        return response.redirect(`/usuario!natural/${usuario.cliente_natural_id}`)
+      if (auth.user.cliente_natural_id) {
+        return response.redirect(`/usuario!natural/${auth.user.cliente_natural_id}`)
       } else {
         return response.redirect('http://per-capital.com/',200)
       }
@@ -138,8 +138,8 @@ class SolicitudSuscripcionUiController {
 
       Event.fire('pagoSolicitudSuscripcionUI::clienteJuridico', datos)
 
-      if (auth.user) {
-        return response.redirect(`/usuario!juridico/${usuario.cliente_juridico_id}`)
+      if (auth.user.cliente_juridico_id) {
+        return response.redirect(`/usuario!juridico/${auth.user.cliente_juridico_id}`)
       } else {
         return response.redirect('http://per-capital.com/',200)
       }
