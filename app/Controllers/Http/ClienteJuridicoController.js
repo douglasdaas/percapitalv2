@@ -194,7 +194,7 @@ class ClienteJuridicoController {
       message
         .to(clienteInformacion.correo_electronico, `${clienteInformacion.razon_social}`)
         .from('testapp@per-capital.com', 'PerCapital')
-        .subject('Informacion de Registro')
+        .subject('Información de Registro')
     })
 
     return response.redirect('http://per-capital.com/',200)

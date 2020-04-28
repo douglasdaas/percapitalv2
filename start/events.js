@@ -9,7 +9,7 @@ Event.on('aprobadoLegal::clienteJuridico', async (cliente) => {
     message
       .to(cliente.correo_electronico, `${cliente.razon_social}`)
       .from('testapp@per-capital.com', 'PerCapital')
-      .subject('Aprobacion Legal')
+      .subject('Aprobación Legal')
   })
 })
 
@@ -18,7 +18,7 @@ Event.on('aprobadoLegal::clienteNatural', async (cliente) => {
     message
       .to(cliente.correo_electronico, `${cliente.nombre} ${cliente.apellido}`)
       .from('testapp@per-capital.com', 'PerCapital')
-      .subject('Aprobacion Legal')
+      .subject('Aprobación Legal')
   })
 })
 
@@ -63,7 +63,7 @@ Event.on('asignacionUnidades::clienteJuridico', async (datos) =>{
     message
       .to(datos.cliente.correo_electronico, `${datos.cliente.razon_social} `)
       .from('testapp@per-capital.com', 'PerCapital')
-      .subject('Asignacion de Unidades de Inverción')
+      .subject('Asignacion de Unidades de Inversión')
   })
 })
 
@@ -72,7 +72,7 @@ Event.on('asignacionUnidades::clienteNatural', async (datos) =>{
     message
       .to(datos.cliente.correo_electronico, `${datos.cliente.nombre} ${datos.cliente.apellido}`)
       .from('testapp@per-capital.com', 'PerCapital')
-      .subject('Asignacion de Unidades de Inverción')
+      .subject('Asignacion de Unidades de Inversión')
   })
 })
 
